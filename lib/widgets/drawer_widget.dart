@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get_storage/get_storage.dart';
+import 'package:turks/views/crew/crew_home.dart';
 import 'package:turks/widgets/text_widget.dart';
-
-import '../utils/colors.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class _MyDrawerState extends State<DrawerWidget> {
           children: <Widget>[
             UserAccountsDrawerHeader(
               decoration: const BoxDecoration(
-                color: secondaryColor,
+                color: Colors.black,
               ),
               accountEmail: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,16 +51,27 @@ class _MyDrawerState extends State<DrawerWidget> {
                 child: CircleAvatar(
                   minRadius: 50,
                   maxRadius: 50,
-                  backgroundImage: NetworkImage(box.read('profilePicture')),
+                  backgroundImage:
+                      NetworkImage(box.read('profilePicture') ?? ''),
                 ),
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.home),
-              title: TextRegular(
-                text: 'Home',
+              title: TextBold(
+                text: 'Products',
                 fontSize: 12,
-                color: Colors.grey,
+                color: Colors.black,
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const CrewHome()));
+              },
+            ),
+            ListTile(
+              title: TextBold(
+                text: 'Logbook',
+                fontSize: 12,
+                color: Colors.black,
               ),
               onTap: () {
                 // Navigator.of(context).pushReplacement(
@@ -69,11 +79,54 @@ class _MyDrawerState extends State<DrawerWidget> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.logout),
-              title: TextRegular(
+              title: TextBold(
+                text: 'Inventory',
+                fontSize: 12,
+                color: Colors.black,
+              ),
+              onTap: () {
+                // Navigator.of(context).pushReplacement(
+                //     MaterialPageRoute(builder: (context) => HomePage()));
+              },
+            ),
+            ListTile(
+              title: TextBold(
+                text: 'Sales History',
+                fontSize: 12,
+                color: Colors.black,
+              ),
+              onTap: () {
+                // Navigator.of(context).pushReplacement(
+                //     MaterialPageRoute(builder: (context) => HomePage()));
+              },
+            ),
+            ListTile(
+              title: TextBold(
+                text: 'Waste Reports',
+                fontSize: 12,
+                color: Colors.black,
+              ),
+              onTap: () {
+                // Navigator.of(context).pushReplacement(
+                //     MaterialPageRoute(builder: (context) => HomePage()));
+              },
+            ),
+            ListTile(
+              title: TextBold(
+                text: 'Expenses',
+                fontSize: 12,
+                color: Colors.black,
+              ),
+              onTap: () {
+                // Navigator.of(context).pushReplacement(
+                //     MaterialPageRoute(builder: (context) => HomePage()));
+              },
+            ),
+            ListTile(
+              title: TextBold(
                 text: 'Logout',
                 fontSize: 12,
-                color: Colors.grey,
+                color: Colors.black,
               ),
               onTap: () {
                 showDialog(

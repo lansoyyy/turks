@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:turks/widgets/text_widget.dart';
 
-import '../utils/colors.dart';
-
 PreferredSizeWidget AppbarWidget(
   String title,
 ) {
   return AppBar(
-    backgroundColor: secondaryColor,
-    title: TextRegular(text: title, fontSize: 18, color: Colors.white),
+    elevation: 0,
+    foregroundColor: Colors.black,
+    backgroundColor: Colors.white,
+    title: TextRegular(text: title, fontSize: 18, color: Colors.black),
     centerTitle: true,
   );
 }

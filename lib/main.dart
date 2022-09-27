@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turks/views/pages/home_page.dart';
+import 'package:turks/auth/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(),
-      home: const HomePage(),
+      home: const LogInPage(),
     );
   }
 }

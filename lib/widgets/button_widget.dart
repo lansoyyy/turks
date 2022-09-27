@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turks/utils/colors.dart';
+import 'package:turks/widgets/text_widget.dart';
 
 class ButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
@@ -14,22 +14,14 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      height: 50,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
       ),
-      color: secondaryColor,
+      minWidth: 250,
+      color: Colors.black,
       onPressed: onPressed,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(80, 15, 80, 15),
-        child: Text(
-          text,
-          style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-              color: Colors.white,
-              fontFamily: 'QRegular'),
-        ),
-      ),
+      child: TextBold(text: text, fontSize: 18, color: Colors.white),
     );
   }
 }
