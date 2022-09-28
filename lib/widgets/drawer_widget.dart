@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get_storage/get_storage.dart';
+import 'package:turks/auth/login.dart';
 import 'package:turks/views/crew/add_product_page.dart';
 import 'package:turks/views/crew/crew_home.dart';
 import 'package:turks/views/crew/expenses_page.dart';
@@ -32,33 +33,19 @@ class _MyDrawerState extends State<DrawerWidget> {
               decoration: const BoxDecoration(
                 color: Colors.black,
               ),
-              accountEmail: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextRegular(
-                    text: box.read('contactNumber') ?? '09090104355',
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
-                  TextRegular(
-                    text: box.read('address') ?? 'Impasugong Bukidnon',
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
+              accountEmail:
+                  TextRegular(text: '', fontSize: 0, color: Colors.white),
               accountName: TextBold(
                 text: box.read('name') ?? 'Lance Olana',
                 fontSize: 14,
                 color: Colors.white,
               ),
-              currentAccountPicture: Padding(
-                padding: const EdgeInsets.all(5.0),
+              currentAccountPicture: const Padding(
+                padding: EdgeInsets.all(5.0),
                 child: CircleAvatar(
                   minRadius: 50,
                   maxRadius: 50,
-                  backgroundImage:
-                      NetworkImage(box.read('profilePicture') ?? ''),
+                  backgroundImage: AssetImage('assets/images/profile.png'),
                 ),
               ),
             ),
@@ -167,9 +154,10 @@ class _MyDrawerState extends State<DrawerWidget> {
                             ),
                             FlatButton(
                               onPressed: () {
-                                // Navigator.of(context).pushReplacement(
-                                //     MaterialPageRoute(
-                                //         builder: (context) => LogInPage()));
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LogInPage()));
                               },
                               child: const Text(
                                 'Continue',

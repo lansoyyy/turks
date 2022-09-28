@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turks/auth/login_admin.dart';
 import 'package:turks/auth/login_crew.dart';
 import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
@@ -34,7 +35,12 @@ class LogInPage extends StatelessWidget {
           const SizedBox(
             height: 50,
           ),
-          ButtonWidget(onPressed: () {}, text: 'Admin'),
+          ButtonWidget(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const LoginAdmin()));
+              },
+              text: 'Admin'),
           const SizedBox(
             height: 20,
           ),

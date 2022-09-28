@@ -17,14 +17,33 @@ class SalesHistoryPage extends StatelessWidget {
             child: SizedBox(
               child: ListView.builder(itemBuilder: ((context, index) {
                 return ListTile(
-                  title: TextBold(
-                      text: 'Pizza', fontSize: 18, color: Colors.black),
-                  subtitle: TextRegular(
-                      text: 'Item', fontSize: 12, color: Colors.grey),
-                  trailing: TextBold(
-                      text: 'Total Sold: 100pcs',
-                      fontSize: 18,
-                      color: Colors.red),
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextBold(
+                          text: 'Pizza', fontSize: 18, color: Colors.black),
+                      TextRegular(
+                          text: 'Item', fontSize: 12, color: Colors.grey),
+                    ],
+                  ),
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: 50),
+                    child: TextBold(
+                        text: '400.00', fontSize: 18, color: Colors.black),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(left: 50),
+                    child: TextRegular(
+                        text: 'Price', fontSize: 12, color: Colors.grey),
+                  ),
+                  trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextBold(text: '100', fontSize: 18, color: Colors.black),
+                      TextRegular(
+                          text: 'Quantity', fontSize: 12, color: Colors.grey),
+                    ],
+                  ),
                 );
               })),
             ),

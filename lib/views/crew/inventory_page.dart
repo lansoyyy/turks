@@ -73,7 +73,7 @@ class InventoryType extends StatelessWidget {
               children: [
                 TextBold(text: 'Item', fontSize: 18, color: Colors.black),
                 TextBold(text: 'Quantity', fontSize: 18, color: Colors.black),
-                TextBold(text: 'Ex Date', fontSize: 18, color: Colors.black),
+                TextBold(text: 'Unit', fontSize: 18, color: Colors.black),
               ],
             ),
             Expanded(
@@ -94,9 +94,7 @@ class InventoryType extends StatelessWidget {
                       trailing: Padding(
                         padding: const EdgeInsets.only(right: 25),
                         child: TextRegular(
-                            text: '10-12-2022',
-                            fontSize: 16,
-                            color: Colors.black),
+                            text: 'KG', fontSize: 16, color: Colors.black),
                       ),
                     );
                   }),
