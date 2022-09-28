@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get_storage/get_storage.dart';
 import 'package:turks/views/crew/crew_home.dart';
+import 'package:turks/views/crew/logbook_page.dart';
+import 'package:turks/views/crew/waste_report_page.dart';
 import 'package:turks/widgets/text_widget.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -74,8 +76,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                 color: Colors.black,
               ),
               onTap: () {
-                // Navigator.of(context).pushReplacement(
-                //     MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const LogbookPage()));
               },
             ),
             ListTile(
@@ -107,8 +109,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                 color: Colors.black,
               ),
               onTap: () {
-                // Navigator.of(context).pushReplacement(
-                //     MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const WasteReportPage()));
               },
             ),
             ListTile(
