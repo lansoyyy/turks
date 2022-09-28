@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:turks/views/admin/create_account_page.dart';
+import 'package:turks/views/admin/expenses_page_admin.dart';
 import 'package:turks/views/admin/logbook_admin.dart';
 import 'package:turks/views/admin/pos_page.dart';
+import 'package:turks/views/chatroom_page.dart';
 import 'package:turks/widgets/button_widget.dart';
 
 import 'inventory_page.dart';
@@ -26,7 +28,12 @@ class AdminHome extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            ButtonWidget(onPressed: () {}, text: 'Messages'),
+            ButtonWidget(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ChatRoom()));
+                },
+                text: 'Messages'),
             const SizedBox(
               height: 20,
             ),
@@ -57,7 +64,12 @@ class AdminHome extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            ButtonWidget(onPressed: () {}, text: 'Expenses'),
+            ButtonWidget(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ExpensesPageAdmin()));
+                },
+                text: 'Expenses'),
             const SizedBox(
               height: 20,
             ),
