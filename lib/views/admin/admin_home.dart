@@ -33,7 +33,7 @@ class AdminHome extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const ChatRoom()));
                 },
-                text: 'Messages'),
+                text: 'Chat Room'),
             const SizedBox(
               height: 20,
             ),
