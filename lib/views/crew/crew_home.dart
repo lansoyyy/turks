@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:turks/services/data/menu_image_data.dart';
 import 'package:turks/views/crew/notif_page.dart';
+import 'package:turks/views/crew/product_page.dart';
 import 'package:turks/widgets/drawer_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 
@@ -34,7 +35,15 @@ class CrewHome extends StatelessWidget {
             crossAxisCount: 2,
           ),
           itemBuilder: (context, index) {
-            return Image.asset('assets/images/' + images[index]);
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const ProductPage()));
+              },
+              child: Image.asset(
+                'assets/images/' + images[index],
+              ),
+            );
           }),
     );
   }

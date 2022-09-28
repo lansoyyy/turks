@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:get_storage/get_storage.dart';
+import 'package:turks/views/crew/add_product_page.dart';
 import 'package:turks/views/crew/crew_home.dart';
+import 'package:turks/views/crew/expenses_page.dart';
+import 'package:turks/views/crew/inventory_page.dart';
 import 'package:turks/views/crew/logbook_page.dart';
+import 'package:turks/views/crew/sales_history_page.dart';
 import 'package:turks/views/crew/waste_report_page.dart';
 import 'package:turks/widgets/text_widget.dart';
 
@@ -59,6 +63,13 @@ class _MyDrawerState extends State<DrawerWidget> {
               ),
             ),
             ListTile(
+              trailing: IconButton(
+                  color: Colors.black,
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const AddProductPage()));
+                  },
+                  icon: const Icon(Icons.add)),
               title: TextBold(
                 text: 'Products',
                 fontSize: 12,
@@ -87,8 +98,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                 color: Colors.black,
               ),
               onTap: () {
-                // Navigator.of(context).pushReplacement(
-                //     MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const InventoryPage()));
               },
             ),
             ListTile(
@@ -98,8 +109,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                 color: Colors.black,
               ),
               onTap: () {
-                // Navigator.of(context).pushReplacement(
-                //     MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const SalesHistoryPage()));
               },
             ),
             ListTile(
@@ -120,8 +131,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                 color: Colors.black,
               ),
               onTap: () {
-                // Navigator.of(context).pushReplacement(
-                //     MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const ExensesPage()));
               },
             ),
             ListTile(
