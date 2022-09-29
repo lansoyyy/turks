@@ -37,8 +37,8 @@ class LogInPage extends StatelessWidget {
           ),
           ButtonWidget(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const LoginAdmin()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => LoginAdmin()));
               },
               text: 'Admin'),
           const SizedBox(
@@ -46,8 +46,8 @@ class LogInPage extends StatelessWidget {
           ),
           ButtonWidget(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const LoginCrew()));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => LoginCrew()));
               },
               text: 'Crew'),
         ]),
