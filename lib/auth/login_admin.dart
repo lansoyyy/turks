@@ -92,13 +92,6 @@ class LoginAdmin extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              TextButton(
-                onPressed: () {},
-                child: TextBold(
-                    text: 'Forgot Password?',
-                    fontSize: 12,
-                    color: Colors.black),
-              ),
             ],
           ),
         ),
