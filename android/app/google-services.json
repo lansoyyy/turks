@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "766201330565",
+    "project_id": "turks-ed29a",
+    "storage_bucket": "turks-ed29a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766201330565:android:014019d4a20b21b84822ec",
+        "android_client_info": {
+          "package_name": "com.example.turks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "766201330565-fhquug23t0qfomlepff0b88a32463ba3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1nem_OxVDj7AWdN-QNyp2nQ2moBhI4ns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "766201330565-fhquug23t0qfomlepff0b88a32463ba3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
