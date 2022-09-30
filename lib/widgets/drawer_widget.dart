@@ -119,8 +119,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                 color: Colors.black,
               ),
               onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const WasteReportPage()));
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => WasteReportPage()));
               },
             ),
             ListTile(
@@ -130,8 +130,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                 color: Colors.black,
               ),
               onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const ExensesPage()));
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => ExensesPage()));
               },
             ),
             ListTile(

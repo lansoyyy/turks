@@ -37,30 +37,12 @@ class ProductPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
             child: ListTile(
-              leading: Column(
-                children: [
-                  const SizedBox(
-                    height: 5,
-                  ),
+              leading:
                   TextBold(text: 'Quantity', fontSize: 18, color: Colors.black),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                ],
-              ),
-              trailing: SizedBox(
-                height: 50,
-                width: 200,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextBold(
-                        text: box.read('productQty') + 'pcs',
-                        fontSize: 18,
-                        color: Colors.grey),
-                  ],
-                ),
-              ),
+              trailing: TextBold(
+                  text: box.read('productQty'),
+                  fontSize: 18,
+                  color: Colors.grey),
             ),
           ),
           Padding(
