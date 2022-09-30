@@ -97,8 +97,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                 color: Colors.black,
               ),
               onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const InventoryPage()));
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => InventoryPage()));
               },
             ),
             ListTile(
@@ -109,7 +109,7 @@ class _MyDrawerState extends State<DrawerWidget> {
               ),
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const SalesHistoryPage()));
+                    builder: (context) => SalesHistoryPage()));
               },
             ),
             ListTile(
