@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:turks/services/cloud_function/add_user.dart';
 import 'package:turks/views/admin/admin_home.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/button_widget.dart';
@@ -17,7 +18,7 @@ class CreateAccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppbarWidget('Crew'),
+      appBar: AppbarWidget(box.read('createAccount')),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -108,7 +109,7 @@ class CreateAccountPage extends StatelessWidget {
                                             await FirebaseAuth.instance
                                                 .createUserWithEmailAndPassword(
                                                     email: username.trim() +
-                                                        '@crew.com',
+                                                        '@Crew.com',
                                                     password: password.trim());
                                           } catch (e) {
                                             showDialog(
@@ -145,9 +146,11 @@ class CreateAccountPage extends StatelessWidget {
                                           await FirebaseAuth.instance
                                               .createUserWithEmailAndPassword(
                                                   email: username.trim() +
-                                                      '@admin.com',
+                                                      '@Admin.com',
                                                   password: password.trim());
                                         }
+                                        addUser(name, username,
+                                            box.read('createAccount'));
                                         Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                                 builder: (context) =>

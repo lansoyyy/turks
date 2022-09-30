@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:turks/views/crew/crew_home.dart';
 import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginCrew extends StatelessWidget {
   late String username;
   late String password;
+
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +62,9 @@ class LoginCrew extends StatelessWidget {
                   onPressed: () async {
                     try {
                       await FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: username.trim() + '@crew.com',
+                          email: username.trim() + '@Crew.com',
                           password: password.trim());
+                      box.write('username', username.trim() + '@Crew.com');
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => CrewHome()));
                     } catch (e) {

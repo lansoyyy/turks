@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:turks/views/admin/admin_home.dart';
 import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginAdmin extends StatelessWidget {
   late String username;
   late String password;
+
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +62,9 @@ class LoginAdmin extends StatelessWidget {
                   onPressed: () async {
                     try {
                       await FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: username.trim() + '@admin.com',
+                          email: username.trim() + '@Admin.com',
                           password: password.trim());
+                      box.write('username', username.trim() + '@Admin.com');
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => AdminHome()));
                     } catch (e) {
