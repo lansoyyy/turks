@@ -32,8 +32,8 @@ class AdminHome extends StatelessWidget {
               ),
               ButtonWidget(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ChatRoom()));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ChatRoom()));
                   },
                   text: 'Chat Room'),
               const SizedBox(

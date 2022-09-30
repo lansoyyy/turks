@@ -37,7 +37,7 @@ class _MyDrawerState extends State<DrawerWidget> {
               accountEmail:
                   TextRegular(text: '', fontSize: 0, color: Colors.white),
               accountName: TextBold(
-                text: box.read('name') ?? 'Lance Olana',
+                text: box.read('name') ?? 'Crew',
                 fontSize: 14,
                 color: Colors.white,
               ),
@@ -57,8 +57,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                 color: Colors.black,
               ),
               onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const ChatRoom()));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => ChatRoom()));
               },
             ),
             ListTile(
