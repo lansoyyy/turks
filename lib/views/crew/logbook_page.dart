@@ -1,11 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:turks/services/cloud_function/logbook.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/drawer_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 
 class LogbookPage extends StatelessWidget {
-  const LogbookPage({Key? key}) : super(key: key);
+  late String name;
+  late String date;
+  late String time;
 
+  late String name1;
+  late String date1;
+  late String time1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +64,9 @@ class LogbookPage extends StatelessWidget {
                                                       fontSize: 12,
                                                       color: Colors.black),
                                                 ),
-                                                onChanged: (_input) {},
+                                                onChanged: (_input) {
+                                                  name = _input;
+                                                },
                                               ),
                                               TextFormField(
                                                 decoration: InputDecoration(
@@ -66,7 +75,9 @@ class LogbookPage extends StatelessWidget {
                                                       fontSize: 12,
                                                       color: Colors.black),
                                                 ),
-                                                onChanged: (_input) {},
+                                                onChanged: (_input) {
+                                                  date = _input;
+                                                },
                                               ),
                                               TextFormField(
                                                 decoration: InputDecoration(
@@ -75,7 +86,9 @@ class LogbookPage extends StatelessWidget {
                                                       fontSize: 12,
                                                       color: Colors.black),
                                                 ),
-                                                onChanged: (_input) {},
+                                                onChanged: (_input) {
+                                                  time = _input;
+                                                },
                                               ),
                                             ],
                                           ),
@@ -83,9 +96,8 @@ class LogbookPage extends StatelessWidget {
                                             FlatButton(
                                               color: Colors.black,
                                               onPressed: () {
-                                                // Navigator.of(context).pushReplacement(
-                                                //     MaterialPageRoute(
-                                                //         builder: (context) => LogInPage()));
+                                                logIn(name, date, time);
+                                                Navigator.of(context).pop();
                                               },
                                               child: const Text(
                                                 'Continue',
@@ -107,23 +119,48 @@ class LogbookPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: SizedBox(
-                          child:
-                              ListView.builder(itemBuilder: (context, index) {
-                            return ListTile(
-                              trailing: TextRegular(
-                                  text: 'August 03, 2022',
-                                  fontSize: 12,
-                                  color: Colors.black),
-                              title: TextBold(
-                                  text: 'Lance Olana',
-                                  fontSize: 18,
-                                  color: Colors.black),
+                      StreamBuilder<QuerySnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection('Login')
+                              .snapshots(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (snapshot.hasError) {
+                              print('error');
+                              return const Center(child: Text('Error'));
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              print('waiting');
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.blue,
+                                )),
+                              );
+                            }
+
+                            final data = snapshot.requireData;
+                            return Expanded(
+                              child: SizedBox(
+                                child: ListView.builder(
+                                    itemCount: snapshot.data?.size ?? 0,
+                                    itemBuilder: (context, index) {
+                                      return ListTile(
+                                        trailing: TextRegular(
+                                            text: data.docs[index]['date'],
+                                            fontSize: 12,
+                                            color: Colors.black),
+                                        title: TextBold(
+                                            text: data.docs[index]['name'],
+                                            fontSize: 18,
+                                            color: Colors.black),
+                                      );
+                                    }),
+                              ),
                             );
                           }),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -174,7 +211,9 @@ class LogbookPage extends StatelessWidget {
                                                       fontSize: 12,
                                                       color: Colors.black),
                                                 ),
-                                                onChanged: (_input) {},
+                                                onChanged: (_input) {
+                                                  name1 = _input;
+                                                },
                                               ),
                                               TextFormField(
                                                 decoration: InputDecoration(
@@ -183,7 +222,9 @@ class LogbookPage extends StatelessWidget {
                                                       fontSize: 12,
                                                       color: Colors.black),
                                                 ),
-                                                onChanged: (_input) {},
+                                                onChanged: (_input) {
+                                                  date1 = _input;
+                                                },
                                               ),
                                               TextFormField(
                                                 decoration: InputDecoration(
@@ -192,7 +233,9 @@ class LogbookPage extends StatelessWidget {
                                                       fontSize: 12,
                                                       color: Colors.black),
                                                 ),
-                                                onChanged: (_input) {},
+                                                onChanged: (_input) {
+                                                  time1 = _input;
+                                                },
                                               ),
                                             ],
                                           ),
@@ -200,9 +243,8 @@ class LogbookPage extends StatelessWidget {
                                             FlatButton(
                                               color: Colors.black,
                                               onPressed: () {
-                                                // Navigator.of(context).pushReplacement(
-                                                //     MaterialPageRoute(
-                                                //         builder: (context) => LogInPage()));
+                                                logOut(name1, date1, time1);
+                                                Navigator.of(context).pop();
                                               },
                                               child: const Text(
                                                 'Continue',
@@ -224,23 +266,48 @@ class LogbookPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: SizedBox(
-                          child:
-                              ListView.builder(itemBuilder: (context, index) {
-                            return ListTile(
-                              trailing: TextRegular(
-                                  text: 'August 03, 2022',
-                                  fontSize: 12,
-                                  color: Colors.black),
-                              title: TextBold(
-                                  text: 'Lance Olana',
-                                  fontSize: 18,
-                                  color: Colors.black),
+                      StreamBuilder<QuerySnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection('Logout')
+                              .snapshots(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (snapshot.hasError) {
+                              print('error');
+                              return const Center(child: Text('Error'));
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              print('waiting');
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.blue,
+                                )),
+                              );
+                            }
+
+                            final data = snapshot.requireData;
+                            return Expanded(
+                              child: SizedBox(
+                                child: ListView.builder(
+                                  itemCount: snapshot.data?.size ?? 0,
+                                    itemBuilder: (context, index) {
+                                  return ListTile(
+                                    trailing: TextRegular(
+                                        text: data.docs[index]['date'],
+                                        fontSize: 12,
+                                        color: Colors.black),
+                                    title: TextBold(
+                                        text: data.docs[index]['name'],
+                                        fontSize: 18,
+                                        color: Colors.black),
+                                  );
+                                }),
+                              ),
                             );
                           }),
-                        ),
-                      ),
                     ],
                   ),
                 ),

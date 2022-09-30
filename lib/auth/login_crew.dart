@@ -61,8 +61,8 @@ class LoginCrew extends StatelessWidget {
                       await FirebaseAuth.instance.signInWithEmailAndPassword(
                           email: username.trim() + '@crew.com',
                           password: password.trim());
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const CrewHome()));
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => CrewHome()));
                     } catch (e) {
                       showDialog(
                           context: context,

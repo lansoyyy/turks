@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({Key? key}) : super(key: key);
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +15,8 @@ class ProductPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Image.asset(
-              'assets/images/rice-bowl (2.6).png',
+            child: Image.network(
+              box.read('productURL'),
               height: 250,
             ),
           ),
@@ -27,7 +28,10 @@ class ProductPage extends StatelessWidget {
             child: ListTile(
               leading:
                   TextBold(text: 'Price', fontSize: 18, color: Colors.black),
-              trailing: TextBold(text: '200', fontSize: 18, color: Colors.grey),
+              trailing: TextBold(
+                  text: box.read('productPrice'),
+                  fontSize: 18,
+                  color: Colors.grey),
             ),
           ),
           Padding(
@@ -50,10 +54,10 @@ class ProductPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.remove)),
-                    TextBold(text: '50pcs', fontSize: 18, color: Colors.grey),
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+                    TextBold(
+                        text: box.read('productQty') + 'pcs',
+                        fontSize: 18,
+                        color: Colors.grey),
                   ],
                 ),
               ),
@@ -65,7 +69,9 @@ class ProductPage extends StatelessWidget {
               leading: TextBold(
                   text: 'Expiration Date', fontSize: 18, color: Colors.black),
               trailing: TextBold(
-                  text: '10-12-2022', fontSize: 18, color: Colors.grey),
+                  text: box.read('productExDate'),
+                  fontSize: 18,
+                  color: Colors.grey),
             ),
           ),
         ],

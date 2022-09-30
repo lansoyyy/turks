@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:turks/services/data/menu_image_data.dart';
 import 'package:turks/views/crew/notif_page.dart';
 import 'package:turks/views/crew/product_page.dart';
 import 'package:turks/widgets/drawer_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
+import 'package:get_storage/get_storage.dart';
 
 class CrewHome extends StatelessWidget {
-  const CrewHome({Key? key}) : super(key: key);
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +29,48 @@ class CrewHome extends StatelessWidget {
           ),
         ],
       ),
-      body: GridView.builder(
-          itemCount: images.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ProductPage()));
-              },
-              child: Image.asset(
-                'assets/images/' + images[index],
-              ),
-            );
+      body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('Products').snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              print('error');
+              return const Center(child: Text('Error'));
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              print('waiting');
+              return const Padding(
+                padding: EdgeInsets.only(top: 50),
+                child: Center(
+                    child: CircularProgressIndicator(
+                  color: Colors.blue,
+                )),
+              );
+            }
+
+            final data = snapshot.requireData;
+            return GridView.builder(
+                itemCount: snapshot.data?.size ?? 0,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      box.write('productPrice', data.docs[index]['price']);
+                      box.write('productURL', data.docs[index]['url']);
+                      box.write('productQty', data.docs[index]['qty']);
+                      box.write('productId', data.docs[index]['id']);
+                      box.write(
+                          'productExDate', data.docs[index]['expireDate']);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ProductPage()));
+                    },
+                    child: Image.network(
+                      data.docs[index]['url'],
+                    ),
+                  );
+                });
           }),
     );
   }

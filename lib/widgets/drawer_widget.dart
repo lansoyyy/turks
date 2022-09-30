@@ -66,7 +66,7 @@ class _MyDrawerState extends State<DrawerWidget> {
                   color: Colors.black,
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const AddProductPage()));
+                        builder: (context) => AddProductPage()));
                   },
                   icon: const Icon(Icons.add)),
               title: TextBold(
@@ -76,7 +76,7 @@ class _MyDrawerState extends State<DrawerWidget> {
               ),
               onTap: () {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const CrewHome()));
+                    MaterialPageRoute(builder: (context) => CrewHome()));
               },
             ),
             ListTile(
@@ -86,8 +86,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                 color: Colors.black,
               ),
               onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const LogbookPage()));
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => LogbookPage()));
               },
             ),
             ListTile(
