@@ -52,8 +52,10 @@ class _ChatRoomState extends State<ChatRoom> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             StreamBuilder<QuerySnapshot>(
-                stream:
-                    FirebaseFirestore.instance.collection('Chat').snapshots(),
+                stream: FirebaseFirestore.instance
+                    .collection('Chat')
+                    .orderBy('doc')
+                    .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {

@@ -3,11 +3,11 @@ import 'package:turks/views/admin/product_list_page.dart';
 import 'package:turks/views/admin/waste_report_page_admin.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/button_widget.dart';
-
+import 'package:get_storage/get_storage.dart';
 import 'inventory_type_admin.dart';
 
 class InventoryAdminPage extends StatelessWidget {
-  const InventoryAdminPage({Key? key}) : super(key: key);
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +22,9 @@ class InventoryAdminPage extends StatelessWidget {
             ),
             ButtonWidget(
                 onPressed: () {
+                  box.write('invenType', 'Ingeredients');
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const InventoryTypeAdmin()));
+                      builder: (context) => InventoryTypeAdmin()));
                 },
                 text: 'Ingredients'),
             const SizedBox(
@@ -31,8 +32,9 @@ class InventoryAdminPage extends StatelessWidget {
             ),
             ButtonWidget(
                 onPressed: () {
+                  box.write('invenType', 'Drinks');
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const InventoryTypeAdmin()));
+                      builder: (context) => InventoryTypeAdmin()));
                 },
                 text: 'Drinks'),
             const SizedBox(
@@ -40,8 +42,9 @@ class InventoryAdminPage extends StatelessWidget {
             ),
             ButtonWidget(
                 onPressed: () {
+                  box.write('invenType', 'Bags');
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const InventoryTypeAdmin()));
+                      builder: (context) => InventoryTypeAdmin()));
                 },
                 text: 'Bags'),
             const SizedBox(
@@ -49,8 +52,9 @@ class InventoryAdminPage extends StatelessWidget {
             ),
             ButtonWidget(
                 onPressed: () {
+                  box.write('invenType', 'Cups');
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const InventoryTypeAdmin()));
+                      builder: (context) => InventoryTypeAdmin()));
                 },
                 text: 'Cups'),
             const SizedBox(

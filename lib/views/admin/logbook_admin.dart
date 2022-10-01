@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:turks/widgets/appbar_widget.dart';
-import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 
 class LogbookAdmin extends StatelessWidget {
@@ -14,64 +14,133 @@ class LogbookAdmin extends StatelessWidget {
         children: [
           Expanded(
             child: SizedBox(
-              child: ListView.separated(
-                  itemCount: 5,
-                  separatorBuilder: (context, index) {
-                    return const Divider();
-                  },
-                  itemBuilder: ((context, index) {
-                    return ListTile(
-                      title: TextBold(
-                          text: 'Lance Olana',
-                          fontSize: 18,
-                          color: Colors.black),
-                      subtitle: TextRegular(
-                          text: 'Crew', fontSize: 12, color: Colors.grey),
-                      trailing: SizedBox(
-                        height: 50,
-                        width: 200,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                TextBold(
-                                    text: 'Login Time',
-                                    fontSize: 10,
-                                    color: Colors.black),
-                                TextRegular(
-                                    text: '6am',
-                                    fontSize: 12,
-                                    color: Colors.black),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                TextBold(
-                                    text: 'Logout Time',
-                                    fontSize: 10,
-                                    color: Colors.black),
-                                TextRegular(
-                                    text: '6pm',
-                                    fontSize: 12,
-                                    color: Colors.black),
-                              ],
-                            ),
-                          ],
-                        ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                    width: 2,
+                    color: Colors.black,
+                  )),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
                       ),
-                    );
-                  })),
+                      TextBold(
+                          text: 'Logged in', fontSize: 18, color: Colors.red),
+                      StreamBuilder<QuerySnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection('Login')
+                              .snapshots(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (snapshot.hasError) {
+                              print('error');
+                              return const Center(child: Text('Error'));
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              print('waiting');
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.blue,
+                                )),
+                              );
+                            }
+
+                            final data = snapshot.requireData;
+                            return Expanded(
+                              child: SizedBox(
+                                child: ListView.builder(
+                                    itemCount: snapshot.data?.size ?? 0,
+                                    itemBuilder: (context, index) {
+                                      return ListTile(
+                                        trailing: TextRegular(
+                                            text: data.docs[index]['date'],
+                                            fontSize: 12,
+                                            color: Colors.black),
+                                        title: TextBold(
+                                            text: data.docs[index]['name'],
+                                            fontSize: 18,
+                                            color: Colors.black),
+                                      );
+                                    }),
+                              ),
+                            );
+                          }),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
-          ButtonWidget(onPressed: () {}, text: 'Save'),
-          const SizedBox(
-            height: 20,
+          Expanded(
+            child: SizedBox(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                    width: 2,
+                    color: Colors.black,
+                  )),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextBold(
+                          text: 'Logged out', fontSize: 18, color: Colors.red),
+                      StreamBuilder<QuerySnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection('Logout')
+                              .snapshots(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (snapshot.hasError) {
+                              print('error');
+                              return const Center(child: Text('Error'));
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              print('waiting');
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.blue,
+                                )),
+                              );
+                            }
+
+                            final data = snapshot.requireData;
+                            return Expanded(
+                              child: SizedBox(
+                                child: ListView.builder(
+                                    itemCount: snapshot.data?.size ?? 0,
+                                    itemBuilder: (context, index) {
+                                      return ListTile(
+                                        trailing: TextRegular(
+                                            text: data.docs[index]['date'],
+                                            fontSize: 12,
+                                            color: Colors.black),
+                                        title: TextBold(
+                                            text: data.docs[index]['name'],
+                                            fontSize: 18,
+                                            color: Colors.black),
+                                      );
+                                    }),
+                              ),
+                            );
+                          }),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
