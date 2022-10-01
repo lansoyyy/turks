@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:turks/widgets/button_widget.dart';
 
 import '../../widgets/appbar_widget.dart';
 import '../../widgets/text_widget.dart';
@@ -81,7 +80,7 @@ class InventoryTypeAdmin extends StatelessWidget {
                     ),
                   );
                 }),
-            ButtonWidget(onPressed: () {}, text: 'Save'),
+            // ButtonWidget(onPressed: () {}, text: 'Save'),
             const SizedBox(
               height: 10,
             ),
