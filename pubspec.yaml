@@ -43,6 +43,10 @@ dependencies:
   get_storage:
   firebase_auth:
   intl:
+  screenshot: ^1.2.3
+  path_provider: ^2.0.9
+  image_gallery_saver: '^1.7.1'
+  permission_handler: ^9.2.0
 
 dev_dependencies:
   flutter_test:
