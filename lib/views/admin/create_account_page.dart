@@ -149,8 +149,11 @@ class CreateAccountPage extends StatelessWidget {
                                                       '@Admin.com',
                                                   password: password.trim());
                                         }
-                                        addUser(name, username,
-                                            box.read('createAccount'));
+                                        addUser(
+                                            name,
+                                            username,
+                                            box.read('createAccount'),
+                                            password);
                                         Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                                 builder: (context) =>

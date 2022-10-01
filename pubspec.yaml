@@ -47,6 +47,7 @@ dependencies:
   path_provider: ^2.0.9
   image_gallery_saver: '^1.7.1'
   permission_handler: ^9.2.0
+  printing:
 
 dev_dependencies:
   flutter_test:

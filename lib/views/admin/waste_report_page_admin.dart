@@ -54,6 +54,13 @@ class WasteReportPageAdmin extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
+                            Image.network(
+                              data.docs[index]['url'],
+                              height: 100,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
                           ],
                           title: TextBold(
                               text: data.docs[index]['type'],

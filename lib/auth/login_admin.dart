@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turks/views/admin/admin_home.dart';
@@ -5,11 +6,41 @@ import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
-class LoginAdmin extends StatelessWidget {
+class LoginAdmin extends StatefulWidget {
+  @override
+  State<LoginAdmin> createState() => _LoginAdminState();
+}
+
+class _LoginAdminState extends State<LoginAdmin> {
   late String username;
+
   late String password;
 
   final box = GetStorage();
+
+  late String forgotPassword = '';
+
+  late String myPassword = '';
+
+  bool hasLoaded = false;
+
+  getData() async {
+    // Use provider
+    var collection = FirebaseFirestore.instance
+        .collection('Users')
+        .where('username', isEqualTo: forgotPassword + '@Admin.com');
+
+    var querySnapshot = await collection.get();
+    if (mounted) {
+      setState(() {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
+          Map<String, dynamic> data = queryDocumentSnapshot.data();
+          myPassword = data['password'];
+          hasLoaded = true;
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +96,7 @@ class LoginAdmin extends StatelessWidget {
                           email: username.trim() + '@Admin.com',
                           password: password.trim());
                       box.write('username', username.trim() + '@Admin.com');
+                      box.write('password', password);
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => AdminHome()));
                     } catch (e) {
@@ -95,6 +127,90 @@ class LoginAdmin extends StatelessWidget {
                   text: 'Login'),
               const SizedBox(
                 height: 20,
+              ),
+              TextButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: const Text(
+                              'Recovering Password',
+                              style: TextStyle(fontFamily: 'QBold'),
+                            ),
+                            content: TextFormField(
+                              onChanged: (_input) {
+                                forgotPassword = _input;
+                                getData();
+                              },
+                              decoration: InputDecoration(
+                                label: TextRegular(
+                                    text: 'Enter your username',
+                                    fontSize: 12,
+                                    color: Colors.black),
+                              ),
+                            ),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () {
+                                  try {
+                                    hasLoaded
+                                        ? showDialog(
+                                            barrierDismissible: false,
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                                  title: const Text(
+                                                    'Your Password',
+                                                    style: TextStyle(
+                                                        fontFamily: 'QBold'),
+                                                  ),
+                                                  content: Text(
+                                                    myPassword,
+                                                    style: const TextStyle(
+                                                        fontFamily: 'QRegular'),
+                                                  ),
+                                                  actions: <Widget>[
+                                                    FlatButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pushReplacement(
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            LoginAdmin()));
+                                                      },
+                                                      child: const Text(
+                                                        'Continue',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'QRegular',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ))
+                                        : const Center(
+                                            child: CircularProgressIndicator(
+                                                color: Colors.black));
+                                  } catch (e) {
+                                    print(e.toString());
+                                  }
+                                },
+                                child: const Text(
+                                  'Continue',
+                                  style: TextStyle(
+                                      fontFamily: 'QRegular',
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ));
+                },
+                child: TextBold(
+                    text: 'Forgot Password?',
+                    fontSize: 12,
+                    color: Colors.black),
               ),
             ],
           ),

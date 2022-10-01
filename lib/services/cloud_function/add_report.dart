@@ -5,6 +5,7 @@ Future addReport(
   String type,
   String date,
   String content,
+  String imageURL,
 ) async {
   final docUser = FirebaseFirestore.instance.collection('Waste Reports').doc();
 
@@ -13,7 +14,8 @@ Future addReport(
     'type': type,
     'date': date,
     'id': docUser.id,
-    'content': content
+    'content': content,
+    'url': imageURL,
   };
 
   await docUser.set(json);

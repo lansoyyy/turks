@@ -115,6 +115,7 @@ class SalesHistoryPage extends StatelessWidget {
                                 },
                               ),
                               TextFormField(
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   label: TextRegular(
                                       text: 'Price',
@@ -126,6 +127,7 @@ class SalesHistoryPage extends StatelessWidget {
                                 },
                               ),
                               TextFormField(
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   label: TextRegular(
                                       text: 'Quantity',

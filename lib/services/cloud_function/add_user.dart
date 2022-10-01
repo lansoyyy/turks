@@ -4,6 +4,7 @@ Future addUser(
   String name,
   String username,
   String type,
+  String password,
 ) async {
   final docUser = FirebaseFirestore.instance.collection('Users').doc();
 
@@ -11,7 +12,8 @@ Future addUser(
     'name': name,
     'username': username + '@$type.com',
     'id': docUser.id,
-    'type': type
+    'type': type,
+    'password': password,
   };
 
   await docUser.set(json);
