@@ -162,19 +162,21 @@ class _ChatRoomState extends State<ChatRoom> {
                       onPressed: () {
                         var dt = DateTime.now();
 
-                        addChat(
-                            name,
-                            dt.month.toString() +
-                                '/' +
-                                dt.day.toString() +
-                                '/' +
-                                dt.year.toString(),
-                            dt.hour.toString() + ':' + dt.minute.toString(),
-                            _messageController.text,
-                            dt.hour.toString() +
-                                dt.minute.toString() +
-                                dt.second.toString());
-                        _messageController.clear();
+                        if (_messageController.text != '') {
+                          addChat(
+                              name,
+                              dt.month.toString() +
+                                  '/' +
+                                  dt.day.toString() +
+                                  '/' +
+                                  dt.year.toString(),
+                              dt.hour.toString() + ':' + dt.minute.toString(),
+                              _messageController.text,
+                              dt.hour.toString() +
+                                  dt.minute.toString() +
+                                  dt.second.toString());
+                          _messageController.clear();
+                        }
                       },
                       icon: const Icon(Icons.send),
                     ),
