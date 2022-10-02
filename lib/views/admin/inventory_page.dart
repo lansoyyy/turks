@@ -72,7 +72,7 @@ class InventoryAdminPage extends StatelessWidget {
             ButtonWidget(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const WasteReportPageAdmin()));
+                      builder: (context) => WasteReportPageAdmin()));
                 },
                 text: 'Waste'),
           ],

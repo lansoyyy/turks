@@ -149,7 +149,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                       context: context,
                       builder: (context) => AlertDialog(
                             title: const Text(
-                              'Ingeredients',
+                              'Ingredients',
                               style: TextStyle(
                                   fontFamily: 'QBold',
                                   fontWeight: FontWeight.bold),
@@ -284,7 +284,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                       context: context,
                       builder: (context) => AlertDialog(
                             title: const Text(
-                              'Ingeredients',
+                              'Drinks',
                               style: TextStyle(
                                   fontFamily: 'QBold',
                                   fontWeight: FontWeight.bold),
@@ -419,7 +419,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                       context: context,
                       builder: (context) => AlertDialog(
                             title: const Text(
-                              'Ingeredients',
+                              'Bags',
                               style: TextStyle(
                                   fontFamily: 'QBold',
                                   fontWeight: FontWeight.bold),
@@ -554,7 +554,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                       context: context,
                       builder: (context) => AlertDialog(
                             title: const Text(
-                              'Ingeredients',
+                              'Cups',
                               style: TextStyle(
                                   fontFamily: 'QBold',
                                   fontWeight: FontWeight.bold),

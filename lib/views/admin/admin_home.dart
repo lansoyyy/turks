@@ -51,7 +51,7 @@ class AdminHome extends StatelessWidget {
               ButtonWidget(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const LogbookAdmin()));
+                        builder: (context) => LogbookAdmin()));
                   },
                   text: 'Logbook'),
               const SizedBox(
@@ -59,8 +59,8 @@ class AdminHome extends StatelessWidget {
               ),
               ButtonWidget(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const POSPage()));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => POSPage()));
                   },
                   text: 'POS'),
               const SizedBox(

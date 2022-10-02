@@ -10,7 +10,7 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppbarWidget('Rice Bowl'),
+      appBar: AppbarWidget('Product'),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
