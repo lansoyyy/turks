@@ -310,13 +310,17 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                   height: 20,
                                 ),
                                 hasLoaded
-                                    ? SizedBox(
-                                        height: 150,
-                                        width: 150,
-                                        
-                                        child: Image.network(
-                                          imageURL,
-                                          fit: BoxFit.cover,
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          uploadPicture('gallery');
+                                        },
+                                        child: SizedBox(
+                                          height: 150,
+                                          width: 150,
+                                          child: Image.network(
+                                            imageURL,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       )
                                     : GestureDetector(
