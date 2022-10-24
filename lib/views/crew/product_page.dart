@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turks/services/data/menu_image_data.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
@@ -6,10 +7,17 @@ import 'package:get_storage/get_storage.dart';
 import '../../services/cloud_function/add_sales.dart';
 import '../../widgets/button_widget.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
   final box = GetStorage();
 
   late String item;
+
+  int qty = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +28,8 @@ class ProductPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Image.network(
-              box.read('productURL'),
+            child: Image.asset(
+              'assets/images/menu/${box.read('index')}.png',
               height: 250,
             ),
           ),
@@ -34,7 +42,7 @@ class ProductPage extends StatelessWidget {
               leading:
                   TextBold(text: 'Price', fontSize: 18, color: Colors.black),
               trailing: TextBold(
-                  text: box.read('productPrice'),
+                  text: prices[box.read('index')],
                   fontSize: 18,
                   color: Colors.grey),
             ),
@@ -44,10 +52,33 @@ class ProductPage extends StatelessWidget {
             child: ListTile(
               leading:
                   TextBold(text: 'Quantity', fontSize: 18, color: Colors.black),
-              trailing: TextBold(
-                  text: box.read('productQty'),
-                  fontSize: 18,
-                  color: Colors.grey),
+              trailing: SizedBox(
+                width: 200,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            if (qty == 0) {
+                            } else {
+                              qty--;
+                            }
+                          });
+                        },
+                        icon: const Icon(Icons.remove)),
+                    TextBold(
+                        text: qty.toString(), fontSize: 18, color: Colors.grey),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            qty++;
+                          });
+                        },
+                        icon: const Icon(Icons.add)),
+                  ],
+                ),
+              ),
             ),
           ),
           Padding(
@@ -56,59 +87,27 @@ class ProductPage extends StatelessWidget {
               leading: TextBold(
                   text: 'Expiration Date', fontSize: 18, color: Colors.black),
               trailing: TextBold(
-                  text: box.read('productExDate'),
-                  fontSize: 18,
-                  color: Colors.grey),
+                  text: '10/23/2023', fontSize: 18, color: Colors.grey),
             ),
           ),
           const Expanded(child: SizedBox()),
           ButtonWidget(
               onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          title: const Text(
-                            'Adding to Sales',
-                            style: TextStyle(
-                                fontFamily: 'QBold',
-                                fontWeight: FontWeight.bold),
-                          ),
-                          content: SizedBox(
-                            height: 300,
-                            child: Column(
-                              children: [
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    label: TextRegular(
-                                        text: 'Product Name',
-                                        fontSize: 12,
-                                        color: Colors.black),
-                                  ),
-                                  onChanged: (_input) {
-                                    item = _input;
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          actions: <Widget>[
-                            FlatButton(
-                              color: Colors.black,
-                              onPressed: () {
-                                addSales(item, box.read('productPrice'),
-                                    box.read('productQty'));
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text(
-                                'Continue',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'QRegular',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ));
+                if (qty != 0) {
+                  addSales(names[box.read('index')], prices[box.read('index')],
+                      qty.toString());
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Added to Sales'),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Cannot Procceed! Quantity must not be 0'),
+                    ),
+                  );
+                }
               },
               text: 'Add Sales'),
           const SizedBox(

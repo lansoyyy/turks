@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:turks/services/cloud_function/add_sales.dart';
 import 'package:turks/widgets/appbar_widget.dart';
-import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/drawer_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 
@@ -90,75 +88,6 @@ class SalesHistoryPage extends StatelessWidget {
                   ),
                 );
               }),
-          ButtonWidget(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          title: const Text(
-                            'Adding to Inventory',
-                            style: TextStyle(
-                                fontFamily: 'QBold',
-                                fontWeight: FontWeight.bold),
-                          ),
-                          content: Column(
-                            children: [
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  label: TextRegular(
-                                      text: 'Item',
-                                      fontSize: 12,
-                                      color: Colors.black),
-                                ),
-                                onChanged: (_input) {
-                                  item = _input;
-                                },
-                              ),
-                              TextFormField(
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  label: TextRegular(
-                                      text: 'Price',
-                                      fontSize: 12,
-                                      color: Colors.black),
-                                ),
-                                onChanged: (_input) {
-                                  price = _input;
-                                },
-                              ),
-                              TextFormField(
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  label: TextRegular(
-                                      text: 'Quantity',
-                                      fontSize: 12,
-                                      color: Colors.black),
-                                ),
-                                onChanged: (_input) {
-                                  qty = _input;
-                                },
-                              ),
-                            ],
-                          ),
-                          actions: <Widget>[
-                            FlatButton(
-                              color: Colors.black,
-                              onPressed: () {
-                                addSales(item, price, qty);
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text(
-                                'Continue',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'QRegular',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ));
-              },
-              text: 'Add Sales'),
           const SizedBox(
             height: 20,
           ),
