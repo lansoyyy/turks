@@ -21,12 +21,14 @@ class _LoginCrewState extends State<LoginCrew> {
   late String forgotPassword;
   late String myPassword;
   bool hasLoaded = false;
+  late String answer;
 
   getData() async {
     // Use provider
     var collection = FirebaseFirestore.instance
         .collection('Users')
-        .where('username', isEqualTo: forgotPassword + '@Crew.com');
+        .where('username', isEqualTo: forgotPassword + '@Crew.com')
+        .where('answer', isEqualTo: answer);
 
     var querySnapshot = await collection.get();
     if (mounted) {
@@ -135,17 +137,33 @@ class _LoginCrewState extends State<LoginCrew> {
                               'Recovering Password',
                               style: TextStyle(fontFamily: 'QBold'),
                             ),
-                            content: TextFormField(
-                              onChanged: (_input) {
-                                forgotPassword = _input;
-                                getData();
-                              },
-                              decoration: InputDecoration(
-                                label: TextRegular(
-                                    text: 'Enter your username',
-                                    fontSize: 12,
-                                    color: Colors.black),
-                              ),
+                            content: Column(
+                              children: [
+                                TextFormField(
+                                  onChanged: (_input) {
+                                    forgotPassword = _input;
+                                    getData();
+                                  },
+                                  decoration: InputDecoration(
+                                    label: TextRegular(
+                                        text: 'Enter your username',
+                                        fontSize: 12,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                                TextFormField(
+                                  onChanged: (_input) {
+                                    answer = _input;
+                                    getData();
+                                  },
+                                  decoration: InputDecoration(
+                                    label: TextRegular(
+                                        text: "Enter your father's birthday",
+                                        fontSize: 12,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ],
                             ),
                             actions: <Widget>[
                               FlatButton(

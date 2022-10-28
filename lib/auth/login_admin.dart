@@ -16,6 +16,8 @@ class _LoginAdminState extends State<LoginAdmin> {
 
   late String password;
 
+  late String answer;
+
   final box = GetStorage();
 
   late String forgotPassword = '';
@@ -28,7 +30,8 @@ class _LoginAdminState extends State<LoginAdmin> {
     // Use provider
     var collection = FirebaseFirestore.instance
         .collection('Users')
-        .where('username', isEqualTo: forgotPassword + '@Admin.com');
+        .where('username', isEqualTo: forgotPassword + '@Admin.com')
+        .where('answer', isEqualTo: answer);
 
     var querySnapshot = await collection.get();
     if (mounted) {
@@ -137,21 +140,38 @@ class _LoginAdminState extends State<LoginAdmin> {
                               'Recovering Password',
                               style: TextStyle(fontFamily: 'QBold'),
                             ),
-                            content: TextFormField(
-                              onChanged: (_input) {
-                                forgotPassword = _input;
-                                getData();
-                              },
-                              decoration: InputDecoration(
-                                label: TextRegular(
-                                    text: 'Enter your username',
-                                    fontSize: 12,
-                                    color: Colors.black),
-                              ),
+                            content: Column(
+                              children: [
+                                TextFormField(
+                                  onChanged: (_input) {
+                                    forgotPassword = _input;
+                                    getData();
+                                  },
+                                  decoration: InputDecoration(
+                                    label: TextRegular(
+                                        text: 'Enter your username',
+                                        fontSize: 12,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                                TextFormField(
+                                  onChanged: (_input) {
+                                    answer = _input;
+                                    getData();
+                                  },
+                                  decoration: InputDecoration(
+                                    label: TextRegular(
+                                        text: "Enter your father's birthday",
+                                        fontSize: 12,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ],
                             ),
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {
+                                  print(myPassword);
                                   try {
                                     hasLoaded
                                         ? showDialog(

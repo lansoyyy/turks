@@ -12,6 +12,7 @@ class CreateAccountPage extends StatelessWidget {
   late String username;
   late String password;
   late String confirmPassword;
+  late String answer;
 
   final box = GetStorage();
 
@@ -95,79 +96,121 @@ class CreateAccountPage extends StatelessWidget {
                       if (password.length > 6) {
                         showDialog(
                             context: context,
-                            builder: (context) => AlertDialog(
-                                  content: const Text(
-                                    'Account Created Succesfully!',
-                                    style: TextStyle(fontFamily: 'QRegular'),
-                                  ),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      onPressed: () async {
-                                        if (box.read('createAccount') ==
-                                            'Crew') {
-                                          try {
-                                            await FirebaseAuth.instance
-                                                .createUserWithEmailAndPassword(
-                                                    email: username.trim() +
-                                                        '@Crew.com',
-                                                    password: password.trim());
-                                          } catch (e) {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) =>
-                                                    AlertDialog(
-                                                      content: Text(
-                                                        e.toString(),
-                                                        style: const TextStyle(
-                                                            fontFamily:
-                                                                'QRegular'),
-                                                      ),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                            'Close',
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    'QRegular',
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ));
-                                          }
-                                        } else {
-                                          await FirebaseAuth.instance
-                                              .createUserWithEmailAndPassword(
-                                                  email: username.trim() +
-                                                      '@Admin.com',
-                                                  password: password.trim());
-                                        }
-                                        addUser(
-                                            name,
-                                            username,
-                                            box.read('createAccount'),
-                                            password);
-                                        Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    AdminHome()));
-                                      },
-                                      child: const Text(
-                                        'Continue',
-                                        style: TextStyle(
-                                            fontFamily: 'QRegular',
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                            builder: (context) {
+                              return AlertDialog(
+                                actions: [
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      showDialog(
+                                          context: context,
+                                          barrierDismissible: false,
+                                          builder: (context) => AlertDialog(
+                                                content: const Text(
+                                                  'Account Created Succesfully!',
+                                                  style: TextStyle(
+                                                      fontFamily: 'QRegular'),
+                                                ),
+                                                actions: <Widget>[
+                                                  FlatButton(
+                                                    onPressed: () async {
+                                                      if (box.read(
+                                                              'createAccount') ==
+                                                          'Crew') {
+                                                        try {
+                                                          await FirebaseAuth
+                                                              .instance
+                                                              .createUserWithEmailAndPassword(
+                                                                  email: username
+                                                                          .trim() +
+                                                                      '@Crew.com',
+                                                                  password:
+                                                                      password
+                                                                          .trim());
+                                                        } catch (e) {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (context) =>
+                                                                      AlertDialog(
+                                                                        content:
+                                                                            Text(
+                                                                          e.toString(),
+                                                                          style:
+                                                                              const TextStyle(fontFamily: 'QRegular'),
+                                                                        ),
+                                                                        actions: <
+                                                                            Widget>[
+                                                                          FlatButton(
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.of(context).pop();
+                                                                            },
+                                                                            child:
+                                                                                const Text(
+                                                                              'Close',
+                                                                              style: TextStyle(fontFamily: 'QRegular', fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ));
+                                                        }
+                                                      } else {
+                                                        await FirebaseAuth
+                                                            .instance
+                                                            .createUserWithEmailAndPassword(
+                                                                email: username
+                                                                        .trim() +
+                                                                    '@Admin.com',
+                                                                password:
+                                                                    password
+                                                                        .trim());
+                                                      }
+                                                      addUser(
+                                                          answer,
+                                                          name,
+                                                          username,
+                                                          box.read(
+                                                              'createAccount'),
+                                                          password);
+                                                      Navigator.of(context)
+                                                          .pushReplacement(
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          AdminHome()));
+                                                    },
+                                                    child: const Text(
+                                                      'Continue',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'QRegular',
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ));
+                                    },
+                                    child: const Text(
+                                      'Continue',
+                                      style: TextStyle(
+                                          fontFamily: 'QRegular',
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ],
-                                ));
+                                  ),
+                                ],
+                                title: TextRegular(
+                                    text: "Enter $name Father's birthday",
+                                    fontSize: 14,
+                                    color: Colors.black),
+                                content: TextFormField(
+                                  onChanged: (_input) {
+                                    answer = _input;
+                                  },
+                                ),
+                              );
+                            });
                       } else {
                         showDialog(
                             context: context,
