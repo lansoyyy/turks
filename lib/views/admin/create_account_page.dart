@@ -167,12 +167,13 @@ class CreateAccountPage extends StatelessWidget {
                                                                         .trim());
                                                       }
                                                       addUser(
-                                                          answer,
-                                                          name,
-                                                          username,
-                                                          box.read(
-                                                              'createAccount'),
-                                                          password);
+                                                        name,
+                                                        username,
+                                                        box.read(
+                                                            'createAccount'),
+                                                        password,
+                                                        answer,
+                                                      );
                                                       Navigator.of(context)
                                                           .pushReplacement(
                                                               MaterialPageRoute(

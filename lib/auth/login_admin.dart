@@ -30,8 +30,7 @@ class _LoginAdminState extends State<LoginAdmin> {
     // Use provider
     var collection = FirebaseFirestore.instance
         .collection('Users')
-        .where('username', isEqualTo: forgotPassword + '@Admin.com')
-        .where('answer', isEqualTo: answer);
+        .where('username', isEqualTo: forgotPassword + '@Admin.com');
 
     var querySnapshot = await collection.get();
     if (mounted) {
@@ -172,6 +171,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                               FlatButton(
                                 onPressed: () {
                                   print(myPassword);
+                                  print(answer);
                                   try {
                                     hasLoaded
                                         ? showDialog(
