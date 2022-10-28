@@ -101,7 +101,6 @@ class CreateAccountPage extends StatelessWidget {
                                 actions: [
                                   FlatButton(
                                     onPressed: () {
-                                      Navigator.of(context).pop();
                                       showDialog(
                                           context: context,
                                           barrierDismissible: false,
@@ -114,6 +113,8 @@ class CreateAccountPage extends StatelessWidget {
                                                 actions: <Widget>[
                                                   FlatButton(
                                                     onPressed: () async {
+                                                      Navigator.of(context)
+                                                          .pop();
                                                       if (box.read(
                                                               'createAccount') ==
                                                           'Crew') {
