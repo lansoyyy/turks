@@ -113,8 +113,6 @@ class CreateAccountPage extends StatelessWidget {
                                                 actions: <Widget>[
                                                   FlatButton(
                                                     onPressed: () async {
-                                                      Navigator.of(context)
-                                                          .pop();
                                                       if (box.read(
                                                               'createAccount') ==
                                                           'Crew') {
