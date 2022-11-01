@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turks/views/admin/admin_home.dart';
+import 'package:turks/views/admin/admin_home_page.dart';
 import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
@@ -99,8 +100,8 @@ class _LoginAdminState extends State<LoginAdmin> {
                           password: password.trim());
                       box.write('username', username.trim() + '@Admin.com');
                       box.write('password', password);
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => AdminHome()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const AdminHomePage()));
                     } catch (e) {
                       showDialog(
                           context: context,
