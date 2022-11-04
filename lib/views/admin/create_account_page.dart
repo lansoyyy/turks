@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turks/services/cloud_function/add_user.dart';
 import 'package:turks/views/admin/admin_home.dart';
+import 'package:turks/views/admin/admin_home_page.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
@@ -178,7 +179,7 @@ class CreateAccountPage extends StatelessWidget {
                                                               MaterialPageRoute(
                                                                   builder:
                                                                       (context) =>
-                                                                          AdminHome()));
+                                                                          const AdminHomePage()));
                                                     },
                                                     child: const Text(
                                                       'Continue',
