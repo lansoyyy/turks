@@ -32,6 +32,10 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
     return num1 * num2;
   }
 
+  late int totalPrice1 = 0;
+  late int totalQuantity1 = 0;
+  late int overAllTotal1 = 0;
+
   getData1() async {
     // Use provider
     var collection = FirebaseFirestore.instance
@@ -45,10 +49,20 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
           Map<String, dynamic> data = queryDocumentSnapshot.data();
           data1Price = data['price'];
           data1Qty = data['qty'];
+
+          totalPrice1 += data1Price;
+          totalQuantity1 += data1Qty;
+          overAllTotal1 = totalPrice1 * totalQuantity1;
         }
       });
     }
+    print(totalPrice1);
+    print(totalQuantity1);
   }
+
+  late int totalPrice2 = 0;
+  late int totalQuantity2 = 0;
+  late int overAllTotal2 = 0;
 
   getData2() async {
     // Use provider
@@ -63,10 +77,18 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
           Map<String, dynamic> data = queryDocumentSnapshot.data();
           data2Price = data['price'];
           data2Qty = data['qty'];
+
+          totalPrice2 += data2Price;
+          totalQuantity2 += data2Qty;
+          overAllTotal2 = totalPrice2 * totalQuantity2;
         }
       });
     }
   }
+
+  late int totalPrice3 = 0;
+  late int totalQuantity3 = 0;
+  late int overAllTotal3 = 0;
 
   getData3() async {
     // Use provider
@@ -81,10 +103,18 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
           Map<String, dynamic> data = queryDocumentSnapshot.data();
           data3Price = data['price'];
           data3Qty = data['qty'];
+
+          totalPrice3 += data3Price;
+          totalQuantity3 += data3Qty;
+          overAllTotal3 = totalPrice3 * totalQuantity3;
         }
       });
     }
   }
+
+  late int totalPrice4 = 0;
+  late int totalQuantity4 = 0;
+  late int overAllTotal4 = 0;
 
   getData4() async {
     // Use provider
@@ -99,6 +129,10 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
           Map<String, dynamic> data = queryDocumentSnapshot.data();
           data4Price = data['price'];
           data4Qty = data['qty'];
+
+          totalPrice4 += data4Price;
+          totalQuantity4 += data4Qty;
+          overAllTotal4 = totalPrice4 * totalQuantity4;
         }
       });
     }
@@ -131,7 +165,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextBold(
-                            text: getTotal(data1Price, data1Qty).toString(),
+                            text: overAllTotal1.toString(),
                             fontSize: 16,
                             color: Colors.green),
                         TextRegular(
@@ -266,7 +300,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextBold(
-                            text: getTotal(data2Price, data2Qty).toString(),
+                            text: overAllTotal2.toString(),
                             fontSize: 16,
                             color: Colors.green),
                         TextRegular(
@@ -401,7 +435,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextBold(
-                            text: getTotal(data3Price, data3Qty).toString(),
+                            text: overAllTotal3.toString(),
                             fontSize: 16,
                             color: Colors.green),
                         TextRegular(
@@ -536,7 +570,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextBold(
-                            text: getTotal(data4Price, data4Qty).toString(),
+                            text: overAllTotal4.toString(),
                             fontSize: 16,
                             color: Colors.green),
                         TextRegular(
