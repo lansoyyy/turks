@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:turks/auth/login.dart';
 import 'package:turks/views/chatroom_page.dart';
+import 'package:turks/views/crew/add_product_page.dart';
 import 'package:turks/views/crew/crew_home.dart';
 import 'package:turks/views/crew/expenses_page.dart';
 import 'package:turks/views/crew/inventory_page.dart';
@@ -61,7 +62,13 @@ class _MyDrawerState extends State<DrawerWidget> {
               },
             ),
             ListTile(
-              
+              trailing: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => AddProductPage()));
+                },
+                icon: const Icon(Icons.add),
+              ),
               title: TextBold(
                 text: 'Products',
                 fontSize: 12,

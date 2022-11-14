@@ -172,7 +172,10 @@ class _ChatRoomState extends State<ChatRoom> {
                                   dt.year.toString(),
                               dt.hour.toString() + ':' + dt.minute.toString(),
                               _messageController.text,
-                              dt.hour.toString() +
+                              dt.day.toString() +
+                                  dt.month.toString() +
+                                  dt.year.toString() +
+                                  dt.hour.toString() +
                                   dt.minute.toString() +
                                   dt.second.toString());
                           _messageController.clear();

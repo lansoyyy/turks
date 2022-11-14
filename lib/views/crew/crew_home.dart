@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:turks/views/crew/notif_page.dart';
 import 'package:turks/views/crew/product_page.dart';
@@ -29,29 +30,50 @@ class CrewHome extends StatelessWidget {
             ),
           ],
         ),
-        body: GridView.builder(
-            itemCount: 23,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-            ),
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  // box.write('productPrice', data.docs[index]['price']);
-                  // box.write('productURL', data.docs[index]['url']);
-                  // box.write('productQty', data.docs[index]['qty']);
-                  // box.write('productId', data.docs[index]['id']);
-                  // box.write(
-                  //     'productExDate', data.docs[index]['expireDate']);
+        body: StreamBuilder<QuerySnapshot>(
+            stream:
+                FirebaseFirestore.instance.collection('Products').snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                print('error');
+                return const Center(child: Text('Error'));
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                print('waiting');
+                return const Padding(
+                  padding: EdgeInsets.only(top: 50),
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: Colors.black,
+                  )),
+                );
+              }
+              final data = snapshot.requireData;
+              return GridView.builder(
+                  itemCount: snapshot.data?.size ?? 0,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        box.write('productPrice', data.docs[index]['price']);
+                        box.write('productURL', data.docs[index]['url']);
+                        box.write('productQty', data.docs[index]['qty']);
 
-                  box.write('index', index);
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ProductPage()));
-                },
-                child: Image.asset(
-                  'assets/images/menu/$index.png',
-                ),
-              );
+                        box.write(
+                            'productExDate', data.docs[index]['expireDate']);
+                        box.write(
+                            'productName', data.docs[index]['productName']);
+
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ProductPage()));
+                      },
+                      child: Image.network(
+                        data.docs[index]['url'],
+                      ),
+                    );
+                  });
             }));
   }
 }

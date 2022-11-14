@@ -77,8 +77,10 @@ class POSPage extends StatelessWidget {
       body: Column(
         children: [
           StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('Sales').snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection('Sales')
+                  .orderBy('date')
+                  .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {

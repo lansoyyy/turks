@@ -96,6 +96,7 @@ class _AddProductPageState extends State<AddProductPage> {
   late String price;
   late String qty;
   late String expireData;
+  late String productName;
 
   @override
   Widget build(BuildContext context) {
@@ -153,9 +154,8 @@ class _AddProductPageState extends State<AddProductPage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
             child: TextFormField(
-              keyboardType: TextInputType.number,
               onChanged: (_input) {
-                price = _input;
+                productName = _input;
               },
               decoration: InputDecoration(
                 label: TextRegular(
@@ -216,7 +216,8 @@ class _AddProductPageState extends State<AddProductPage> {
                           actions: <Widget>[
                             FlatButton(
                               onPressed: () {
-                                postProduct(imageURL, price, qty, expireData);
+                                postProduct(productName, imageURL, price, qty,
+                                    expireData);
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                         builder: (context) => CrewHome()));

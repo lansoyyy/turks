@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:turks/services/data/menu_image_data.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
@@ -23,13 +22,13 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppbarWidget('Product'),
+      appBar: AppbarWidget(box.read('productName')),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Image.asset(
-              'assets/images/menu/${box.read('index')}.png',
+            child: Image.network(
+              box.read('productURL'),
               height: 250,
             ),
           ),
@@ -42,7 +41,7 @@ class _ProductPageState extends State<ProductPage> {
               leading:
                   TextBold(text: 'Price', fontSize: 18, color: Colors.black),
               trailing: TextBold(
-                  text: prices[box.read('index')],
+                  text: box.read('productPrice').toString(),
                   fontSize: 18,
                   color: Colors.grey),
             ),
@@ -87,14 +86,16 @@ class _ProductPageState extends State<ProductPage> {
               leading: TextBold(
                   text: 'Expiration Date', fontSize: 18, color: Colors.black),
               trailing: TextBold(
-                  text: '10/23/2023', fontSize: 18, color: Colors.grey),
+                  text: box.read('productExDate'),
+                  fontSize: 18,
+                  color: Colors.grey),
             ),
           ),
           const Expanded(child: SizedBox()),
           ButtonWidget(
               onPressed: () {
                 if (qty != 0) {
-                  addSales(names[box.read('index')], prices[box.read('index')],
+                  addSales(box.read('productName'), box.read('productPrice'),
                       qty.toString());
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
