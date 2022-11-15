@@ -15,7 +15,8 @@ Future postProduct(
     'price': price,
     'expireDate': expireData,
     'qty': qty,
-    'id': docUser.id
+    'id': docUser.id,
+    'dateTime': DateTime.now(),
   };
 
   await docUser.set(json);

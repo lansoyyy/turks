@@ -22,7 +22,7 @@ class NotifPage extends StatelessWidget {
               child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('Chat')
-                      .orderBy('doc')
+                      .orderBy('dateTime')
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {

@@ -91,6 +91,7 @@ class InventoryType extends StatelessWidget {
                 stream: FirebaseFirestore.instance
                     .collection('Inventory')
                     .where('type', isEqualTo: box.read('inventoryType'))
+                    .orderBy('dateTime')
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {

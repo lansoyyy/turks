@@ -129,6 +129,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
                   child: StreamBuilder<QuerySnapshot>(
                       stream: FirebaseFirestore.instance
                           .collection('Waste Reports')
+                          .orderBy('dateTime')
                           .snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {

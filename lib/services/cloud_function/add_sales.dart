@@ -18,7 +18,8 @@ Future addSales(
         dt.year.toString() +
         dt.hour.toString() +
         dt.minute.toString() +
-        dt.second.toString()
+        dt.second.toString(),
+    'dateTime': DateTime.now(),
   };
 
   await docUser.set(json);

@@ -301,6 +301,7 @@ class _LogbookPageState extends State<LogbookPage> {
                       StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection('Login')
+                              .orderBy('dateTime')
                               .snapshots(),
                           builder: (BuildContext context,
                               AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -524,6 +525,7 @@ class _LogbookPageState extends State<LogbookPage> {
                       StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection('Logout')
+                              .orderBy('dateTime')
                               .snapshots(),
                           builder: (BuildContext context,
                               AsyncSnapshot<QuerySnapshot> snapshot) {

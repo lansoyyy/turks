@@ -16,6 +16,7 @@ Future addReport(
     'id': docUser.id,
     'content': content,
     'url': imageURL,
+    'dateTime': DateTime.now(),
   };
 
   await docUser.set(json);

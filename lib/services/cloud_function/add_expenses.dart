@@ -13,7 +13,8 @@ Future addExpenses(
     'qty': qty,
     'price': price,
     'id': docUser.id,
-    'type': type
+    'type': type,
+    'dateTime': DateTime.now(),
   };
 
   await docUser.set(json);

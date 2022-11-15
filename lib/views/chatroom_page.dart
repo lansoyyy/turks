@@ -54,7 +54,7 @@ class _ChatRoomState extends State<ChatRoom> {
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Chat')
-                    .orderBy('doc')
+                    .orderBy('dateTime')
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {

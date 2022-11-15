@@ -31,8 +31,10 @@ class CrewHome extends StatelessWidget {
           ],
         ),
         body: StreamBuilder<QuerySnapshot>(
-            stream:
-                FirebaseFirestore.instance.collection('Products').snapshots(),
+            stream: FirebaseFirestore.instance
+                .collection('Products')
+                .orderBy('dateTime')
+                .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 print('error');

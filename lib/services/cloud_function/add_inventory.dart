@@ -13,7 +13,8 @@ Future addInventory(
     'qty': qty,
     'unit': unit,
     'id': docUser.id,
-    'type': type
+    'type': type,
+    'dateTime': DateTime.now(),
   };
 
   await docUser.set(json);

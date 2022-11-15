@@ -15,7 +15,8 @@ Future addChat(
     'message': message,
     'id': docUser.id,
     'doc': doc,
-    'date': date
+    'date': date,
+    'dateTime': DateTime.now(),
   };
 
   await docUser.set(json);
