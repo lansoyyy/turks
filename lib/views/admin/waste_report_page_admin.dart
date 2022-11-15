@@ -83,6 +83,7 @@ class WasteReportPageAdmin extends StatelessWidget {
               StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('Waste Reports')
+                      .orderBy('dateTime')
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {

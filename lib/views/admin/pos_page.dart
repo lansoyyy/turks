@@ -79,7 +79,7 @@ class POSPage extends StatelessWidget {
           StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('Sales')
-                  .orderBy('date')
+                  .orderBy('dateTime')
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {

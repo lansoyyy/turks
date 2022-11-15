@@ -104,8 +104,8 @@ class GeneralInventory extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const ProductListPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ProductListPage()));
           },
           child: Container(
             child: Center(

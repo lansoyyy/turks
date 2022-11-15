@@ -140,6 +140,7 @@ class LogbookAdmin extends StatelessWidget {
                       StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection('Login')
+                              .orderBy('dateTime')
                               .snapshots(),
                           builder: (BuildContext context,
                               AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -212,6 +213,7 @@ class LogbookAdmin extends StatelessWidget {
                       StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection('Logout')
+                              .orderBy('dateTime')
                               .snapshots(),
                           builder: (BuildContext context,
                               AsyncSnapshot<QuerySnapshot> snapshot) {

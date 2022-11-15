@@ -195,6 +195,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                     stream: FirebaseFirestore.instance
                                         .collection('Expenses')
                                         .where('type', isEqualTo: 'Ingredients')
+                                        .orderBy('dateTime')
                                         .snapshots(),
                                     builder: (BuildContext context,
                                         AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -330,6 +331,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                     stream: FirebaseFirestore.instance
                                         .collection('Expenses')
                                         .where('type', isEqualTo: 'Drinks')
+                                        .orderBy('dateTime')
                                         .snapshots(),
                                     builder: (BuildContext context,
                                         AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -465,6 +467,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                     stream: FirebaseFirestore.instance
                                         .collection('Expenses')
                                         .where('type', isEqualTo: 'Bags')
+                                        .orderBy('dateTime')
                                         .snapshots(),
                                     builder: (BuildContext context,
                                         AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -600,6 +603,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                     stream: FirebaseFirestore.instance
                                         .collection('Expenses')
                                         .where('type', isEqualTo: 'Cups')
+                                        .orderBy('dateTime')
                                         .snapshots(),
                                     builder: (BuildContext context,
                                         AsyncSnapshot<QuerySnapshot> snapshot) {

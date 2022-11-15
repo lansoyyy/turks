@@ -63,7 +63,7 @@ class InventoryAdminPage extends StatelessWidget {
             ButtonWidget(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ProductListPage()));
+                      builder: (context) => ProductListPage()));
                 },
                 text: 'Products'),
             const SizedBox(

@@ -92,6 +92,7 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
                 stream: FirebaseFirestore.instance
                     .collection('Inventory')
                     .where('type', isEqualTo: box.read('invenType'))
+                    .orderBy('dateTime')
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
