@@ -96,14 +96,14 @@ class ExpensesType extends StatelessWidget {
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Expenses')
-                    .orderBy('dateTime', descending: false)
                     .where('type', isEqualTo: box.read('expensesType'))
+                    .orderBy('dateTime')
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
                     print('error');
-                    return const Center(child: Text('Error'));
+                    return Center(child: Text(snapshot.error.toString()));
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     print('waiting');
