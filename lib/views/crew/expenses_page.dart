@@ -96,8 +96,8 @@ class ExpensesType extends StatelessWidget {
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Expenses')
+                    .orderBy('dateTime', descending: false)
                     .where('type', isEqualTo: box.read('expensesType'))
-                    .orderBy('dateTime')
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
