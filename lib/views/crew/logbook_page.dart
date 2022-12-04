@@ -201,7 +201,7 @@ class _LogbookPageState extends State<LogbookPage> {
                                           ));
                                 } else {
                                   if (myLoc ==
-                                      'Malaybalay, Sayre Highway, Gaisano Building') {
+                                      '544F+XW9, Malaybalay, Bukidnon') {
                                     showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
@@ -425,7 +425,7 @@ class _LogbookPageState extends State<LogbookPage> {
                                           ));
                                 } else {
                                   if (myLoc ==
-                                      'Malaybalay, Sayre Highway, Gaisano Building') {
+                                      '544F+XW9, Malaybalay, Bukidnon') {
                                     showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
