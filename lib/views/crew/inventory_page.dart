@@ -26,7 +26,7 @@ class InventoryPage extends StatelessWidget {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => InventoryType()));
                 },
-                text: 'Ingeredients'),
+                text: 'Ingredients'),
             const SizedBox(
               height: 20,
             ),

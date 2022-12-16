@@ -200,94 +200,94 @@ class _LogbookPageState extends State<LogbookPage> {
                                             ],
                                           ));
                                 } else {
-                                  if (myLoc ==
-                                      '544F+XW9, Malaybalay, Bukidnon') {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                              title: const Text(
-                                                'Logging in',
-                                                style: TextStyle(
-                                                    fontFamily: 'QBold',
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              content: Column(
-                                                children: [
-                                                  TextFormField(
-                                                    decoration: InputDecoration(
-                                                      label: TextRegular(
-                                                          text: 'Name',
-                                                          fontSize: 12,
-                                                          color: Colors.black),
-                                                    ),
-                                                    onChanged: (_input) {
-                                                      name = _input;
-                                                    },
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: const Text(
+                                              'Logging in',
+                                              style: TextStyle(
+                                                  fontFamily: 'QBold',
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            content: Column(
+                                              children: [
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    label: TextRegular(
+                                                        text: 'Name',
+                                                        fontSize: 12,
+                                                        color: Colors.black),
                                                   ),
-                                                  TextFormField(
-                                                    decoration: InputDecoration(
-                                                      label: TextRegular(
-                                                          text: 'Date',
-                                                          fontSize: 12,
-                                                          color: Colors.black),
-                                                    ),
-                                                    onChanged: (_input) {
-                                                      date = _input;
-                                                    },
-                                                  ),
-                                                  TextFormField(
-                                                    decoration: InputDecoration(
-                                                      label: TextRegular(
-                                                          text: 'Time',
-                                                          fontSize: 12,
-                                                          color: Colors.black),
-                                                    ),
-                                                    onChanged: (_input) {
-                                                      time = _input;
-                                                    },
-                                                  ),
-                                                ],
-                                              ),
-                                              actions: <Widget>[
-                                                FlatButton(
-                                                  color: Colors.black,
-                                                  onPressed: () {
-                                                    logIn(name, date, time);
-                                                    Navigator.of(context).pop();
+                                                  onChanged: (_input) {
+                                                    name = _input;
                                                   },
-                                                  child: const Text(
-                                                    'Continue',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily: 'QRegular',
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                ),
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    label: TextRegular(
+                                                        text: 'Date',
+                                                        fontSize: 12,
+                                                        color: Colors.black),
                                                   ),
+                                                  onChanged: (_input) {
+                                                    date = _input;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    label: TextRegular(
+                                                        text: 'Time',
+                                                        fontSize: 12,
+                                                        color: Colors.black),
+                                                  ),
+                                                  onChanged: (_input) {
+                                                    time = _input;
+                                                  },
                                                 ),
                                               ],
-                                            ));
-                                  } else {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                              title: TextBold(
-                                                  text: 'Cannot Procceed',
-                                                  color: Colors.black,
-                                                  fontSize: 14),
-                                              actions: <Widget>[
-                                                FlatButton(
-                                                  onPressed: () =>
-                                                      Navigator.of(context)
-                                                          .pop(true),
-                                                  child: TextBold(
-                                                      text: 'Close',
-                                                      color: Colors.black,
-                                                      fontSize: 12),
+                                            ),
+                                            actions: <Widget>[
+                                              FlatButton(
+                                                color: Colors.black,
+                                                onPressed: () {
+                                                  logIn(name, date, time);
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: const Text(
+                                                  'Continue',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: 'QRegular',
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
-                                              ],
-                                            ));
-                                  }
+                                              ),
+                                            ],
+                                          ));
+                                  // if (myLoc ==
+                                  //     '544F+XW9, Malaybalay, Bukidnon') {
+
+                                  // } else {
+                                  //   showDialog(
+                                  //       context: context,
+                                  //       builder: (context) => AlertDialog(
+                                  //             title: TextBold(
+                                  //                 text: 'Cannot Procceed',
+                                  //                 color: Colors.black,
+                                  //                 fontSize: 14),
+                                  //             actions: <Widget>[
+                                  //               FlatButton(
+                                  //                 onPressed: () =>
+                                  //                     Navigator.of(context)
+                                  //                         .pop(true),
+                                  //                 child: TextBold(
+                                  //                     text: 'Close',
+                                  //                     color: Colors.black,
+                                  //                     fontSize: 12),
+                                  //               ),
+                                  //             ],
+                                  //           ));
+                                  // }
                                 }
                               },
                               child: TextBold(
@@ -424,94 +424,94 @@ class _LogbookPageState extends State<LogbookPage> {
                                             ],
                                           ));
                                 } else {
-                                  if (myLoc ==
-                                      '544F+XW9, Malaybalay, Bukidnon') {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                              title: const Text(
-                                                'Logging out',
-                                                style: TextStyle(
-                                                    fontFamily: 'QBold',
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              content: Column(
-                                                children: [
-                                                  TextFormField(
-                                                    decoration: InputDecoration(
-                                                      label: TextRegular(
-                                                          text: 'Name',
-                                                          fontSize: 12,
-                                                          color: Colors.black),
-                                                    ),
-                                                    onChanged: (_input) {
-                                                      name1 = _input;
-                                                    },
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: const Text(
+                                              'Logging out',
+                                              style: TextStyle(
+                                                  fontFamily: 'QBold',
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            content: Column(
+                                              children: [
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    label: TextRegular(
+                                                        text: 'Name',
+                                                        fontSize: 12,
+                                                        color: Colors.black),
                                                   ),
-                                                  TextFormField(
-                                                    decoration: InputDecoration(
-                                                      label: TextRegular(
-                                                          text: 'Date',
-                                                          fontSize: 12,
-                                                          color: Colors.black),
-                                                    ),
-                                                    onChanged: (_input) {
-                                                      date1 = _input;
-                                                    },
-                                                  ),
-                                                  TextFormField(
-                                                    decoration: InputDecoration(
-                                                      label: TextRegular(
-                                                          text: 'Time',
-                                                          fontSize: 12,
-                                                          color: Colors.black),
-                                                    ),
-                                                    onChanged: (_input) {
-                                                      time1 = _input;
-                                                    },
-                                                  ),
-                                                ],
-                                              ),
-                                              actions: <Widget>[
-                                                FlatButton(
-                                                  color: Colors.black,
-                                                  onPressed: () {
-                                                    logOut(name1, date1, time1);
-                                                    Navigator.of(context).pop();
+                                                  onChanged: (_input) {
+                                                    name1 = _input;
                                                   },
-                                                  child: const Text(
-                                                    'Continue',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily: 'QRegular',
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                ),
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    label: TextRegular(
+                                                        text: 'Date',
+                                                        fontSize: 12,
+                                                        color: Colors.black),
                                                   ),
+                                                  onChanged: (_input) {
+                                                    date1 = _input;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    label: TextRegular(
+                                                        text: 'Time',
+                                                        fontSize: 12,
+                                                        color: Colors.black),
+                                                  ),
+                                                  onChanged: (_input) {
+                                                    time1 = _input;
+                                                  },
                                                 ),
                                               ],
-                                            ));
-                                  } else {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                              title: TextBold(
-                                                  text: 'Cannot Procceed',
-                                                  color: Colors.black,
-                                                  fontSize: 14),
-                                              actions: <Widget>[
-                                                FlatButton(
-                                                  onPressed: () =>
-                                                      Navigator.of(context)
-                                                          .pop(true),
-                                                  child: TextBold(
-                                                      text: 'Close',
-                                                      color: Colors.black,
-                                                      fontSize: 12),
+                                            ),
+                                            actions: <Widget>[
+                                              FlatButton(
+                                                color: Colors.black,
+                                                onPressed: () {
+                                                  logOut(name1, date1, time1);
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: const Text(
+                                                  'Continue',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: 'QRegular',
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
-                                              ],
-                                            ));
-                                  }
+                                              ),
+                                            ],
+                                          ));
+                                  // if (myLoc ==
+                                  //     '544F+XW9, Malaybalay, Bukidnon') {
+
+                                  // } else {
+                                  //   showDialog(
+                                  //       context: context,
+                                  //       builder: (context) => AlertDialog(
+                                  //             title: TextBold(
+                                  //                 text: 'Cannot Procceed',
+                                  //                 color: Colors.black,
+                                  //                 fontSize: 14),
+                                  //             actions: <Widget>[
+                                  //               FlatButton(
+                                  //                 onPressed: () =>
+                                  //                     Navigator.of(context)
+                                  //                         .pop(true),
+                                  //                 child: TextBold(
+                                  //                     text: 'Close',
+                                  //                     color: Colors.black,
+                                  //                     fontSize: 12),
+                                  //               ),
+                                  //             ],
+                                  //           ));
+                                  // }
                                 }
                               },
                               child: TextBold(
