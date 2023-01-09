@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:turks/views/admin/product_page_admin.dart';
+import 'package:turks/views/crew/add_product_page.dart';
 import 'package:turks/views/crew/notif_page.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
@@ -11,6 +12,13 @@ class ProductListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.black,
+            child: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => AddProductPage()));
+            }),
         appBar: AppBar(
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,

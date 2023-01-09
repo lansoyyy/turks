@@ -4,10 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:turks/services/cloud_function/post_product.dart';
-import 'package:turks/views/crew/crew_home.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/button_widget.dart';
-import 'package:turks/widgets/drawer_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
@@ -101,7 +99,6 @@ class _AddProductPageState extends State<AddProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const DrawerWidget(),
       appBar: AppbarWidget('Adding Product'),
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -218,9 +215,8 @@ class _AddProductPageState extends State<AddProductPage> {
                               onPressed: () {
                                 postProduct(productName, imageURL, price, qty,
                                     expireData);
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) => CrewHome()));
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
                               },
                               child: const Text(
                                 'Continue',

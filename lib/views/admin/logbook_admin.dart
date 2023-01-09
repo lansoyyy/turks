@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
@@ -166,12 +167,21 @@ class LogbookAdmin extends StatelessWidget {
                                 child: ListView.builder(
                                     itemCount: snapshot.data?.size ?? 0,
                                     itemBuilder: (context, index) {
+                                      DateTime created =
+                                          data.docs[index]['dateTime'].toDate();
+
+                                      String formattedTime = DateFormat.yMMMd()
+                                          .add_jm()
+                                          .format(created);
+                                      String formattedTime1 = DateFormat.j()
+                                          .add_jm()
+                                          .format(created);
                                       name.add(data.docs[index]['name']);
-                                      date.add(data.docs[index]['date']);
-                                      time.add(data.docs[index]['time']);
+                                      date.add(formattedTime);
+                                      time.add(formattedTime1);
                                       return ListTile(
                                         trailing: TextRegular(
-                                            text: data.docs[index]['date'],
+                                            text: formattedTime,
                                             fontSize: 12,
                                             color: Colors.black),
                                         title: TextBold(
@@ -239,12 +249,21 @@ class LogbookAdmin extends StatelessWidget {
                                 child: ListView.builder(
                                     itemCount: snapshot.data?.size ?? 0,
                                     itemBuilder: (context, index) {
+                                        DateTime created =
+                                          data.docs[index]['dateTime'].toDate();
+
+                                      String formattedTime = DateFormat.yMMMd()
+                                          .add_jm()
+                                          .format(created);
+                                          String formattedTime1 = DateFormat.j()
+                                          .add_jm()
+                                          .format(created);
                                       name1.add(data.docs[index]['name']);
-                                      date1.add(data.docs[index]['date']);
-                                      time1.add(data.docs[index]['time']);
+                                      date1.add(formattedTime);
+                                      time1.add(formattedTime1);
                                       return ListTile(
                                         trailing: TextRegular(
-                                            text: data.docs[index]['date'],
+                                            text: formattedTime,
                                             fontSize: 12,
                                             color: Colors.black),
                                         title: TextBold(

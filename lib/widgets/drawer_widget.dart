@@ -51,7 +51,7 @@ class _MyDrawerState extends State<DrawerWidget> {
             ),
             ListTile(
               title: TextBold(
-                text: 'Chat Room',
+                text: 'Ban Messasing',
                 fontSize: 12,
                 color: Colors.black,
               ),

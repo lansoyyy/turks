@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:turks/views/admin/expenses_page_admin.dart';
 import 'package:turks/views/admin/general_inventory.dart';
-import 'package:turks/views/admin/inventory_page.dart';
 import 'package:turks/views/admin/logbook_admin.dart';
 import 'package:turks/views/admin/pos_page.dart';
 import 'package:turks/views/chatroom_page.dart';
@@ -41,7 +40,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                TextBold(text: 'Chat Room', fontSize: 24, color: Colors.black),
+                TextBold(
+                    text: 'Ban Messaging', fontSize: 18, color: Colors.black),
               ],
             ),
             height: 50,
@@ -300,7 +300,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                TextBold(text: 'Logout', fontSize: 24, color: Colors.black),
+                TextBold(text: 'Logout', fontSize: 24, color: Colors.red),
               ],
             ),
             height: 50,

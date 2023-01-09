@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:path_provider/path_provider.dart';
@@ -108,9 +109,14 @@ class WasteReportPageAdmin extends StatelessWidget {
                         child: ListView.builder(
                             itemCount: snapshot.data?.size ?? 0,
                             itemBuilder: (context, index) {
+                              DateTime created =
+                                  data.docs[index]['dateTime'].toDate();
+
+                              String formattedTime =
+                                  DateFormat.yMMMd().format(created);
                               name.add(data.docs[index]['name']);
                               type.add(data.docs[index]['type']);
-                              date.add(data.docs[index]['date']);
+                              date.add(formattedTime);
                               content.add(data.docs[index]['content']);
                               return Padding(
                                 padding:
@@ -137,7 +143,7 @@ class WasteReportPageAdmin extends StatelessWidget {
                                       fontSize: 18,
                                       color: Colors.black),
                                   trailing: TextRegular(
-                                      text: data.docs[index]['date'],
+                                      text: formattedTime,
                                       fontSize: 12,
                                       color: Colors.black),
                                   subtitle: TextRegular(

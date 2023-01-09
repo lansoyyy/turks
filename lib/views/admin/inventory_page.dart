@@ -22,7 +22,7 @@ class InventoryAdminPage extends StatelessWidget {
             ),
             ButtonWidget(
                 onPressed: () {
-                  box.write('invenType', 'Ingeredients');
+                  box.write('invenType', 'Ingredients');
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => InventoryTypeAdmin()));
                 },
