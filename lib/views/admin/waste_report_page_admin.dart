@@ -55,6 +55,7 @@ class _WasteReportPageAdminState extends State<WasteReportPageAdmin> {
   var date = [];
 
   var content = [];
+  var myNames = [];
 
   String cdate2 = DateFormat("MMMM, dd, yyyy").format(DateTime.now());
 
@@ -86,6 +87,7 @@ class _WasteReportPageAdminState extends State<WasteReportPageAdmin> {
                 pw.TableRow(
                   decoration: const pw.BoxDecoration(color: PdfColors.grey200),
                   children: [
+                    pw.Text('Crew'),
                     pw.Text('Concern'),
                     pw.Text('Report Type'),
                     pw.Text('Date'),
@@ -95,6 +97,7 @@ class _WasteReportPageAdminState extends State<WasteReportPageAdmin> {
                 for (int i = 0; i < name.length; i++)
                   pw.TableRow(
                     children: [
+                      pw.Text(myNames[i]),
                       pw.Text(name[i]),
                       pw.Text(type[i]),
                       pw.Text(date[i]),
@@ -190,6 +193,7 @@ class _WasteReportPageAdminState extends State<WasteReportPageAdmin> {
                               name.add(data.docs[index]['name']);
                               type.add(data.docs[index]['type']);
                               date.add(formattedTime);
+                              myNames.add(data.docs[index]['myName']);
                               content.add(data.docs[index]['content']);
                               return Padding(
                                 padding:

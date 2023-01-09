@@ -5,7 +5,7 @@ Future addReport(String name, String type, String date, String content,
   final docUser = FirebaseFirestore.instance.collection('Waste Reports').doc();
 
   final json = {
-    'username': username,
+    'myName': username,
     'name': name,
     'type': type,
     'date': date,

@@ -1,11 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future addInventory(
-  String item,
-  String qty,
-  String unit,
-  String type,
-) async {
+    String item, String qty, String unit, String type, String myName) async {
   final docUser = FirebaseFirestore.instance.collection('Inventory').doc();
 
   final json = {
@@ -15,6 +11,7 @@ Future addInventory(
     'id': docUser.id,
     'type': type,
     'dateTime': DateTime.now(),
+    'myName': myName
   };
 
   await docUser.set(json);

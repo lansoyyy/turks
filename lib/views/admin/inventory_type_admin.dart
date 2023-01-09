@@ -50,6 +50,7 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
   var items = [];
   var qty = [];
   var unit = [];
+  var myNames = [];
 
   String cdate2 = DateFormat("MMMM, dd, yyyy").format(DateTime.now());
 
@@ -108,6 +109,7 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
                 pw.TableRow(
                   decoration: const pw.BoxDecoration(color: PdfColors.grey200),
                   children: [
+                    pw.Text('Crew'),
                     pw.Text('Item'),
                     pw.Text('Quantity'),
                     pw.Text('Unit'),
@@ -116,6 +118,7 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
                 for (int i = 0; i < items.length; i++)
                   pw.TableRow(
                     children: [
+                      pw.Text(myNames[i]),
                       pw.Text(items[i]),
                       pw.Text(qty[i]),
                       pw.Text(unit[i]),
@@ -206,6 +209,7 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
                         itemCount: snapshot.data?.size ?? 0,
                         itemBuilder: ((context, index) {
                           items.add(data.docs[index]['item']);
+                          myNames.add(data.docs[index]['myName']);
                           qty.add(data.docs[index]['qty']);
                           unit.add(data.docs[index]['unit']);
                           return ListTile(

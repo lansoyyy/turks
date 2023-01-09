@@ -7,7 +7,12 @@ import 'package:turks/widgets/drawer_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
-class ExensesPage extends StatelessWidget {
+class ExensesPage extends StatefulWidget {
+  @override
+  State<ExensesPage> createState() => _ExensesPageState();
+}
+
+class _ExensesPageState extends State<ExensesPage> {
   final box = GetStorage();
 
   @override
@@ -64,12 +69,45 @@ class ExensesPage extends StatelessWidget {
   }
 }
 
-class ExpensesType extends StatelessWidget {
+class ExpensesType extends StatefulWidget {
+  @override
+  State<ExpensesType> createState() => _ExpensesTypeState();
+}
+
+class _ExpensesTypeState extends State<ExpensesType> {
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  late String myName = '';
+
+  getData() async {
+    // Use provider
+    var collection = FirebaseFirestore.instance
+        .collection('Users')
+        .where('username', isEqualTo: box.read('username'));
+
+    var querySnapshot = await collection.get();
+    if (mounted) {
+      setState(() {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
+          Map<String, dynamic> data = queryDocumentSnapshot.data();
+          myName = data['name'];
+        }
+      });
+    }
+  }
+
   final box = GetStorage();
 
   late String type;
+
   late String item;
+
   late String price;
+
   late String qty;
 
   String getTotal(int num1, int num2) {
@@ -214,7 +252,8 @@ class ExpensesType extends StatelessWidget {
                                       item,
                                       int.parse(qty),
                                       int.parse(price),
-                                      box.read('expensesType'));
+                                      box.read('expensesType'),
+                                      myName);
                                   Navigator.of(context).pop();
                                 },
                                 child: const Text(

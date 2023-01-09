@@ -75,6 +75,31 @@ class InventoryType extends StatefulWidget {
 }
 
 class _InventoryTypeState extends State<InventoryType> {
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  late String myName = '';
+
+  getData() async {
+    // Use provider
+    var collection = FirebaseFirestore.instance
+        .collection('Users')
+        .where('username', isEqualTo: box.read('username'));
+
+    var querySnapshot = await collection.get();
+    if (mounted) {
+      setState(() {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
+          Map<String, dynamic> data = queryDocumentSnapshot.data();
+          myName = data['name'];
+        }
+      });
+    }
+  }
+
   final box = GetStorage();
 
   late String item;
@@ -256,7 +281,7 @@ class _InventoryTypeState extends State<InventoryType> {
                                 color: Colors.black,
                                 onPressed: () {
                                   addInventory(item, qty, unit,
-                                      box.read('inventoryType'));
+                                      box.read('inventoryType'), myName);
                                   Navigator.of(context).pop();
                                 },
                                 child: const Text(

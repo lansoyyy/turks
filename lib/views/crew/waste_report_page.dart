@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:turks/services/cloud_function/add_report.dart';
@@ -19,6 +20,33 @@ class WasteReportPage extends StatefulWidget {
 }
 
 class _WasteReportPageState extends State<WasteReportPage> {
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  late String myName = '';
+
+  final box = GetStorage();
+
+  getData() async {
+    // Use provider
+    var collection = FirebaseFirestore.instance
+        .collection('Users')
+        .where('username', isEqualTo: box.read('username'));
+
+    var querySnapshot = await collection.get();
+    if (mounted) {
+      setState(() {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
+          Map<String, dynamic> data = queryDocumentSnapshot.data();
+          myName = data['name'];
+        }
+      });
+    }
+  }
+
   var hasLoaded = false;
 
   firebase_storage.FirebaseStorage storage =
@@ -331,17 +359,6 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                     TextFormField(
                                       decoration: InputDecoration(
                                         label: TextRegular(
-                                            text: 'Crew Name',
-                                            fontSize: 12,
-                                            color: Colors.black),
-                                      ),
-                                      onChanged: (_input) {
-                                        username = _input;
-                                      },
-                                    ),
-                                    TextFormField(
-                                      decoration: InputDecoration(
-                                        label: TextRegular(
                                             text: 'Name',
                                             fontSize: 12,
                                             color: Colors.black),
@@ -424,7 +441,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
                               color: Colors.black,
                               onPressed: () {
                                 addReport(name, type, date, content, imageURL,
-                                    username);
+                                    myName);
                                 Navigator.of(context).pop();
                               },
                               child: const Text(

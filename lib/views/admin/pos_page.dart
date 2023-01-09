@@ -57,6 +57,7 @@ class _POSPageState extends State<POSPage> {
   var qty = [];
 
   var price = [];
+  var myNames = [];
 
   String cdate2 = DateFormat("MMMM, dd, yyyy").format(DateTime.now());
 
@@ -88,6 +89,7 @@ class _POSPageState extends State<POSPage> {
                 pw.TableRow(
                   decoration: const pw.BoxDecoration(color: PdfColors.grey200),
                   children: [
+                    pw.Text('Crew'),
                     pw.Text('Item'),
                     pw.Text('Quantity'),
                     pw.Text('Price'),
@@ -96,6 +98,7 @@ class _POSPageState extends State<POSPage> {
                 for (int i = 0; i < items.length; i++)
                   pw.TableRow(
                     children: [
+                      pw.Text(myNames[i]),
                       pw.Text(items[i]),
                       pw.Text(qty[i]),
                       pw.Text(price[i]),
@@ -177,6 +180,7 @@ class _POSPageState extends State<POSPage> {
                         itemCount: snapshot.data?.size ?? 0,
                         itemBuilder: ((context, index) {
                           items.add(data.docs[index]['item']);
+                          myNames.add(data.docs[index]['myName']);
                           qty.add(data.docs[index]['qty']);
                           price.add(data.docs[index]['price']);
                           return ListTile(
