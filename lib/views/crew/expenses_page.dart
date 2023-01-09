@@ -26,7 +26,7 @@ class ExensesPage extends StatelessWidget {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => ExpensesType()));
                 },
-                text: 'Ingeredients'),
+                text: 'Ingredients'),
             const SizedBox(
               height: 20,
             ),
@@ -159,49 +159,52 @@ class ExpensesType extends StatelessWidget {
                       context: context,
                       builder: (context) => AlertDialog(
                             title: const Text(
-                              'Adding to Inventory',
+                              'Adding to Expenses',
                               style: TextStyle(
                                   fontFamily: 'QBold',
                                   fontWeight: FontWeight.bold),
                             ),
-                            content: Column(
-                              children: [
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    label: TextRegular(
-                                        text: 'Item',
-                                        fontSize: 12,
-                                        color: Colors.black),
+                            content: SizedBox(
+                              height: 180,
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                      label: TextRegular(
+                                          text: 'Item',
+                                          fontSize: 12,
+                                          color: Colors.black),
+                                    ),
+                                    onChanged: (_input) {
+                                      item = _input;
+                                    },
                                   ),
-                                  onChanged: (_input) {
-                                    item = _input;
-                                  },
-                                ),
-                                TextFormField(
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    label: TextRegular(
-                                        text: 'Quantity',
-                                        fontSize: 12,
-                                        color: Colors.black),
+                                  TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                      label: TextRegular(
+                                          text: 'Quantity',
+                                          fontSize: 12,
+                                          color: Colors.black),
+                                    ),
+                                    onChanged: (_input) {
+                                      qty = _input;
+                                    },
                                   ),
-                                  onChanged: (_input) {
-                                    qty = _input;
-                                  },
-                                ),
-                                TextFormField(
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    label: TextRegular(
-                                        text: 'Price',
-                                        fontSize: 12,
-                                        color: Colors.black),
+                                  TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                      label: TextRegular(
+                                          text: 'Price',
+                                          fontSize: 12,
+                                          color: Colors.black),
+                                    ),
+                                    onChanged: (_input) {
+                                      price = _input;
+                                    },
                                   ),
-                                  onChanged: (_input) {
-                                    price = _input;
-                                  },
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             actions: <Widget>[
                               FlatButton(

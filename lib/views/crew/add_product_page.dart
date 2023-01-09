@@ -197,7 +197,7 @@ class _AddProductPageState extends State<AddProductPage> {
               },
               decoration: InputDecoration(
                 label: TextRegular(
-                    text: 'Expiration Date (Ex. 10/22/2022)',
+                    text: 'Seasonal Date (Ex. 10/22/2022)',
                     fontSize: 18,
                     color: Colors.black),
               ),

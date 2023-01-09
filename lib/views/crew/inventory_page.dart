@@ -7,7 +7,12 @@ import 'package:turks/widgets/drawer_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
-class InventoryPage extends StatelessWidget {
+class InventoryPage extends StatefulWidget {
+  @override
+  State<InventoryPage> createState() => _InventoryPageState();
+}
+
+class _InventoryPageState extends State<InventoryPage> {
   final box = GetStorage();
 
   @override
@@ -22,7 +27,7 @@ class InventoryPage extends StatelessWidget {
           children: [
             ButtonWidget(
                 onPressed: () {
-                  box.write('inventoryType', 'Ingeredients');
+                  box.write('inventoryType', 'Ingredients');
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => InventoryType()));
                 },
@@ -64,12 +69,23 @@ class InventoryPage extends StatelessWidget {
   }
 }
 
-class InventoryType extends StatelessWidget {
+class InventoryType extends StatefulWidget {
+  @override
+  State<InventoryType> createState() => _InventoryTypeState();
+}
+
+class _InventoryTypeState extends State<InventoryType> {
   final box = GetStorage();
 
   late String item;
+
   late String qty;
-  late String unit;
+
+  late String unit = 'pcs';
+
+  var unitList = ['pcs', 'kg', 'box'];
+
+  var _value = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -155,42 +171,85 @@ class InventoryType extends StatelessWidget {
                                   fontFamily: 'QBold',
                                   fontWeight: FontWeight.bold),
                             ),
-                            content: Column(
-                              children: [
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    label: TextRegular(
-                                        text: 'Item',
-                                        fontSize: 12,
-                                        color: Colors.black),
+                            content: SizedBox(
+                              height: 200,
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                      label: TextRegular(
+                                          text: 'Item',
+                                          fontSize: 12,
+                                          color: Colors.black),
+                                    ),
+                                    onChanged: (_input) {
+                                      item = _input;
+                                    },
                                   ),
-                                  onChanged: (_input) {
-                                    item = _input;
-                                  },
-                                ),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    label: TextRegular(
-                                        text: 'Quantity',
-                                        fontSize: 12,
-                                        color: Colors.black),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                      label: TextRegular(
+                                          text: 'Quantity',
+                                          fontSize: 12,
+                                          color: Colors.black),
+                                    ),
+                                    onChanged: (_input) {
+                                      qty = _input;
+                                    },
                                   ),
-                                  onChanged: (_input) {
-                                    qty = _input;
-                                  },
-                                ),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    label: TextRegular(
-                                        text: 'Unit (Ex. kg)',
-                                        fontSize: 12,
-                                        color: Colors.black),
+                                  const SizedBox(
+                                    height: 20,
                                   ),
-                                  onChanged: (_input) {
-                                    unit = _input;
-                                  },
-                                ),
-                              ],
+                                  StatefulBuilder(
+                                    builder: ((context, setState) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              20, 2, 20, 2),
+                                          child: DropdownButton(
+                                            underline: Container(
+                                                color: Colors.transparent),
+                                            iconEnabledColor: Colors.black,
+                                            isExpanded: true,
+                                            value: _value,
+                                            items: [
+                                              for (int i = 0;
+                                                  i < unitList.length;
+                                                  i++)
+                                                DropdownMenuItem(
+                                                  onTap: () {
+                                                    unit = unitList[i];
+                                                  },
+                                                  child: Center(
+                                                      child: Row(children: [
+                                                    Text("Unit: " + unitList[i],
+                                                        style: const TextStyle(
+                                                          fontFamily:
+                                                              'QRegular',
+                                                          color: Colors.black,
+                                                        ))
+                                                  ])),
+                                                  value: i,
+                                                ),
+                                            ],
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _value =
+                                                    int.parse(value.toString());
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                ],
+                              ),
                             ),
                             actions: <Widget>[
                               FlatButton(

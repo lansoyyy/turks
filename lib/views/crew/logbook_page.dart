@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
 import 'package:turks/services/cloud_function/logbook.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/drawer_widget.dart';
@@ -209,42 +210,23 @@ class _LogbookPageState extends State<LogbookPage> {
                                                   fontFamily: 'QBold',
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            content: Column(
-                                              children: [
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    label: TextRegular(
-                                                        text: 'Name',
-                                                        fontSize: 12,
-                                                        color: Colors.black),
+                                            content: SizedBox(
+                                              height: 100,
+                                              child: Column(
+                                                children: [
+                                                  TextFormField(
+                                                    decoration: InputDecoration(
+                                                      label: TextRegular(
+                                                          text: 'Name',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
+                                                    ),
+                                                    onChanged: (_input) {
+                                                      name = _input;
+                                                    },
                                                   ),
-                                                  onChanged: (_input) {
-                                                    name = _input;
-                                                  },
-                                                ),
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    label: TextRegular(
-                                                        text: 'Date',
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  onChanged: (_input) {
-                                                    date = _input;
-                                                  },
-                                                ),
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    label: TextRegular(
-                                                        text: 'Time',
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  onChanged: (_input) {
-                                                    time = _input;
-                                                  },
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                             actions: <Widget>[
                                               FlatButton(
@@ -327,9 +309,15 @@ class _LogbookPageState extends State<LogbookPage> {
                                 child: ListView.builder(
                                     itemCount: snapshot.data?.size ?? 0,
                                     itemBuilder: (context, index) {
+                                      DateTime created =
+                                          data.docs[index]['dateTime'].toDate();
+
+                                      String formattedTime = DateFormat.yMMMd()
+                                          .add_jm()
+                                          .format(created);
                                       return ListTile(
                                         trailing: TextRegular(
-                                            text: data.docs[index]['date'],
+                                            text: formattedTime,
                                             fontSize: 12,
                                             color: Colors.black),
                                         title: TextBold(
@@ -433,42 +421,23 @@ class _LogbookPageState extends State<LogbookPage> {
                                                   fontFamily: 'QBold',
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            content: Column(
-                                              children: [
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    label: TextRegular(
-                                                        text: 'Name',
-                                                        fontSize: 12,
-                                                        color: Colors.black),
+                                            content: SizedBox(
+                                              height: 100,
+                                              child: Column(
+                                                children: [
+                                                  TextFormField(
+                                                    decoration: InputDecoration(
+                                                      label: TextRegular(
+                                                          text: 'Name',
+                                                          fontSize: 12,
+                                                          color: Colors.black),
+                                                    ),
+                                                    onChanged: (_input) {
+                                                      name1 = _input;
+                                                    },
                                                   ),
-                                                  onChanged: (_input) {
-                                                    name1 = _input;
-                                                  },
-                                                ),
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    label: TextRegular(
-                                                        text: 'Date',
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  onChanged: (_input) {
-                                                    date1 = _input;
-                                                  },
-                                                ),
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    label: TextRegular(
-                                                        text: 'Time',
-                                                        fontSize: 12,
-                                                        color: Colors.black),
-                                                  ),
-                                                  onChanged: (_input) {
-                                                    time1 = _input;
-                                                  },
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                             actions: <Widget>[
                                               FlatButton(
@@ -551,9 +520,15 @@ class _LogbookPageState extends State<LogbookPage> {
                                 child: ListView.builder(
                                     itemCount: snapshot.data?.size ?? 0,
                                     itemBuilder: (context, index) {
+                                      DateTime created =
+                                          data.docs[index]['dateTime'].toDate();
+
+                                      String formattedTime = DateFormat.yMMMd()
+                                          .add_jm()
+                                          .format(created);
                                       return ListTile(
                                         trailing: TextRegular(
-                                            text: data.docs[index]['date'],
+                                            text: formattedTime,
                                             fontSize: 12,
                                             color: Colors.black),
                                         title: TextBold(

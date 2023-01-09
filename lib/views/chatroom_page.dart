@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:turks/services/cloud_function/add_chat.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
@@ -46,7 +47,7 @@ class _ChatRoomState extends State<ChatRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppbarWidget('Chat Room'),
+      appBar: AppbarWidget('Ban Messaging'),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,6 +80,11 @@ class _ChatRoomState extends State<ChatRoom> {
                       child: ListView.builder(
                           itemCount: snapshot.data?.size ?? 0,
                           itemBuilder: ((context, index) {
+                            DateTime created =
+                                data.docs[index]['dateTime'].toDate();
+
+                            String formattedTime =
+                                DateFormat.yMMMd().add_jm().format(created);
                             return Padding(
                               padding:
                                   const EdgeInsets.fromLTRB(30, 10, 30, 10),
@@ -124,22 +130,10 @@ class _ChatRoomState extends State<ChatRoom> {
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            TextRegular(
-                                                text: data.docs[index]['time'],
-                                                fontSize: 10,
-                                                color: Colors.grey),
-                                            TextRegular(
-                                                text: data.docs[index]['date'],
-                                                fontSize: 10,
-                                                color: Colors.grey),
-                                          ],
-                                        ),
+                                        TextRegular(
+                                            text: formattedTime,
+                                            fontSize: 10,
+                                            color: Colors.grey),
                                       ],
                                     ),
                                   ),

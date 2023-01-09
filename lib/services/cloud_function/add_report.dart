@@ -1,15 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future addReport(
-  String name,
-  String type,
-  String date,
-  String content,
-  String imageURL,
-) async {
+Future addReport(String name, String type, String date, String content,
+    String imageURL, String username) async {
   final docUser = FirebaseFirestore.instance.collection('Waste Reports').doc();
 
   final json = {
+    'username': username,
     'name': name,
     'type': type,
     'date': date,

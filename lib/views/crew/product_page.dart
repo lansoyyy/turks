@@ -84,7 +84,7 @@ class _ProductPageState extends State<ProductPage> {
             padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
             child: ListTile(
               leading: TextBold(
-                  text: 'Expiration Date', fontSize: 18, color: Colors.black),
+                  text: 'Seasonal Date', fontSize: 18, color: Colors.black),
               trailing: TextBold(
                   text: box.read('productExDate'),
                   fontSize: 18,
