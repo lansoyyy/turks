@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
@@ -12,22 +13,70 @@ import 'package:printing/printing.dart';
 
 import '../../widgets/button_widget.dart';
 
-class WasteReportPageAdmin extends StatelessWidget {
+class WasteReportPageAdmin extends StatefulWidget {
+  @override
+  State<WasteReportPageAdmin> createState() => _WasteReportPageAdminState();
+}
+
+class _WasteReportPageAdminState extends State<WasteReportPageAdmin> {
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  final box = GetStorage();
+
+  late String myName = '';
+
+  getData() async {
+    // Use provider
+    var collection = FirebaseFirestore.instance
+        .collection('Users')
+        .where('username', isEqualTo: box.read('username'));
+
+    var querySnapshot = await collection.get();
+    if (mounted) {
+      setState(() {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
+          Map<String, dynamic> data = queryDocumentSnapshot.data();
+          myName = data['name'];
+        }
+      });
+    }
+  }
+
   final doc = pw.Document();
 
   var name = [];
+
   var type = [];
+
   var date = [];
+
   var content = [];
+
+  String cdate2 = DateFormat("MMMM, dd, yyyy").format(DateTime.now());
 
   void _createPdf() async {
     /// for using an image from assets
     // final image = await imageFromAssetBundle('assets/image.png');
 
+    final image = await imageFromAssetBundle(
+      'assets/images/T turks logo.png',
+    );
+
     doc.addPage(
       pw.Page(
         build: ((context) {
           return pw.Column(children: [
+            pw.Center(
+              child: pw.Image(image, height: 120, width: 120),
+            ),
+            pw.SizedBox(height: 5),
+            pw.Text('Sayre Hwy, Malaybalay, 8700 Bukidnon'),
+            pw.SizedBox(height: 5),
+            pw.Text(cdate2),
             pw.SizedBox(height: 20),
             pw.Text('Waste Reports'),
             pw.SizedBox(height: 30),
@@ -53,7 +102,23 @@ class WasteReportPageAdmin extends StatelessWidget {
                     ],
                   ),
               ],
-            )
+            ),
+            pw.SizedBox(height: 75),
+            pw.Align(
+              alignment: pw.Alignment.bottomRight,
+              child: pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.center,
+                children: [
+                  pw.Text(myName,
+                      style: const pw.TextStyle(
+                          decoration: pw.TextDecoration.underline)),
+                  pw.SizedBox(height: 5),
+                  pw.Text(
+                    'ADMIN',
+                  ),
+                ],
+              ),
+            ),
           ]);
         }),
         pageFormat: PdfPageFormat.a4,

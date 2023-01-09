@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -17,13 +18,40 @@ class InventoryTypeAdmin extends StatefulWidget {
 }
 
 class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   final box = GetStorage();
+
+  late String myName = '';
+
+  getData() async {
+    // Use provider
+    var collection = FirebaseFirestore.instance
+        .collection('Users')
+        .where('username', isEqualTo: box.read('username'));
+
+    var querySnapshot = await collection.get();
+    if (mounted) {
+      setState(() {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
+          Map<String, dynamic> data = queryDocumentSnapshot.data();
+          myName = data['name'];
+        }
+      });
+    }
+  }
 
   final doc = pw.Document();
 
   var items = [];
   var qty = [];
   var unit = [];
+
+  String cdate2 = DateFormat("MMMM, dd, yyyy").format(DateTime.now());
 
   void _createPdf() async {
     /// for using an image from assets
@@ -57,10 +85,20 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
     //   ),
     // ); // Page
 
+    final image = await imageFromAssetBundle(
+      'assets/images/T turks logo.png',
+    );
     doc.addPage(
       pw.Page(
         build: ((context) {
           return pw.Column(children: [
+            pw.Center(
+              child: pw.Image(image, height: 120, width: 120),
+            ),
+            pw.SizedBox(height: 5),
+            pw.Text('Sayre Hwy, Malaybalay, 8700 Bukidnon'),
+            pw.SizedBox(height: 5),
+            pw.Text(cdate2),
             pw.SizedBox(height: 20),
             pw.Text('Inventory - ${box.read('invenType')}'),
             pw.SizedBox(height: 30),
@@ -84,7 +122,23 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
                     ],
                   ),
               ],
-            )
+            ),
+            pw.SizedBox(height: 75),
+            pw.Align(
+              alignment: pw.Alignment.bottomRight,
+              child: pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.center,
+                children: [
+                  pw.Text(myName,
+                      style: const pw.TextStyle(
+                          decoration: pw.TextDecoration.underline)),
+                  pw.SizedBox(height: 5),
+                  pw.Text(
+                    'ADMIN',
+                  ),
+                ],
+              ),
+            ),
           ]);
         }),
         pageFormat: PdfPageFormat.a4,
