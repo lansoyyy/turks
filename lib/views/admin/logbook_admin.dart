@@ -23,31 +23,39 @@ class LogbookAdmin extends StatelessWidget {
 
     doc.addPage(
       pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Container(
-            margin: const pw.EdgeInsets.all(20),
-            child: pw.Column(children: [
-              pw.Center(child: pw.Text('Logged In')),
-              pw.SizedBox(
-                height: 20,
-              ),
-              for (int i = 0; i < name.length; i++)
-                pw.Column(
+        build: ((context) {
+          return pw.Column(children: [
+            pw.SizedBox(height: 20),
+            pw.Text('Logged In'),
+            pw.SizedBox(height: 30),
+            pw.Table(
+              border: pw.TableBorder.all(color: PdfColors.black),
+              children: [
+                pw.TableRow(
+                  decoration: const pw.BoxDecoration(color: PdfColors.grey200),
                   children: [
-                    pw.Text('\n Name: ' +
-                        name[i] +
-                        ', Date: ' +
-                        date[i] +
-                        ', Time: ' +
-                        time[i]),
+                    pw.Text('Name'),
+                    pw.Text('Date'),
+                    pw.Text('Time'),
                   ],
                 ),
-            ]),
-          );
-        },
+                for (int i = 0; i < name.length; i++)
+                  pw.TableRow(
+                    children: [
+                      pw.Text(name[i]),
+                      pw.Text(date[i]),
+                      pw.Text(time[i]),
+                    ],
+                  ),
+              ],
+            )
+          ]);
+        }),
+        pageFormat: PdfPageFormat.a4,
       ),
-    ); // Page
+    );
+
+    /// Page
 
     /// print the document using the iOS or Android print service:
     await Printing.layoutPdf(
@@ -74,29 +82,35 @@ class LogbookAdmin extends StatelessWidget {
 
     doc.addPage(
       pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Container(
-            margin: const pw.EdgeInsets.all(20),
-            child: pw.Column(children: [
-              pw.Center(child: pw.Text('Logged Out')),
-              pw.SizedBox(
-                height: 20,
-              ),
-              for (int i = 0; i < name1.length; i++)
-                pw.Column(
+        build: ((context) {
+          return pw.Column(children: [
+            pw.SizedBox(height: 20),
+            pw.Text('Logged Out'),
+            pw.SizedBox(height: 30),
+            pw.Table(
+              border: pw.TableBorder.all(color: PdfColors.black),
+              children: [
+                pw.TableRow(
+                  decoration: const pw.BoxDecoration(color: PdfColors.grey200),
                   children: [
-                    pw.Text('\n Name: ' +
-                        name1[i] +
-                        ', Date: ' +
-                        date1[i] +
-                        ', Time: ' +
-                        time1[i]),
+                    pw.Text('Name'),
+                    pw.Text('Date'),
+                    pw.Text('Time'),
                   ],
                 ),
-            ]),
-          );
-        },
+                for (int i = 0; i < name1.length; i++)
+                  pw.TableRow(
+                    children: [
+                      pw.Text(name1[i]),
+                      pw.Text(date1[i]),
+                      pw.Text(time1[i]),
+                    ],
+                  ),
+              ],
+            )
+          ]);
+        }),
+        pageFormat: PdfPageFormat.a4,
       ),
     ); // Page
 
@@ -170,12 +184,10 @@ class LogbookAdmin extends StatelessWidget {
                                       DateTime created =
                                           data.docs[index]['dateTime'].toDate();
 
-                                      String formattedTime = DateFormat.yMMMd()
-                                          .add_jm()
-                                          .format(created);
-                                      String formattedTime1 = DateFormat.j()
-                                          .add_jm()
-                                          .format(created);
+                                      String formattedTime =
+                                          DateFormat.yMMMd().format(created);
+                                      String formattedTime1 =
+                                          DateFormat.j().format(created);
                                       name.add(data.docs[index]['name']);
                                       date.add(formattedTime);
                                       time.add(formattedTime1);
@@ -249,15 +261,13 @@ class LogbookAdmin extends StatelessWidget {
                                 child: ListView.builder(
                                     itemCount: snapshot.data?.size ?? 0,
                                     itemBuilder: (context, index) {
-                                        DateTime created =
+                                      DateTime created =
                                           data.docs[index]['dateTime'].toDate();
 
-                                      String formattedTime = DateFormat.yMMMd()
-                                          .add_jm()
-                                          .format(created);
-                                          String formattedTime1 = DateFormat.j()
-                                          .add_jm()
-                                          .format(created);
+                                      String formattedTime =
+                                          DateFormat.yMMMd().format(created);
+                                      String formattedTime1 =
+                                          DateFormat.j().format(created);
                                       name1.add(data.docs[index]['name']);
                                       date1.add(formattedTime);
                                       time1.add(formattedTime1);

@@ -19,7 +19,7 @@ class GeneralInventory extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
           onTap: () {
-            box.write('invenType', 'Ingeredients');
+            box.write('invenType', 'Ingredients');
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => InventoryTypeAdmin()));
           },

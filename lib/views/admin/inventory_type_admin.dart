@@ -29,33 +29,67 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
     /// for using an image from assets
     // final image = await imageFromAssetBundle('assets/image.png');
 
+    // doc.addPage(
+    //   pw.Page(
+    //     pageFormat: PdfPageFormat.a4,
+    //     build: (pw.Context context) {
+    //       return pw.Container(
+    //         margin: const pw.EdgeInsets.all(20),
+    //         child: pw.Column(children: [
+    //           pw.Center(child: pw.Text('Inventory')),
+    //           pw.SizedBox(
+    //             height: 20,
+    //           ),
+    //           for (int i = 0; i < items.length; i++)
+    //             pw.Column(
+    //               children: [
+    //                 pw.Text('\n Item: ' +
+    //                     items[i] +
+    //                     ', Quantity: ' +
+    //                     qty[i] +
+    //                     ', Unit: ' +
+    //                     unit[i]),
+    //               ],
+    //             ),
+    //         ]),
+    //       );
+    //     },
+    //   ),
+    // ); // Page
+
     doc.addPage(
       pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Container(
-            margin: const pw.EdgeInsets.all(20),
-            child: pw.Column(children: [
-              pw.Center(child: pw.Text('Inventory')),
-              pw.SizedBox(
-                height: 20,
-              ),
-              for (int i = 0; i < items.length; i++)
-                pw.Column(
+        build: ((context) {
+          return pw.Column(children: [
+            pw.SizedBox(height: 20),
+            pw.Text('Inventory - ${box.read('invenType')}'),
+            pw.SizedBox(height: 30),
+            pw.Table(
+              border: pw.TableBorder.all(color: PdfColors.black),
+              children: [
+                pw.TableRow(
+                  decoration: const pw.BoxDecoration(color: PdfColors.grey200),
                   children: [
-                    pw.Text('\n Item: ' +
-                        items[i] +
-                        ', Quantity: ' +
-                        qty[i] +
-                        ', Unit: ' +
-                        unit[i]),
+                    pw.Text('Item'),
+                    pw.Text('Quantity'),
+                    pw.Text('Unit'),
                   ],
                 ),
-            ]),
-          );
-        },
+                for (int i = 0; i < items.length; i++)
+                  pw.TableRow(
+                    children: [
+                      pw.Text(items[i]),
+                      pw.Text(qty[i]),
+                      pw.Text(unit[i]),
+                    ],
+                  ),
+              ],
+            )
+          ]);
+        }),
+        pageFormat: PdfPageFormat.a4,
       ),
-    ); // Page
+    );
 
     /// print the document using the iOS or Android print service:
     await Printing.layoutPdf(

@@ -26,29 +26,37 @@ class WasteReportPageAdmin extends StatelessWidget {
 
     doc.addPage(
       pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Container(
-            margin: const pw.EdgeInsets.all(20),
-            child: pw.Column(children: [
-              pw.Center(child: pw.Text('Reports')),
-              pw.SizedBox(
-                height: 20,
-              ),
-              for (int i = 0; i < name.length; i++)
-                pw.Column(
+        build: ((context) {
+          return pw.Column(children: [
+            pw.SizedBox(height: 20),
+            pw.Text('Waste Reports'),
+            pw.SizedBox(height: 30),
+            pw.Table(
+              border: pw.TableBorder.all(color: PdfColors.black),
+              children: [
+                pw.TableRow(
+                  decoration: const pw.BoxDecoration(color: PdfColors.grey200),
                   children: [
-                    pw.Text('\n' 'by: ' +
-                        name[i] +
-                        ', Date: ' +
-                        date[i] +
-                        ', Content: ' +
-                        content[i]),
+                    pw.Text('Concern'),
+                    pw.Text('Report Type'),
+                    pw.Text('Date'),
+                    pw.Text('Content'),
                   ],
                 ),
-            ]),
-          );
-        },
+                for (int i = 0; i < name.length; i++)
+                  pw.TableRow(
+                    children: [
+                      pw.Text(name[i]),
+                      pw.Text(type[i]),
+                      pw.Text(date[i]),
+                      pw.Text(content[i]),
+                    ],
+                  ),
+              ],
+            )
+          ]);
+        }),
+        pageFormat: PdfPageFormat.a4,
       ),
     ); // Page
 
