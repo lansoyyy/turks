@@ -108,7 +108,7 @@ class _InventoryTypeState extends State<InventoryType> {
 
   late String unit = 'pcs';
 
-  var unitList = ['pcs', 'kg', 'box'];
+  var unitList = ['pcs', 'kg', 'box', 'tray', 'dozen', 'others'];
 
   var _value = 0;
 

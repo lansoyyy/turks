@@ -140,6 +140,12 @@ class _WasteReportPageState extends State<WasteReportPage> {
 
   late String username;
 
+  late String unit = 'pcs';
+
+  var unitList = ['pcs', 'kg', 'box', 'tray', 'dozen', 'others'];
+
+  var _value = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -391,6 +397,60 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                       },
                                     ),
                                     const SizedBox(
+                                      height: 10,
+                                    ),
+                                    StatefulBuilder(
+                                      builder: ((context, setState) {
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                20, 2, 20, 2),
+                                            child: DropdownButton(
+                                              underline: Container(
+                                                  color: Colors.transparent),
+                                              iconEnabledColor: Colors.black,
+                                              isExpanded: true,
+                                              value: _value,
+                                              items: [
+                                                for (int i = 0;
+                                                    i < unitList.length;
+                                                    i++)
+                                                  DropdownMenuItem(
+                                                    onTap: () {
+                                                      unit = unitList[i];
+                                                    },
+                                                    child: Center(
+                                                        child: Row(children: [
+                                                      Text(
+                                                          "Unit: " +
+                                                              unitList[i],
+                                                          style:
+                                                              const TextStyle(
+                                                            fontFamily:
+                                                                'QRegular',
+                                                            color: Colors.black,
+                                                          ))
+                                                    ])),
+                                                    value: i,
+                                                  ),
+                                              ],
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  _value = int.parse(
+                                                      value.toString());
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                    ),
+                                    const SizedBox(
                                       height: 20,
                                     ),
                                     hasLoaded
@@ -441,7 +501,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
                               color: Colors.black,
                               onPressed: () {
                                 addReport(name, type, date, content, imageURL,
-                                    myName);
+                                    myName, unit);
                                 Navigator.of(context).pop();
                               },
                               child: const Text(

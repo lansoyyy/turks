@@ -56,6 +56,7 @@ class _WasteReportPageAdminState extends State<WasteReportPageAdmin> {
 
   var content = [];
   var myNames = [];
+  var unit = [];
 
   String cdate2 = DateFormat("MMMM, dd, yyyy").format(DateTime.now());
 
@@ -89,6 +90,7 @@ class _WasteReportPageAdminState extends State<WasteReportPageAdmin> {
                   children: [
                     pw.Text('Crew'),
                     pw.Text('Concern'),
+                    pw.Text('Unit'),
                     pw.Text('Report Type'),
                     pw.Text('Date'),
                     pw.Text('Content'),
@@ -99,6 +101,7 @@ class _WasteReportPageAdminState extends State<WasteReportPageAdmin> {
                     children: [
                       pw.Text(myNames[i]),
                       pw.Text(name[i]),
+                      pw.Text(unit[i]),
                       pw.Text(type[i]),
                       pw.Text(date[i]),
                       pw.Text(content[i]),
@@ -194,6 +197,7 @@ class _WasteReportPageAdminState extends State<WasteReportPageAdmin> {
                               type.add(data.docs[index]['type']);
                               date.add(formattedTime);
                               myNames.add(data.docs[index]['myName']);
+                              unit.add(data.docs[index]['unit']);
                               content.add(data.docs[index]['content']);
                               return Padding(
                                 padding:

@@ -114,6 +114,12 @@ class _ExpensesTypeState extends State<ExpensesType> {
     return "${num1 * num2}";
   }
 
+  late String unit = 'pcs';
+
+  var unitList = ['pcs', 'kg', 'box', 'tray', 'dozen', 'others'];
+
+  var _value = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,7 +209,7 @@ class _ExpensesTypeState extends State<ExpensesType> {
                                   fontWeight: FontWeight.bold),
                             ),
                             content: SizedBox(
-                              height: 180,
+                              height: 250,
                               child: Column(
                                 children: [
                                   TextFormField(
@@ -241,6 +247,57 @@ class _ExpensesTypeState extends State<ExpensesType> {
                                       price = _input;
                                     },
                                   ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  StatefulBuilder(
+                                    builder: ((context, setState) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              20, 2, 20, 2),
+                                          child: DropdownButton(
+                                            underline: Container(
+                                                color: Colors.transparent),
+                                            iconEnabledColor: Colors.black,
+                                            isExpanded: true,
+                                            value: _value,
+                                            items: [
+                                              for (int i = 0;
+                                                  i < unitList.length;
+                                                  i++)
+                                                DropdownMenuItem(
+                                                  onTap: () {
+                                                    unit = unitList[i];
+                                                  },
+                                                  child: Center(
+                                                      child: Row(children: [
+                                                    Text("Unit: " + unitList[i],
+                                                        style: const TextStyle(
+                                                          fontFamily:
+                                                              'QRegular',
+                                                          color: Colors.black,
+                                                        ))
+                                                  ])),
+                                                  value: i,
+                                                ),
+                                            ],
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _value =
+                                                    int.parse(value.toString());
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                                  ),
                                 ],
                               ),
                             ),
@@ -253,7 +310,8 @@ class _ExpensesTypeState extends State<ExpensesType> {
                                       int.parse(qty),
                                       int.parse(price),
                                       box.read('expensesType'),
-                                      myName);
+                                      myName,
+                                      unit);
                                   Navigator.of(context).pop();
                                 },
                                 child: const Text(

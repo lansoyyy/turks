@@ -26,11 +26,9 @@ class LogInPage extends StatelessWidget {
               child: TextBold(text: 'Login', fontSize: 28, color: Colors.black),
             ),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.transparent,
-                border: Border.all(
-                  color: Colors.brown,
-                )),
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.transparent,
+            ),
           ),
           const SizedBox(
             height: 50,

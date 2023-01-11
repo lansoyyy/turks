@@ -51,7 +51,7 @@ class _MyDrawerState extends State<DrawerWidget> {
             ),
             ListTile(
               title: TextBold(
-                text: 'Ban Messasing',
+                text: 'Banner Messasing',
                 fontSize: 12,
                 color: Colors.black,
               ),

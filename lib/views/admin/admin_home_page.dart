@@ -41,7 +41,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   height: 10,
                 ),
                 TextBold(
-                    text: 'Ban Messaging', fontSize: 18, color: Colors.black),
+                    text: 'Banner Messaging',
+                    fontSize: 18,
+                    color: Colors.black),
               ],
             ),
             height: 50,

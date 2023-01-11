@@ -46,40 +46,40 @@ class _ProductPageState extends State<ProductPage> {
                   color: Colors.grey),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
-            child: ListTile(
-              leading:
-                  TextBold(text: 'Quantity', fontSize: 18, color: Colors.black),
-              trailing: SizedBox(
-                width: 200,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            if (qty == 0) {
-                            } else {
-                              qty--;
-                            }
-                          });
-                        },
-                        icon: const Icon(Icons.remove)),
-                    TextBold(
-                        text: qty.toString(), fontSize: 18, color: Colors.grey),
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            qty++;
-                          });
-                        },
-                        icon: const Icon(Icons.add)),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
+          //   child: ListTile(
+          //     leading:
+          //         TextBold(text: 'Quantity', fontSize: 18, color: Colors.black),
+          //     trailing: SizedBox(
+          //       width: 200,
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.end,
+          //         children: [
+          //           IconButton(
+          //               onPressed: () {
+          //                 setState(() {
+          //                   if (qty == 0) {
+          //                   } else {
+          //                     qty--;
+          //                   }
+          //                 });
+          //               },
+          //               icon: const Icon(Icons.remove)),
+          //           TextBold(
+          //               text: qty.toString(), fontSize: 18, color: Colors.grey),
+          //           IconButton(
+          //               onPressed: () {
+          //                 setState(() {
+          //                   qty++;
+          //                 });
+          //               },
+          //               icon: const Icon(Icons.add)),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
             child: ListTile(
@@ -95,8 +95,7 @@ class _ProductPageState extends State<ProductPage> {
           ButtonWidget(
               onPressed: () {
                 if (qty != 0) {
-                  addSales(box.read('productName'), box.read('productPrice'),
-                      qty.toString());
+                  addSales(box.read('productName'), box.read('productPrice'));
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Added to Sales'),

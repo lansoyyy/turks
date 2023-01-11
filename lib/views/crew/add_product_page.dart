@@ -173,19 +173,19 @@ class _AddProductPageState extends State<AddProductPage> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
-            child: TextFormField(
-              keyboardType: TextInputType.number,
-              onChanged: (_input) {
-                qty = _input;
-              },
-              decoration: InputDecoration(
-                label: TextRegular(
-                    text: 'Quantity', fontSize: 18, color: Colors.black),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
+          //   child: TextFormField(
+          //     keyboardType: TextInputType.number,
+          //     onChanged: (_input) {
+          //       qty = _input;
+          //     },
+          //     decoration: InputDecoration(
+          //       label: TextRegular(
+          //           text: 'Quantity', fontSize: 18, color: Colors.black),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.fromLTRB(50, 5, 50, 50),
             child: TextFormField(

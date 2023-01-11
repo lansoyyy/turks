@@ -67,7 +67,7 @@ class ProductListPage extends StatelessWidget {
                       onTap: () {
                         box.write('productPrice', data.docs[index]['price']);
                         box.write('productURL', data.docs[index]['url']);
-                        box.write('productQty', data.docs[index]['qty']);
+                        // box.write('productQty', data.docs[index]['qty']);
 
                         box.write(
                             'productExDate', data.docs[index]['expireDate']);
