@@ -183,52 +183,57 @@ class _POSPageState extends State<POSPage> {
                           myNames.add(data.docs[index]['myName']);
                           qty.add(data.docs[index]['qty']);
                           price.add(data.docs[index]['price']);
-                          return ListTile(
-                            leading: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextBold(
-                                    text: data.docs[index]['item'] +
-                                        ' - ' +
-                                        data.docs[index]['price'],
-                                    fontSize: 18,
-                                    color: Colors.black),
-                                TextRegular(
-                                    text: 'Item-Price',
-                                    fontSize: 12,
-                                    color: Colors.grey),
+                          return DataTable(
+                              border: TableBorder.all(color: Colors.grey),
+                              columns: [
+                                DataColumn(
+                                  label: TextBold(
+                                      text: 'Item - Price',
+                                      fontSize: 14,
+                                      color: Colors.black),
+                                ),
+                                DataColumn(
+                                  label: TextBold(
+                                      text: 'Quantity',
+                                      fontSize: 14,
+                                      color: Colors.black),
+                                ),
+                                DataColumn(
+                                  label: TextBold(
+                                      text: 'Total',
+                                      fontSize: 14,
+                                      color: Colors.black),
+                                ),
                               ],
-                            ),
-                            title: Padding(
-                              padding: const EdgeInsets.only(left: 50),
-                              child: TextBold(
-                                  text: data.docs[index]['qty'],
-                                  fontSize: 18,
-                                  color: Colors.black),
-                            ),
-                            subtitle: Padding(
-                              padding: const EdgeInsets.only(left: 50),
-                              child: TextRegular(
-                                  text: 'Quantity',
-                                  fontSize: 12,
-                                  color: Colors.grey),
-                            ),
-                            trailing: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextBold(
-                                    text: getTotal(
-                                        int.parse(data.docs[index]['qty']),
-                                        int.parse(data.docs[index]['price'])),
-                                    fontSize: 18,
-                                    color: Colors.black),
-                                TextRegular(
-                                    text: 'Total',
-                                    fontSize: 12,
-                                    color: Colors.grey),
-                              ],
-                            ),
-                          );
+                              rows: [
+                                for (int i = 0; i < snapshot.data!.size; i++)
+                                  DataRow(cells: [
+                                    DataCell(
+                                      TextRegular(
+                                          text: data.docs[index]['item'] +
+                                              ' ' +
+                                              data.docs[index]['price'],
+                                          fontSize: 12,
+                                          color: Colors.grey),
+                                    ),
+                                    DataCell(
+                                      TextRegular(
+                                          text: data.docs[index]['qty'],
+                                          fontSize: 12,
+                                          color: Colors.grey),
+                                    ),
+                                    DataCell(
+                                      TextRegular(
+                                          text: getTotal(
+                                              int.parse(
+                                                  data.docs[index]['price']),
+                                              int.parse(
+                                                  data.docs[index]['qty'])),
+                                          fontSize: 12,
+                                          color: Colors.grey),
+                                    ),
+                                  ])
+                              ]);
                         })),
                   ),
                 );

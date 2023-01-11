@@ -212,29 +212,51 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
                           myNames.add(data.docs[index]['myName']);
                           qty.add(data.docs[index]['qty']);
                           unit.add(data.docs[index]['unit']);
-                          return ListTile(
-                            leading: Padding(
-                              padding: const EdgeInsets.only(left: 40),
-                              child: TextRegular(
-                                  text: data.docs[index]['item'],
-                                  fontSize: 16,
-                                  color: Colors.black),
-                            ),
-                            title: Padding(
-                              padding: const EdgeInsets.only(left: 50),
-                              child: TextRegular(
-                                  text: data.docs[index]['qty'],
-                                  fontSize: 16,
-                                  color: Colors.black),
-                            ),
-                            trailing: Padding(
-                              padding: const EdgeInsets.only(right: 25),
-                              child: TextRegular(
-                                  text: data.docs[index]['unit'],
-                                  fontSize: 16,
-                                  color: Colors.black),
-                            ),
-                          );
+                          return DataTable(
+                              border: TableBorder.all(color: Colors.grey),
+                              columns: [
+                                DataColumn(
+                                  label: TextBold(
+                                      text: 'Item',
+                                      fontSize: 14,
+                                      color: Colors.black),
+                                ),
+                                DataColumn(
+                                  label: TextBold(
+                                      text: 'Quantity',
+                                      fontSize: 14,
+                                      color: Colors.black),
+                                ),
+                                DataColumn(
+                                  label: TextBold(
+                                      text: 'Unit',
+                                      fontSize: 14,
+                                      color: Colors.black),
+                                ),
+                              ],
+                              rows: [
+                                for (int i = 0; i < snapshot.data!.size; i++)
+                                  DataRow(cells: [
+                                    DataCell(
+                                      TextRegular(
+                                          text: data.docs[index]['item'],
+                                          fontSize: 12,
+                                          color: Colors.grey),
+                                    ),
+                                    DataCell(
+                                      TextRegular(
+                                          text: data.docs[index]['qty'],
+                                          fontSize: 12,
+                                          color: Colors.grey),
+                                    ),
+                                    DataCell(
+                                      TextRegular(
+                                          text: data.docs[index]['unit'],
+                                          fontSize: 12,
+                                          color: Colors.grey),
+                                    ),
+                                  ])
+                              ]);
                         }),
                       ),
                     ),
