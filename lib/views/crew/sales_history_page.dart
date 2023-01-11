@@ -42,50 +42,53 @@ class SalesHistoryPage extends StatelessWidget {
                 return Expanded(
                   child: SizedBox(
                     child: ListView.builder(
-                        itemCount: snapshot.data?.size ?? 0,
+                        itemCount: 1,
                         itemBuilder: ((context, index) {
-                          return ListTile(
-                            leading: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextBold(
-                                    text: data.docs[index]['item'],
-                                    fontSize: 18,
-                                    color: Colors.black),
-                                TextRegular(
-                                    text: 'Item',
-                                    fontSize: 12,
-                                    color: Colors.grey),
+                          return DataTable(
+                              border: TableBorder.all(color: Colors.grey),
+                              columns: [
+                                DataColumn(
+                                  label: TextBold(
+                                      text: 'Item',
+                                      fontSize: 14,
+                                      color: Colors.black),
+                                ),
+                                DataColumn(
+                                  label: TextBold(
+                                      text: 'Quantity',
+                                      fontSize: 14,
+                                      color: Colors.black),
+                                ),
+                                DataColumn(
+                                  label: TextBold(
+                                      text: 'Price',
+                                      fontSize: 14,
+                                      color: Colors.black),
+                                ),
                               ],
-                            ),
-                            title: Padding(
-                              padding: const EdgeInsets.only(left: 50),
-                              child: TextBold(
-                                  text: data.docs[index]['price'] + '.00',
-                                  fontSize: 18,
-                                  color: Colors.black),
-                            ),
-                            subtitle: Padding(
-                              padding: const EdgeInsets.only(left: 50),
-                              child: TextRegular(
-                                  text: 'Price',
-                                  fontSize: 12,
-                                  color: Colors.grey),
-                            ),
-                            trailing: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextBold(
-                                    text: data.docs[index]['qty'],
-                                    fontSize: 18,
-                                    color: Colors.black),
-                                TextRegular(
-                                    text: 'Quantity',
-                                    fontSize: 12,
-                                    color: Colors.grey),
-                              ],
-                            ),
-                          );
+                              rows: [
+                                for (int i = 0; i < snapshot.data!.size; i++)
+                                  DataRow(cells: [
+                                    DataCell(
+                                      TextRegular(
+                                          text: data.docs[index]['item'],
+                                          fontSize: 12,
+                                          color: Colors.grey),
+                                    ),
+                                    DataCell(
+                                      TextRegular(
+                                          text: data.docs[index]['qty'],
+                                          fontSize: 12,
+                                          color: Colors.grey),
+                                    ),
+                                    DataCell(
+                                      TextRegular(
+                                          text: data.docs[index]['price'],
+                                          fontSize: 12,
+                                          color: Colors.grey),
+                                    ),
+                                  ])
+                              ]);
                         })),
                   ),
                 );

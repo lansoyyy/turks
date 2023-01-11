@@ -206,7 +206,7 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
                   return Expanded(
                     child: SizedBox(
                       child: ListView.builder(
-                        itemCount: snapshot.data?.size ?? 0,
+                        itemCount: 1,
                         itemBuilder: ((context, index) {
                           items.add(data.docs[index]['item']);
                           myNames.add(data.docs[index]['myName']);

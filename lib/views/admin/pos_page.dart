@@ -177,7 +177,7 @@ class _POSPageState extends State<POSPage> {
                   height: 350,
                   child: Scrollbar(
                     child: ListView.builder(
-                        itemCount: snapshot.data?.size ?? 0,
+                        itemCount: 1,
                         itemBuilder: ((context, index) {
                           items.add(data.docs[index]['item']);
                           myNames.add(data.docs[index]['myName']);
