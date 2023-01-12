@@ -17,8 +17,7 @@ class CrewHome extends StatelessWidget {
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           elevation: 0,
-          title:
-              TextRegular(text: 'Products', fontSize: 18, color: Colors.black),
+          title: TextRegular(text: 'Menu', fontSize: 18, color: Colors.black),
           centerTitle: true,
           actions: [
             IconButton(

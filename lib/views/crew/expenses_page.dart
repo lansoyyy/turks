@@ -126,17 +126,8 @@ class _ExpensesTypeState extends State<ExpensesType> {
       appBar: AppbarWidget(box.read('expensesType')),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextBold(
-                    text: 'Item - Price', fontSize: 18, color: Colors.black),
-                TextBold(text: 'Quantity', fontSize: 18, color: Colors.black),
-                TextBold(text: 'Total', fontSize: 18, color: Colors.black),
-              ],
-            ),
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Expenses')
@@ -161,171 +152,224 @@ class _ExpensesTypeState extends State<ExpensesType> {
                   }
 
                   final data = snapshot.requireData;
-                  return Expanded(
-                    child: SizedBox(
-                      child: ListView.builder(
-                        itemCount: snapshot.data?.size ?? 0,
-                        itemBuilder: ((context, index) {
-                          return ListTile(
-                            leading: Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: TextRegular(
-                                  text: data.docs[index]['item'] +
-                                      ' - ' +
-                                      data.docs[index]['price'].toString(),
-                                  fontSize: 16,
-                                  color: Colors.black),
-                            ),
-                            title: Padding(
-                              padding: const EdgeInsets.only(left: 50),
-                              child: TextRegular(
-                                  text: data.docs[index]['qty'].toString(),
-                                  fontSize: 16,
-                                  color: Colors.black),
-                            ),
-                            trailing: Padding(
-                              padding: const EdgeInsets.only(right: 25),
-                              child: TextRegular(
-                                  text: getTotal(data.docs[index]['price'],
-                                      data.docs[index]['qty']),
-                                  fontSize: 16,
-                                  color: Colors.black),
-                            ),
-                          );
-                        }),
+                  return SingleChildScrollView(
+                    child: DataTable(columns: [
+                      DataColumn(
+                        label: TextBold(
+                            text: 'Item - Price',
+                            fontSize: 14,
+                            color: Colors.black),
                       ),
-                    ),
+                      DataColumn(
+                        label: TextBold(
+                            text: 'Quantity',
+                            fontSize: 14,
+                            color: Colors.black),
+                      ),
+                      DataColumn(
+                        label: TextBold(
+                            text: 'Total', fontSize: 14, color: Colors.black),
+                      ),
+                    ], rows: [
+                      for (int i = 0; i < data.docs.length; i++)
+                        DataRow(cells: [
+                          DataCell(
+                            TextRegular(
+                                text: data.docs[i]['item'] +
+                                    ' ' +
+                                    data.docs[i]['price'].toString(),
+                                fontSize: 12,
+                                color: Colors.black),
+                          ),
+                          DataCell(
+                            TextRegular(
+                                text: data.docs[i]['qty'].toString(),
+                                fontSize: 12,
+                                color: Colors.black),
+                          ),
+                          DataCell(
+                            TextRegular(
+                                text: getTotal(data.docs[i]['qty'],
+                                        data.docs[i]['price'])
+                                    .toString(),
+                                fontSize: 12,
+                                color: Colors.black),
+                          ),
+                        ]),
+                    ]),
                   );
+                  // return Expanded(
+                  //   child: SizedBox(
+                  //     child: ListView.builder(
+                  //       itemCount: snapshot.data?.size ?? 0,
+                  //       itemBuilder: ((context, index) {
+                  //         return ListTile(
+                  //           leading: Padding(
+                  //             padding: const EdgeInsets.only(left: 20),
+                  //             child: TextRegular(
+                  //                 text: data.docs[index]['item'] +
+                  //                     ' - ' +
+                  //                     data.docs[index]['price'].toString(),
+                  //                 fontSize: 16,
+                  //                 color: Colors.black),
+                  //           ),
+                  //           title: Padding(
+                  //             padding: const EdgeInsets.only(left: 50),
+                  //             child: TextRegular(
+                  //                 text: data.docs[index]['qty'].toString(),
+                  //                 fontSize: 16,
+                  //                 color: Colors.black),
+                  //           ),
+                  //           trailing: Padding(
+                  //             padding: const EdgeInsets.only(right: 25),
+                  //             child: TextRegular(
+                  //                 text: getTotal(data.docs[index]['price'],
+                  //                     data.docs[index]['qty']),
+                  //                 fontSize: 16,
+                  //                 color: Colors.black),
+                  //           ),
+                  //         );
+                  //       }),
+                  //     ),
+                  //   ),
+                  // );
                 }),
-            ButtonWidget(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            title: const Text(
-                              'Adding to Expenses',
-                              style: TextStyle(
-                                  fontFamily: 'QBold',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            content: SizedBox(
-                              height: 250,
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                      label: TextRegular(
-                                          text: 'Item',
-                                          fontSize: 12,
-                                          color: Colors.black),
-                                    ),
-                                    onChanged: (_input) {
-                                      item = _input;
-                                    },
-                                  ),
-                                  TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                      label: TextRegular(
-                                          text: 'Quantity',
-                                          fontSize: 12,
-                                          color: Colors.black),
-                                    ),
-                                    onChanged: (_input) {
-                                      qty = _input;
-                                    },
-                                  ),
-                                  TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                      label: TextRegular(
-                                          text: 'Price',
-                                          fontSize: 12,
-                                          color: Colors.black),
-                                    ),
-                                    onChanged: (_input) {
-                                      price = _input;
-                                    },
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  StatefulBuilder(
-                                    builder: ((context, setState) {
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              20, 2, 20, 2),
-                                          child: DropdownButton(
-                                            underline: Container(
-                                                color: Colors.transparent),
-                                            iconEnabledColor: Colors.black,
-                                            isExpanded: true,
-                                            value: _value,
-                                            items: [
-                                              for (int i = 0;
-                                                  i < unitList.length;
-                                                  i++)
-                                                DropdownMenuItem(
-                                                  onTap: () {
-                                                    unit = unitList[i];
-                                                  },
-                                                  child: Center(
-                                                      child: Row(children: [
-                                                    Text("Unit: " + unitList[i],
-                                                        style: const TextStyle(
-                                                          fontFamily:
-                                                              'QRegular',
-                                                          color: Colors.black,
-                                                        ))
-                                                  ])),
-                                                  value: i,
-                                                ),
-                                            ],
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _value =
-                                                    int.parse(value.toString());
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                ],
+            const Expanded(child: SizedBox()),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ButtonWidget(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              title: const Text(
+                                'Adding to Expenses',
+                                style: TextStyle(
+                                    fontFamily: 'QBold',
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ),
-                            actions: <Widget>[
-                              FlatButton(
-                                color: Colors.black,
-                                onPressed: () {
-                                  addExpenses(
-                                      item,
-                                      int.parse(qty),
-                                      int.parse(price),
-                                      box.read('expensesType'),
-                                      myName,
-                                      unit);
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text(
-                                  'Continue',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'QRegular',
-                                      fontWeight: FontWeight.bold),
+                              content: SizedBox(
+                                height: 250,
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      decoration: InputDecoration(
+                                        label: TextRegular(
+                                            text: 'Item',
+                                            fontSize: 12,
+                                            color: Colors.black),
+                                      ),
+                                      onChanged: (_input) {
+                                        item = _input;
+                                      },
+                                    ),
+                                    TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        label: TextRegular(
+                                            text: 'Quantity',
+                                            fontSize: 12,
+                                            color: Colors.black),
+                                      ),
+                                      onChanged: (_input) {
+                                        qty = _input;
+                                      },
+                                    ),
+                                    TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        label: TextRegular(
+                                            text: 'Price',
+                                            fontSize: 12,
+                                            color: Colors.black),
+                                      ),
+                                      onChanged: (_input) {
+                                        price = _input;
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    StatefulBuilder(
+                                      builder: ((context, setState) {
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                20, 2, 20, 2),
+                                            child: DropdownButton(
+                                              underline: Container(
+                                                  color: Colors.transparent),
+                                              iconEnabledColor: Colors.black,
+                                              isExpanded: true,
+                                              value: _value,
+                                              items: [
+                                                for (int i = 0;
+                                                    i < unitList.length;
+                                                    i++)
+                                                  DropdownMenuItem(
+                                                    onTap: () {
+                                                      unit = unitList[i];
+                                                    },
+                                                    child: Center(
+                                                        child: Row(children: [
+                                                      Text(
+                                                          "Unit: " +
+                                                              unitList[i],
+                                                          style:
+                                                              const TextStyle(
+                                                            fontFamily:
+                                                                'QRegular',
+                                                            color: Colors.black,
+                                                          ))
+                                                    ])),
+                                                    value: i,
+                                                  ),
+                                              ],
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  _value = int.parse(
+                                                      value.toString());
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ));
-                },
-                text: 'Add Expenses'),
+                              actions: <Widget>[
+                                FlatButton(
+                                  color: Colors.black,
+                                  onPressed: () {
+                                    addExpenses(
+                                        item,
+                                        int.parse(qty),
+                                        int.parse(price),
+                                        box.read('expensesType'),
+                                        myName,
+                                        unit);
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text(
+                                    'Continue',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'QRegular',
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ));
+                  },
+                  text: 'Add Expenses'),
+            ),
             const SizedBox(
               height: 20,
             ),

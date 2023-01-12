@@ -128,17 +128,19 @@ class _WasteReportPageState extends State<WasteReportPage> {
     }
   }
 
-  late String name;
+  late String name = '';
 
-  late String type;
+  late String type = '';
 
-  late String date;
+  late String date = '';
 
-  late String content;
+  late String content = '';
 
-  late String updatedReport;
+  late String updatedReport = '';
 
-  late String username;
+  late String username = '';
+
+  late String qty = '';
 
   late String unit = 'pcs';
 
@@ -188,7 +190,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
 
                         final data = snapshot.requireData;
                         return ListView.builder(
-                            itemCount: 1,
+                            itemCount: data.size == 0 ? 0 : 1,
                             itemBuilder: (context, index) {
                               DateTime created =
                                   data.docs[index]['dateTime'].toDate();
@@ -261,7 +263,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                       ),
                                       DataColumn(
                                         label: TextBold(
-                                            text: 'Type',
+                                            text: 'Type - Qty',
                                             fontSize: 12,
                                             color: Colors.black),
                                       ),
@@ -276,7 +278,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                         DataRow(cells: [
                                           DataCell(
                                             TextRegular(
-                                                text: data.docs[i]['username'] +
+                                                text: data.docs[i]['myName'] +
                                                     ' on ' +
                                                     formattedTime,
                                                 fontSize: 12,
@@ -284,7 +286,9 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                           ),
                                           DataCell(
                                             TextRegular(
-                                                text: data.docs[i]['name'],
+                                                text: data.docs[i]['name'] +
+                                                    ' - ' +
+                                                    data.docs[i]['qty'],
                                                 fontSize: 12,
                                                 color: Colors.black),
                                           ),
@@ -382,6 +386,17 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                       ),
                                       onChanged: (_input) {
                                         type = _input;
+                                      },
+                                    ),
+                                    TextFormField(
+                                      decoration: InputDecoration(
+                                        label: TextRegular(
+                                            text: 'Quantity',
+                                            fontSize: 12,
+                                            color: Colors.black),
+                                      ),
+                                      onChanged: (_input) {
+                                        qty = _input;
                                       },
                                     ),
                                     TextFormField(
@@ -501,7 +516,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
                               color: Colors.black,
                               onPressed: () {
                                 addReport(name, type, date, content, imageURL,
-                                    myName, unit);
+                                    myName, unit, qty);
                                 Navigator.of(context).pop();
                               },
                               child: const Text(
