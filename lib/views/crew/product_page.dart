@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
@@ -12,6 +13,31 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  late String myName = '';
+
+  getData() async {
+    // Use provider
+    var collection = FirebaseFirestore.instance
+        .collection('Users')
+        .where('username', isEqualTo: box.read('username'));
+
+    var querySnapshot = await collection.get();
+    if (mounted) {
+      setState(() {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
+          Map<String, dynamic> data = queryDocumentSnapshot.data();
+          myName = data['name'];
+        }
+      });
+    }
+  }
+
   final box = GetStorage();
 
   late String item;
@@ -46,40 +72,40 @@ class _ProductPageState extends State<ProductPage> {
                   color: Colors.grey),
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
-          //   child: ListTile(
-          //     leading:
-          //         TextBold(text: 'Quantity', fontSize: 18, color: Colors.black),
-          //     trailing: SizedBox(
-          //       width: 200,
-          //       child: Row(
-          //         mainAxisAlignment: MainAxisAlignment.end,
-          //         children: [
-          //           IconButton(
-          //               onPressed: () {
-          //                 setState(() {
-          //                   if (qty == 0) {
-          //                   } else {
-          //                     qty--;
-          //                   }
-          //                 });
-          //               },
-          //               icon: const Icon(Icons.remove)),
-          //           TextBold(
-          //               text: qty.toString(), fontSize: 18, color: Colors.grey),
-          //           IconButton(
-          //               onPressed: () {
-          //                 setState(() {
-          //                   qty++;
-          //                 });
-          //               },
-          //               icon: const Icon(Icons.add)),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
+            child: ListTile(
+              leading:
+                  TextBold(text: 'Quantity', fontSize: 18, color: Colors.black),
+              trailing: SizedBox(
+                width: 200,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            if (qty == 0) {
+                            } else {
+                              qty--;
+                            }
+                          });
+                        },
+                        icon: const Icon(Icons.remove)),
+                    TextBold(
+                        text: qty.toString(), fontSize: 18, color: Colors.grey),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            qty++;
+                          });
+                        },
+                        icon: const Icon(Icons.add)),
+                  ],
+                ),
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
             child: ListTile(
@@ -95,7 +121,8 @@ class _ProductPageState extends State<ProductPage> {
           ButtonWidget(
               onPressed: () {
                 if (qty != 0) {
-                  addSales(box.read('productName'), box.read('productPrice'));
+                  addSales(box.read('productName'), box.read('productPrice'),
+                      qty, myName);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Added to Sales'),

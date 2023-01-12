@@ -91,10 +91,10 @@ class _AddProductPageState extends State<AddProductPage> {
     }
   }
 
-  late String price;
-  late String qty;
-  late String expireData;
-  late String productName;
+  late String price = '';
+  late String qty = '';
+  late String expireData = '';
+  late String productName = '';
 
   @override
   Widget build(BuildContext context) {

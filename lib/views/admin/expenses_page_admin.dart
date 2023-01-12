@@ -189,7 +189,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                   fontWeight: FontWeight.bold),
                             ),
                             content: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 StreamBuilder<QuerySnapshot>(
                                     stream: FirebaseFirestore.instance
@@ -217,50 +217,53 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                       }
 
                                       final data = snapshot.requireData;
-                                      return Expanded(
-                                        child: SizedBox(
-                                          child: ListView.builder(
-                                              itemCount:
-                                                  snapshot.data?.size ?? 0,
-                                              itemBuilder: (context, index) {
-                                                return ListTile(
-                                                  leading: TextBold(
-                                                      text: data.docs[index]
-                                                          ['item'],
-                                                      fontSize: 18,
-                                                      color: Colors.black),
-                                                  title: TextBold(
-                                                      text: data.docs[index]
-                                                                  ['qty']
-                                                              .toString() +
-                                                          'pcs',
-                                                      fontSize: 16,
-                                                      color: Colors.black),
-                                                  subtitle: TextRegular(
-                                                      text: 'Quantity',
-                                                      fontSize: 10,
-                                                      color: Colors.grey),
-                                                  trailing: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      TextBold(
-                                                          text: data.docs[index]
-                                                                      ['price']
-                                                                  .toString() +
-                                                              '.00',
-                                                          fontSize: 16,
-                                                          color: Colors.black),
-                                                      TextRegular(
-                                                          text: 'Price',
-                                                          fontSize: 10,
-                                                          color: Colors.grey),
-                                                    ],
-                                                  ),
-                                                );
-                                              }),
-                                        ),
+                                      return SingleChildScrollView(
+                                        child: DataTable(columns: [
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Name',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Quantity',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Price',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                        ], rows: [
+                                          for (int i = 0;
+                                              i < data.docs.length;
+                                              i++)
+                                            DataRow(cells: [
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['item'],
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['qty']
+                                                        .toString(),
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['price']
+                                                        .toString(),
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                            ]),
+                                        ]),
                                       );
                                     }),
                               ],
@@ -325,7 +328,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                   fontWeight: FontWeight.bold),
                             ),
                             content: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 StreamBuilder<QuerySnapshot>(
                                     stream: FirebaseFirestore.instance
@@ -353,50 +356,53 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                       }
 
                                       final data = snapshot.requireData;
-                                      return Expanded(
-                                        child: SizedBox(
-                                          child: ListView.builder(
-                                              itemCount:
-                                                  snapshot.data?.size ?? 0,
-                                              itemBuilder: (context, index) {
-                                                return ListTile(
-                                                  leading: TextBold(
-                                                      text: data.docs[index]
-                                                          ['item'],
-                                                      fontSize: 18,
-                                                      color: Colors.black),
-                                                  title: TextBold(
-                                                      text: data.docs[index]
-                                                                  ['qty']
-                                                              .toString() +
-                                                          'pcs',
-                                                      fontSize: 16,
-                                                      color: Colors.black),
-                                                  subtitle: TextRegular(
-                                                      text: 'Quantity',
-                                                      fontSize: 10,
-                                                      color: Colors.grey),
-                                                  trailing: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      TextBold(
-                                                          text: data.docs[index]
-                                                                      ['price']
-                                                                  .toString() +
-                                                              '.00',
-                                                          fontSize: 16,
-                                                          color: Colors.black),
-                                                      TextRegular(
-                                                          text: 'Price',
-                                                          fontSize: 10,
-                                                          color: Colors.grey),
-                                                    ],
-                                                  ),
-                                                );
-                                              }),
-                                        ),
+                                      return SingleChildScrollView(
+                                        child: DataTable(columns: [
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Name',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Quantity',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Price',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                        ], rows: [
+                                          for (int i = 0;
+                                              i < data.docs.length;
+                                              i++)
+                                            DataRow(cells: [
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['item'],
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['qty']
+                                                        .toString(),
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['price']
+                                                        .toString(),
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                            ]),
+                                        ]),
                                       );
                                     }),
                               ],
@@ -461,7 +467,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                   fontWeight: FontWeight.bold),
                             ),
                             content: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 StreamBuilder<QuerySnapshot>(
                                     stream: FirebaseFirestore.instance
@@ -489,50 +495,53 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                       }
 
                                       final data = snapshot.requireData;
-                                      return Expanded(
-                                        child: SizedBox(
-                                          child: ListView.builder(
-                                              itemCount:
-                                                  snapshot.data?.size ?? 0,
-                                              itemBuilder: (context, index) {
-                                                return ListTile(
-                                                  leading: TextBold(
-                                                      text: data.docs[index]
-                                                          ['item'],
-                                                      fontSize: 18,
-                                                      color: Colors.black),
-                                                  title: TextBold(
-                                                      text: data.docs[index]
-                                                                  ['qty']
-                                                              .toString() +
-                                                          'pcs',
-                                                      fontSize: 16,
-                                                      color: Colors.black),
-                                                  subtitle: TextRegular(
-                                                      text: 'Quantity',
-                                                      fontSize: 10,
-                                                      color: Colors.grey),
-                                                  trailing: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      TextBold(
-                                                          text: data.docs[index]
-                                                                      ['price']
-                                                                  .toString() +
-                                                              '.00',
-                                                          fontSize: 16,
-                                                          color: Colors.black),
-                                                      TextRegular(
-                                                          text: 'Price',
-                                                          fontSize: 10,
-                                                          color: Colors.grey),
-                                                    ],
-                                                  ),
-                                                );
-                                              }),
-                                        ),
+                                      return SingleChildScrollView(
+                                        child: DataTable(columns: [
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Name',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Quantity',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Price',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                        ], rows: [
+                                          for (int i = 0;
+                                              i < data.docs.length;
+                                              i++)
+                                            DataRow(cells: [
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['item'],
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['qty']
+                                                        .toString(),
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['price']
+                                                        .toString(),
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                            ]),
+                                        ]),
                                       );
                                     }),
                               ],
@@ -597,7 +606,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                   fontWeight: FontWeight.bold),
                             ),
                             content: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 StreamBuilder<QuerySnapshot>(
                                     stream: FirebaseFirestore.instance
@@ -625,50 +634,53 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                                       }
 
                                       final data = snapshot.requireData;
-                                      return Expanded(
-                                        child: SizedBox(
-                                          child: ListView.builder(
-                                              itemCount:
-                                                  snapshot.data?.size ?? 0,
-                                              itemBuilder: (context, index) {
-                                                return ListTile(
-                                                  leading: TextBold(
-                                                      text: data.docs[index]
-                                                          ['item'],
-                                                      fontSize: 18,
-                                                      color: Colors.black),
-                                                  title: TextBold(
-                                                      text: data.docs[index]
-                                                                  ['qty']
-                                                              .toString() +
-                                                          'pcs',
-                                                      fontSize: 16,
-                                                      color: Colors.black),
-                                                  subtitle: TextRegular(
-                                                      text: 'Quantity',
-                                                      fontSize: 10,
-                                                      color: Colors.grey),
-                                                  trailing: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      TextBold(
-                                                          text: data.docs[index]
-                                                                      ['price']
-                                                                  .toString() +
-                                                              '.00',
-                                                          fontSize: 16,
-                                                          color: Colors.black),
-                                                      TextRegular(
-                                                          text: 'Price',
-                                                          fontSize: 10,
-                                                          color: Colors.grey),
-                                                    ],
-                                                  ),
-                                                );
-                                              }),
-                                        ),
+                                      return SingleChildScrollView(
+                                        child: DataTable(columns: [
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Name',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Quantity',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                          DataColumn(
+                                            label: TextBold(
+                                                text: 'Price',
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                        ], rows: [
+                                          for (int i = 0;
+                                              i < data.docs.length;
+                                              i++)
+                                            DataRow(cells: [
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['item'],
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['qty']
+                                                        .toString(),
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              DataCell(
+                                                TextRegular(
+                                                    text: data.docs[i]['price']
+                                                        .toString(),
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                            ]),
+                                        ]),
                                       );
                                     }),
                               ],

@@ -177,11 +177,11 @@ class _POSPageState extends State<POSPage> {
                   height: 350,
                   child: Scrollbar(
                     child: ListView.builder(
-                        itemCount: 1,
+                        itemCount: data.size == 0 ? 0 : 1,
                         itemBuilder: ((context, index) {
                           items.add(data.docs[index]['item']);
                           myNames.add(data.docs[index]['myName']);
-                          qty.add(data.docs[index]['qty']);
+                          qty.add(data.docs[index]['qty'].toString());
                           price.add(data.docs[index]['price']);
                           return DataTable(
                               border: TableBorder.all(color: Colors.grey),
@@ -218,7 +218,8 @@ class _POSPageState extends State<POSPage> {
                                     ),
                                     DataCell(
                                       TextRegular(
-                                          text: data.docs[index]['qty'],
+                                          text: data.docs[index]['qty']
+                                              .toString(),
                                           fontSize: 12,
                                           color: Colors.grey),
                                     ),
@@ -227,8 +228,7 @@ class _POSPageState extends State<POSPage> {
                                           text: getTotal(
                                               int.parse(
                                                   data.docs[index]['price']),
-                                              int.parse(
-                                                  data.docs[index]['qty'])),
+                                              data.docs[index]['qty']),
                                           fontSize: 12,
                                           color: Colors.grey),
                                     ),
