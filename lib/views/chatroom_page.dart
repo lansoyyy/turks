@@ -47,7 +47,7 @@ class _ChatRoomState extends State<ChatRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppbarWidget('Banner Messaging'),
+      appBar: AppbarWidget('Banner Messages'),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

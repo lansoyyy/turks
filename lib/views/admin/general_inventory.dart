@@ -109,8 +109,8 @@ class GeneralInventory extends StatelessWidget {
           },
           child: Container(
             child: Center(
-                child: TextBold(
-                    text: 'Products', fontSize: 24, color: Colors.white)),
+                child:
+                    TextBold(text: 'Menu', fontSize: 24, color: Colors.white)),
             height: 50,
             width: 100,
             decoration: BoxDecoration(

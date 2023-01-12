@@ -51,7 +51,7 @@ class _MyDrawerState extends State<DrawerWidget> {
             ),
             ListTile(
               title: TextBold(
-                text: 'Banner Messasing',
+                text: 'Banner Messages',
                 fontSize: 12,
                 color: Colors.black,
               ),
@@ -69,7 +69,7 @@ class _MyDrawerState extends State<DrawerWidget> {
               //   icon: const Icon(Icons.add),
               // ),
               title: TextBold(
-                text: 'Products',
+                text: 'Menu',
                 fontSize: 12,
                 color: Colors.black,
               ),
