@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turks/utils/firebase_options.dart';
 import 'package:turks/views/admin/admin_home_page.dart';
-import 'package:turks/views/crew/crew_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
