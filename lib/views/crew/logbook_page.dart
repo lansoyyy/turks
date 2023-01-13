@@ -14,13 +14,13 @@ class LogbookPage extends StatefulWidget {
 }
 
 class _LogbookPageState extends State<LogbookPage> {
-  late String name;
+  late String name = '';
 
   late String date;
 
   late String time;
 
-  late String name1;
+  late String name1 = '';
 
   late String date1;
 
@@ -232,7 +232,7 @@ class _LogbookPageState extends State<LogbookPage> {
                                               FlatButton(
                                                 color: Colors.black,
                                                 onPressed: () {
-                                                  logIn(name, date, time);
+                                                  logIn(name);
                                                   Navigator.of(context).pop();
                                                 },
                                                 child: const Text(
@@ -443,7 +443,7 @@ class _LogbookPageState extends State<LogbookPage> {
                                               FlatButton(
                                                 color: Colors.black,
                                                 onPressed: () {
-                                                  logOut(name1, date1, time1);
+                                                  logOut(name1);
                                                   Navigator.of(context).pop();
                                                 },
                                                 child: const Text(
