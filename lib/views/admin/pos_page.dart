@@ -210,25 +210,23 @@ class _POSPageState extends State<POSPage> {
                                   DataRow(cells: [
                                     DataCell(
                                       TextRegular(
-                                          text: data.docs[index]['item'] +
+                                          text: data.docs[i]['item'] +
                                               ' ' +
-                                              data.docs[index]['price'],
+                                              data.docs[i]['price'],
                                           fontSize: 12,
                                           color: Colors.grey),
                                     ),
                                     DataCell(
                                       TextRegular(
-                                          text: data.docs[index]['qty']
-                                              .toString(),
+                                          text: data.docs[i]['qty'].toString(),
                                           fontSize: 12,
                                           color: Colors.grey),
                                     ),
                                     DataCell(
                                       TextRegular(
                                           text: getTotal(
-                                              int.parse(
-                                                  data.docs[index]['price']),
-                                              data.docs[index]['qty']),
+                                              int.parse(data.docs[i]['price']),
+                                              data.docs[i]['qty']),
                                           fontSize: 12,
                                           color: Colors.grey),
                                     ),

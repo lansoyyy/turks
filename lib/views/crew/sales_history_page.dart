@@ -68,19 +68,19 @@ class SalesHistoryPage extends StatelessWidget {
                               DataRow(cells: [
                                 DataCell(
                                   TextRegular(
-                                      text: data.docs[index]['item'],
+                                      text: data.docs[i]['item'],
                                       fontSize: 12,
                                       color: Colors.grey),
                                 ),
                                 DataCell(
                                   TextRegular(
-                                      text: data.docs[index]['qty'].toString(),
+                                      text: data.docs[i]['qty'].toString(),
                                       fontSize: 12,
                                       color: Colors.grey),
                                 ),
                                 DataCell(
                                   TextRegular(
-                                      text: data.docs[index]['price'],
+                                      text: data.docs[i]['price'],
                                       fontSize: 12,
                                       color: Colors.grey),
                                 ),
