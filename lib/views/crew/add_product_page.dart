@@ -11,6 +11,8 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
 
 class AddProductPage extends StatefulWidget {
+  const AddProductPage({Key? key}) : super(key: key);
+
   @override
   State<AddProductPage> createState() => _AddProductPageState();
 }
@@ -211,7 +213,7 @@ class _AddProductPageState extends State<AddProductPage> {
                             style: TextStyle(fontFamily: 'QRegular'),
                           ),
                           actions: <Widget>[
-                            FlatButton(
+                            MaterialButton(
                               onPressed: () {
                                 postProduct(productName, imageURL, price, qty,
                                     expireData);

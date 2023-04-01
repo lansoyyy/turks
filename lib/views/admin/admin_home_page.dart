@@ -187,7 +187,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             fontFamily: 'QBold', fontWeight: FontWeight.bold),
                       ),
                       actions: <Widget>[
-                        FlatButton(
+                        MaterialButton(
                           color: Colors.black,
                           onPressed: () {
                             box.write('createAccount', 'Admin');
@@ -203,7 +203,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                        FlatButton(
+                        MaterialButton(
                           color: Colors.red,
                           onPressed: () {
                             box.write('createAccount', 'Crew');
@@ -262,7 +262,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         style: TextStyle(fontFamily: 'QRegular'),
                       ),
                       actions: <Widget>[
-                        FlatButton(
+                        MaterialButton(
                           onPressed: () => Navigator.of(context).pop(true),
                           child: const Text(
                             'Close',
@@ -271,7 +271,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                        FlatButton(
+                        MaterialButton(
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(

@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:turks/views/admin/admin_home.dart';
 import 'package:turks/views/admin/admin_home_page.dart';
 import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LoginAdmin extends StatefulWidget {
+  const LoginAdmin({Key? key}) : super(key: key);
+
   @override
   State<LoginAdmin> createState() => _LoginAdminState();
 }
@@ -112,7 +113,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                                       const TextStyle(fontFamily: 'QRegular'),
                                 ),
                                 actions: <Widget>[
-                                  FlatButton(
+                                  MaterialButton(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
@@ -169,7 +170,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                               ],
                             ),
                             actions: <Widget>[
-                              FlatButton(
+                              MaterialButton(
                                 onPressed: () {
                                   print(myPassword);
                                   print(answer);
@@ -190,14 +191,14 @@ class _LoginAdminState extends State<LoginAdmin> {
                                                         fontFamily: 'QRegular'),
                                                   ),
                                                   actions: <Widget>[
-                                                    FlatButton(
+                                                    MaterialButton(
                                                       onPressed: () {
                                                         Navigator.of(context)
                                                             .pushReplacement(
                                                                 MaterialPageRoute(
                                                                     builder:
                                                                         (context) =>
-                                                                            LoginAdmin()));
+                                                                            const LoginAdmin()));
                                                       },
                                                       child: const Text(
                                                         'Continue',

@@ -189,7 +189,7 @@ class _LogbookPageState extends State<LogbookPage> {
                                                 color: Colors.black,
                                                 fontSize: 12),
                                             actions: <Widget>[
-                                              FlatButton(
+                                              MaterialButton(
                                                 onPressed: () =>
                                                     Navigator.of(context)
                                                         .pop(true),
@@ -229,7 +229,7 @@ class _LogbookPageState extends State<LogbookPage> {
                                               ),
                                             ),
                                             actions: <Widget>[
-                                              FlatButton(
+                                              MaterialButton(
                                                 color: Colors.black,
                                                 onPressed: () {
                                                   logIn(name);
@@ -400,7 +400,7 @@ class _LogbookPageState extends State<LogbookPage> {
                                                 color: Colors.black,
                                                 fontSize: 12),
                                             actions: <Widget>[
-                                              FlatButton(
+                                              MaterialButton(
                                                 onPressed: () =>
                                                     Navigator.of(context)
                                                         .pop(true),
@@ -440,7 +440,7 @@ class _LogbookPageState extends State<LogbookPage> {
                                               ),
                                             ),
                                             actions: <Widget>[
-                                              FlatButton(
+                                              MaterialButton(
                                                 color: Colors.black,
                                                 onPressed: () {
                                                   logOut(name1);

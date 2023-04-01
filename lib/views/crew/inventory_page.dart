@@ -8,6 +8,8 @@ import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
 class InventoryPage extends StatefulWidget {
+  const InventoryPage({Key? key}) : super(key: key);
+
   @override
   State<InventoryPage> createState() => _InventoryPageState();
 }
@@ -70,6 +72,8 @@ class _InventoryPageState extends State<InventoryPage> {
 }
 
 class InventoryType extends StatefulWidget {
+  const InventoryType({Key? key}) : super(key: key);
+
   @override
   State<InventoryType> createState() => _InventoryTypeState();
 }
@@ -291,7 +295,7 @@ class _InventoryTypeState extends State<InventoryType> {
                               ),
                             ),
                             actions: <Widget>[
-                              FlatButton(
+                              MaterialButton(
                                 color: Colors.black,
                                 onPressed: () {
                                   addInventory(item, qty, unit,

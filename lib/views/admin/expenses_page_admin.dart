@@ -4,6 +4,8 @@ import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 
 class ExpensesPageAdmin extends StatefulWidget {
+  const ExpensesPageAdmin({Key? key}) : super(key: key);
+
   @override
   State<ExpensesPageAdmin> createState() => _ExpensesPageAdminState();
 }
@@ -269,7 +271,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                               ],
                             ),
                             actions: <Widget>[
-                              FlatButton(
+                              MaterialButton(
                                 onPressed: () =>
                                     Navigator.of(context).pop(true),
                                 child: const Text(
@@ -408,7 +410,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                               ],
                             ),
                             actions: <Widget>[
-                              FlatButton(
+                              MaterialButton(
                                 onPressed: () =>
                                     Navigator.of(context).pop(true),
                                 child: const Text(
@@ -547,7 +549,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                               ],
                             ),
                             actions: <Widget>[
-                              FlatButton(
+                              MaterialButton(
                                 onPressed: () =>
                                     Navigator.of(context).pop(true),
                                 child: const Text(
@@ -686,7 +688,7 @@ class _ExpensesPageAdminState extends State<ExpensesPageAdmin> {
                               ],
                             ),
                             actions: <Widget>[
-                              FlatButton(
+                              MaterialButton(
                                 onPressed: () =>
                                     Navigator.of(context).pop(true),
                                 child: const Text(

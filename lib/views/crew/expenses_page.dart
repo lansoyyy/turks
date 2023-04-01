@@ -8,6 +8,8 @@ import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ExensesPage extends StatefulWidget {
+  const ExensesPage({Key? key}) : super(key: key);
+
   @override
   State<ExensesPage> createState() => _ExensesPageState();
 }
@@ -70,6 +72,8 @@ class _ExensesPageState extends State<ExensesPage> {
 }
 
 class ExpensesType extends StatefulWidget {
+  const ExpensesType({Key? key}) : super(key: key);
+
   @override
   State<ExpensesType> createState() => _ExpensesTypeState();
 }
@@ -345,7 +349,7 @@ class _ExpensesTypeState extends State<ExpensesType> {
                                 ),
                               ),
                               actions: <Widget>[
-                                FlatButton(
+                                MaterialButton(
                                   color: Colors.black,
                                   onPressed: () {
                                     addExpenses(

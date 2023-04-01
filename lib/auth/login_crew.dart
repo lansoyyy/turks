@@ -7,6 +7,8 @@ import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LoginCrew extends StatefulWidget {
+  const LoginCrew({Key? key}) : super(key: key);
+
   @override
   State<LoginCrew> createState() => _LoginCrewState();
 }
@@ -109,7 +111,7 @@ class _LoginCrewState extends State<LoginCrew> {
                                       const TextStyle(fontFamily: 'QRegular'),
                                 ),
                                 actions: <Widget>[
-                                  FlatButton(
+                                  MaterialButton(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
@@ -166,7 +168,7 @@ class _LoginCrewState extends State<LoginCrew> {
                               ],
                             ),
                             actions: <Widget>[
-                              FlatButton(
+                              MaterialButton(
                                 onPressed: () {
                                   try {
                                     hasLoaded
@@ -185,7 +187,7 @@ class _LoginCrewState extends State<LoginCrew> {
                                                         fontFamily: 'QRegular'),
                                                   ),
                                                   actions: <Widget>[
-                                                    FlatButton(
+                                                    MaterialButton(
                                                       onPressed: () {
                                                         Navigator.of(context)
                                                             .pushReplacement(

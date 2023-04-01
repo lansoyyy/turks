@@ -12,6 +12,8 @@ import 'inventory_page.dart';
 class AdminHome extends StatelessWidget {
   final box = GetStorage();
 
+  AdminHome({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +89,7 @@ class AdminHome extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                               ),
                               actions: <Widget>[
-                                FlatButton(
+                                MaterialButton(
                                   color: Colors.black,
                                   onPressed: () {
                                     box.write('createAccount', 'Admin');
@@ -104,7 +106,7 @@ class AdminHome extends StatelessWidget {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                FlatButton(
+                                MaterialButton(
                                   color: Colors.red,
                                   onPressed: () {
                                     box.write('createAccount', 'Crew');
@@ -144,7 +146,7 @@ class AdminHome extends StatelessWidget {
                                 style: TextStyle(fontFamily: 'QRegular'),
                               ),
                               actions: <Widget>[
-                                FlatButton(
+                                MaterialButton(
                                   onPressed: () =>
                                       Navigator.of(context).pop(true),
                                   child: const Text(
@@ -154,7 +156,7 @@ class AdminHome extends StatelessWidget {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                FlatButton(
+                                MaterialButton(
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(

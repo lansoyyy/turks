@@ -15,6 +15,8 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
 
 class WasteReportPage extends StatefulWidget {
+  const WasteReportPage({Key? key}) : super(key: key);
+
   @override
   State<WasteReportPage> createState() => _WasteReportPageState();
 }
@@ -216,7 +218,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                                 },
                                               ),
                                               actions: <Widget>[
-                                                FlatButton(
+                                                MaterialButton(
                                                   onPressed: () =>
                                                       Navigator.of(context)
                                                           .pop(true),
@@ -228,7 +230,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                                             FontWeight.bold),
                                                   ),
                                                 ),
-                                                FlatButton(
+                                                MaterialButton(
                                                   color: Colors.black,
                                                   onPressed: () {
                                                     FirebaseFirestore.instance
@@ -512,7 +514,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
                             ),
                           ),
                           actions: <Widget>[
-                            FlatButton(
+                            MaterialButton(
                               color: Colors.black,
                               onPressed: () {
                                 addReport(name, type, date, content, imageURL,

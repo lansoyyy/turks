@@ -17,6 +17,8 @@ class CreateAccountPage extends StatelessWidget {
 
   final box = GetStorage();
 
+  CreateAccountPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,7 +102,7 @@ class CreateAccountPage extends StatelessWidget {
                             builder: (context) {
                               return AlertDialog(
                                 actions: [
-                                  FlatButton(
+                                  MaterialButton(
                                     onPressed: () {
                                       showDialog(
                                           context: context,
@@ -112,7 +114,7 @@ class CreateAccountPage extends StatelessWidget {
                                                       fontFamily: 'QRegular'),
                                                 ),
                                                 actions: <Widget>[
-                                                  FlatButton(
+                                                  MaterialButton(
                                                     onPressed: () async {
                                                       if (box.read(
                                                               'createAccount') ==
@@ -141,7 +143,7 @@ class CreateAccountPage extends StatelessWidget {
                                                                         ),
                                                                         actions: <
                                                                             Widget>[
-                                                                          FlatButton(
+                                                                          MaterialButton(
                                                                             onPressed:
                                                                                 () {
                                                                               Navigator.of(context).pop();
@@ -221,7 +223,7 @@ class CreateAccountPage extends StatelessWidget {
                                     style: TextStyle(fontFamily: 'QRegular'),
                                   ),
                                   actions: <Widget>[
-                                    FlatButton(
+                                    MaterialButton(
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
@@ -244,7 +246,7 @@ class CreateAccountPage extends StatelessWidget {
                                   style: TextStyle(fontFamily: 'QRegular'),
                                 ),
                                 actions: <Widget>[
-                                  FlatButton(
+                                  MaterialButton(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
