@@ -14,6 +14,8 @@ import 'package:printing/printing.dart';
 import '../../widgets/button_widget.dart';
 
 class POSPage extends StatefulWidget {
+  const POSPage({super.key});
+
   @override
   State<POSPage> createState() => _POSPageState();
 }
