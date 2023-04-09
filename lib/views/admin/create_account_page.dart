@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turks/services/cloud_function/add_user.dart';
-import 'package:turks/views/admin/admin_home.dart';
 import 'package:turks/views/admin/admin_home_page.dart';
 import 'package:turks/widgets/appbar_widget.dart';
 import 'package:turks/widgets/button_widget.dart';
@@ -204,7 +203,8 @@ class CreateAccountPage extends StatelessWidget {
                                   ),
                                 ],
                                 title: TextRegular(
-                                    text: "Enter $name Father's birthday",
+                                    text:
+                                        "Enter $name security code or phrasey",
                                     fontSize: 14,
                                     color: Colors.black),
                                 content: TextFormField(

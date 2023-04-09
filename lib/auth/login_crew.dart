@@ -160,7 +160,7 @@ class _LoginCrewState extends State<LoginCrew> {
                                   },
                                   decoration: InputDecoration(
                                     label: TextRegular(
-                                        text: "Enter your father's birthday",
+                                        text: "Enter security code or phrase",
                                         fontSize: 12,
                                         color: Colors.black),
                                   ),
