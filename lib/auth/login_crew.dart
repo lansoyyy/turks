@@ -194,7 +194,7 @@ class _LoginCrewState extends State<LoginCrew> {
                                                                 MaterialPageRoute(
                                                                     builder:
                                                                         (context) =>
-                                                                            LoginCrew()));
+                                                                            const LoginCrew()));
                                                       },
                                                       child: const Text(
                                                         'Continue',
@@ -226,7 +226,7 @@ class _LoginCrewState extends State<LoginCrew> {
                           ));
                 },
                 child: TextBold(
-                    text: 'Forgot Password?',
+                    text: 'Recover Password?',
                     fontSize: 12,
                     color: Colors.black),
               ),

@@ -230,7 +230,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                           ));
                 },
                 child: TextBold(
-                    text: 'Forgot Password?',
+                    text: 'Recover Password?',
                     fontSize: 12,
                     color: Colors.black),
               ),
