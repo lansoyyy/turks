@@ -12,6 +12,8 @@ import 'package:printing/printing.dart';
 import 'dart:io';
 
 class LogbookAdmin extends StatefulWidget {
+  const LogbookAdmin({super.key});
+
   @override
   State<LogbookAdmin> createState() => _LogbookAdminState();
 }
@@ -260,7 +262,8 @@ class _LogbookAdminState extends State<LogbookAdmin> {
                                           data.docs[index]['dateTime'].toDate();
 
                                       String formattedTime =
-                                          DateFormat.yMMMd().format(created);
+                                          DateFormat('MMM/d/yyy - hh:mm a')
+                                              .format(created);
                                       String formattedTime1 =
                                           DateFormat.j().format(created);
                                       name.add(data.docs[index]['name']);
@@ -340,7 +343,8 @@ class _LogbookAdminState extends State<LogbookAdmin> {
                                           data.docs[index]['dateTime'].toDate();
 
                                       String formattedTime =
-                                          DateFormat.yMMMd().format(created);
+                                          DateFormat('MMM/d/yyy - hh:mm a')
+                                              .format(created);
                                       String formattedTime1 =
                                           DateFormat.j().format(created);
                                       name1.add(data.docs[index]['name']);
