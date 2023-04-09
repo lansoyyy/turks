@@ -25,11 +25,27 @@ class _POSPageState extends State<POSPage> {
   void initState() {
     super.initState();
     getData();
+    getTotal1();
+  }
+
+  getTotal1() {
+    FirebaseFirestore.instance
+        .collection('Sales')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      for (var doc in querySnapshot.docs) {
+        setState(() {
+          prices.add(int.parse(getTotal(int.parse(doc['price']), doc['qty'])));
+        });
+      }
+    });
   }
 
   final box = GetStorage();
 
   late String myName = '';
+
+  List<int> prices = [];
 
   getData() async {
     // Use provider
@@ -240,6 +256,14 @@ class _POSPageState extends State<POSPage> {
               }),
           const SizedBox(
             height: 30,
+          ),
+          TextBold(
+              text:
+                  'Total Sales:     ₱${prices.reduce((sum, price) => sum + price)}',
+              fontSize: 18,
+              color: Colors.black),
+          const SizedBox(
+            height: 20,
           ),
           const Expanded(
             child: SizedBox(
