@@ -124,6 +124,10 @@ class _POSPageState extends State<POSPage> {
                   ),
               ],
             ),
+            pw.SizedBox(height: 30),
+            pw.Text(
+              'Total Sales:     ₱${prices.reduce((sum, price) => sum + price)}',
+            ),
             pw.SizedBox(height: 75),
             pw.Align(
               alignment: pw.Alignment.bottomRight,
