@@ -29,6 +29,9 @@ class _AddProductPageState extends State<AddProductPage> {
 
   late String imageURL = '';
 
+  int dropValue = 0;
+  String type = 'Food';
+
   Future<void> uploadPicture(String inputSource) async {
     final picker = ImagePicker();
     XFile pickedImage;
@@ -189,7 +192,7 @@ class _AddProductPageState extends State<AddProductPage> {
           //   ),
           // ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(50, 5, 50, 50),
+            padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
             child: TextFormField(
               onChanged: (_input) {
                 expireData = _input;
@@ -202,6 +205,46 @@ class _AddProductPageState extends State<AddProductPage> {
               ),
             ),
           ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 30),
+              child: SizedBox(
+                width: 250,
+                child: DropdownButton(
+                    value: dropValue,
+                    items: [
+                      DropdownMenuItem(
+                        onTap: () {
+                          setState(() {
+                            type = 'Food';
+                          });
+                        },
+                        value: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 50),
+                          child: TextRegular(
+                              text: 'Food', fontSize: 16, color: Colors.black),
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        onTap: () {
+                          setState(() {
+                            type = 'Drink';
+                          });
+                        },
+                        value: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 50),
+                          child: TextRegular(
+                              text: 'Drink', fontSize: 16, color: Colors.black),
+                        ),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        dropValue = int.parse(value.toString());
+                      });
+                    }),
+              )),
           ButtonWidget(
               onPressed: () {
                 showDialog(
@@ -216,7 +259,7 @@ class _AddProductPageState extends State<AddProductPage> {
                             MaterialButton(
                               onPressed: () {
                                 postProduct(productName, imageURL, price, qty,
-                                    expireData);
+                                    expireData, type);
                                 Navigator.of(context).pop();
                                 Navigator.of(context).pop();
                               },
