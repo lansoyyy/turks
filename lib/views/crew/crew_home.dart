@@ -9,6 +9,8 @@ import 'package:get_storage/get_storage.dart';
 class CrewHome extends StatelessWidget {
   final box = GetStorage();
 
+  CrewHome({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +27,34 @@ class CrewHome extends StatelessWidget {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const NotifPage()));
               },
-              icon: const Icon(Icons.notifications),
+              icon: Badge(
+                  label: StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('Chat')
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          print('error');
+                          return const Center(child: Text('Error'));
+                        }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          print('waiting');
+                          return const Padding(
+                            padding: EdgeInsets.only(top: 50),
+                            child: Center(
+                                child: CircularProgressIndicator(
+                              color: Colors.black,
+                            )),
+                          );
+                        }
+                        final data = snapshot.requireData;
+                        return TextRegular(
+                            text: data.docs.length.toString(),
+                            fontSize: 12,
+                            color: Colors.white);
+                      }),
+                  child: const Icon(Icons.notifications)),
             ),
           ],
         ),
