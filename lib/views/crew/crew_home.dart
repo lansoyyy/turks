@@ -6,10 +6,18 @@ import 'package:turks/widgets/drawer_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
-class CrewHome extends StatelessWidget {
+class CrewHome extends StatefulWidget {
+  const CrewHome({super.key});
+
+  @override
+  State<CrewHome> createState() => _CrewHomeState();
+}
+
+class _CrewHomeState extends State<CrewHome> {
   final box = GetStorage();
 
-  CrewHome({super.key});
+  int dropValue = 0;
+  String type = 'Food';
 
   @override
   Widget build(BuildContext context) {
@@ -58,52 +66,109 @@ class CrewHome extends StatelessWidget {
             ),
           ],
         ),
-        body: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('Products')
-                .orderBy('dateTime')
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                print('error');
-                return const Center(child: Text('Error'));
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                print('waiting');
-                return const Padding(
-                  padding: EdgeInsets.only(top: 50),
-                  child: Center(
-                      child: CircularProgressIndicator(
-                    color: Colors.black,
-                  )),
-                );
-              }
-              final data = snapshot.requireData;
-              return GridView.builder(
-                  itemCount: snapshot.data?.size ?? 0,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        box.write('productPrice', data.docs[index]['price']);
-                        box.write('productURL', data.docs[index]['url']);
-                        box.write('productQty', data.docs[index]['qty']);
+        body: Column(
+          children: [
+            Padding(
+                padding: const EdgeInsets.fromLTRB(10, 5, 10, 20),
+                child: SizedBox(
+                  width: 250,
+                  child: DropdownButton(
+                      value: dropValue,
+                      items: [
+                        DropdownMenuItem(
+                          onTap: () {
+                            setState(() {
+                              type = 'Food';
+                            });
+                          },
+                          value: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 150),
+                            child: TextRegular(
+                                text: 'Food',
+                                fontSize: 16,
+                                color: Colors.black),
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          onTap: () {
+                            setState(() {
+                              type = 'Drink';
+                            });
+                          },
+                          value: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 50),
+                            child: TextRegular(
+                                text: 'Drink',
+                                fontSize: 16,
+                                color: Colors.black),
+                          ),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          dropValue = int.parse(value.toString());
+                        });
+                      }),
+                )),
+            Expanded(
+              child: SizedBox(
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('Products')
+                        .where('type', isEqualTo: type)
+                        .orderBy('dateTime')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        print('error');
+                        return const Center(child: Text('Error'));
+                      }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        print('waiting');
+                        return const Padding(
+                          padding: EdgeInsets.only(top: 50),
+                          child: Center(
+                              child: CircularProgressIndicator(
+                            color: Colors.black,
+                          )),
+                        );
+                      }
+                      final data = snapshot.requireData;
+                      return GridView.builder(
+                          itemCount: data.docs.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                          ),
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                box.write(
+                                    'productPrice', data.docs[index]['price']);
+                                box.write(
+                                    'productURL', data.docs[index]['url']);
+                                box.write(
+                                    'productQty', data.docs[index]['qty']);
 
-                        box.write(
-                            'productExDate', data.docs[index]['expireDate']);
-                        box.write(
-                            'productName', data.docs[index]['productName']);
+                                box.write('productExDate',
+                                    data.docs[index]['expireDate']);
+                                box.write('productName',
+                                    data.docs[index]['productName']);
 
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ProductPage()));
-                      },
-                      child: Image.network(
-                        data.docs[index]['url'],
-                      ),
-                    );
-                  });
-            }));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ProductPage()));
+                              },
+                              child: Image.network(
+                                data.docs[index]['url'],
+                              ),
+                            );
+                          });
+                    }),
+              ),
+            ),
+          ],
+        ));
   }
 }
