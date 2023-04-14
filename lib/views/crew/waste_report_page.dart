@@ -191,17 +191,43 @@ class _WasteReportPageState extends State<WasteReportPage> {
                         }
 
                         final data = snapshot.requireData;
-                        return ListView.builder(
-                            itemCount: data.size == 0 ? 0 : 1,
-                            itemBuilder: (context, index) {
-                              DateTime created =
-                                  data.docs[index]['dateTime'].toDate();
-
-                              String formattedTime =
-                                  DateFormat.yMMMd().format(created);
-                              return GestureDetector(
-                                  onDoubleTap: () {
-                                    showDialog(
+                        return SingleChildScrollView(
+                          child: DataTable(columns: [
+                            DataColumn(
+                              label: TextBold(
+                                  text: 'Crew\nName - Date',
+                                  fontSize: 12,
+                                  color: Colors.black),
+                            ),
+                            DataColumn(
+                              label: TextBold(
+                                  text: 'Type - Qty',
+                                  fontSize: 12,
+                                  color: Colors.black),
+                            ),
+                            DataColumn(
+                              label: TextBold(
+                                  text: 'Concern',
+                                  fontSize: 12,
+                                  color: Colors.black),
+                            ),
+                          ], rows: [
+                            for (int i = 0; i < data.docs.length; i++)
+                              DataRow(cells: [
+                                DataCell(
+                                  TextRegular(
+                                      text: data.docs[i]['myName'] +
+                                          ' on ' +
+                                          DateFormat.yMMMd().format(data.docs[i]
+                                                  ['dateTime']
+                                              .toDate()),
+                                      fontSize: 12,
+                                      color: Colors.black),
+                                ),
+                                DataCell(
+                                  GestureDetector(
+                                    onTap: () {
+                                      showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
                                               title: const Text(
@@ -237,7 +263,7 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                                         .collection(
                                                             'Waste Reports')
                                                         .doc(
-                                                            data.docs[index].id)
+                                                            data.docs[i].id)
                                                         .update({
                                                       'content': updatedReport,
                                                     });
@@ -254,99 +280,24 @@ class _WasteReportPageState extends State<WasteReportPage> {
                                                 ),
                                               ],
                                             ));
-                                  },
-                                  child: SingleChildScrollView(
-                                    child: DataTable(columns: [
-                                      DataColumn(
-                                        label: TextBold(
-                                            text: 'Crew\nName - Date',
-                                            fontSize: 12,
-                                            color: Colors.black),
-                                      ),
-                                      DataColumn(
-                                        label: TextBold(
-                                            text: 'Type - Qty',
-                                            fontSize: 12,
-                                            color: Colors.black),
-                                      ),
-                                      DataColumn(
-                                        label: TextBold(
-                                            text: 'Concern',
-                                            fontSize: 12,
-                                            color: Colors.black),
-                                      ),
-                                    ], rows: [
-                                      for (int i = 0; i < data.docs.length; i++)
-                                        DataRow(cells: [
-                                          DataCell(
-                                            TextRegular(
-                                                text: data.docs[i]['myName'] +
-                                                    ' on ' +
-                                                    formattedTime,
-                                                fontSize: 12,
-                                                color: Colors.black),
-                                          ),
-                                          DataCell(
-                                            TextRegular(
-                                                text: data.docs[i]['name'] +
-                                                    ' - ' +
-                                                    data.docs[i]['qty'],
-                                                fontSize: 12,
-                                                color: Colors.black),
-                                          ),
-                                          DataCell(
-                                            TextRegular(
-                                                text: data.docs[i]['content'],
-                                                fontSize: 12,
-                                                color: Colors.black),
-                                          ),
-                                        ]),
-                                    ]),
-                                  )
-                                  // ExpansionTile(
-                                  //   children: [
-                                  //     TextRegular(
-                                  //         text: data.docs[index]['content'],
-                                  //         fontSize: 12,
-                                  //         color: Colors.black),
-                                  //     const SizedBox(
-                                  //       height: 10,
-                                  //     ),
-                                  //     Image.network(data.docs[index]['url'],
-                                  //         height: 100),
-                                  //     const SizedBox(
-                                  //       height: 20,
-                                  //     ),
-                                  //   ],
-                                  //   title: TextBold(
-                                  //       text: data.docs[index]['type'],
-                                  //       fontSize: 18,
-                                  //       color: Colors.black),
-                                  //   trailing: TextRegular(
-                                  //       text: formattedTime,
-                                  //       fontSize: 12,
-                                  //       color: Colors.black),
-                                  //   subtitle: Column(
-                                  //     crossAxisAlignment:
-                                  //         CrossAxisAlignment.start,
-                                  //     children: [
-                                  //       TextRegular(
-                                  //           text: data.docs[index]['name'],
-                                  //           fontSize: 12,
-                                  //           color: Colors.black),
-                                  //       const SizedBox(
-                                  //         height: 10,
-                                  //       ),
-                                  //       // TextRegular(
-                                  //       //     text: "Generated by: " +
-                                  //       //         data.docs[index]['username'],
-                                  //       //     fontSize: 10,
-                                  //       //     color: Colors.black),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  );
-                            });
+                                    },
+                                    child: TextRegular(
+                                        text: data.docs[i]['name'] +
+                                            ' - ' +
+                                            data.docs[i]['qty'],
+                                        fontSize: 12,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                                DataCell(
+                                  TextRegular(
+                                      text: data.docs[i]['content'],
+                                      fontSize: 12,
+                                      color: Colors.black),
+                                ),
+                              ]),
+                          ]),
+                        );
                       }),
                 ),
               ),

@@ -30,8 +30,8 @@ class _InventoryPageState extends State<InventoryPage> {
             ButtonWidget(
                 onPressed: () {
                   box.write('inventoryType', 'Ingredients');
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => InventoryType()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const InventoryType()));
                 },
                 text: 'Ingredients'),
             const SizedBox(
@@ -40,8 +40,8 @@ class _InventoryPageState extends State<InventoryPage> {
             ButtonWidget(
                 onPressed: () {
                   box.write('inventoryType', 'Drinks');
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => InventoryType()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const InventoryType()));
                 },
                 text: 'Drinks'),
             const SizedBox(
@@ -50,8 +50,8 @@ class _InventoryPageState extends State<InventoryPage> {
             ButtonWidget(
                 onPressed: () {
                   box.write('inventoryType', 'Bags');
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => InventoryType()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const InventoryType()));
                 },
                 text: 'Bags'),
             const SizedBox(
@@ -60,8 +60,8 @@ class _InventoryPageState extends State<InventoryPage> {
             ButtonWidget(
                 onPressed: () {
                   box.write('inventoryType', 'Cups');
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => InventoryType()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const InventoryType()));
                 },
                 text: 'Cups'),
           ],
@@ -121,201 +121,219 @@ class _InventoryTypeState extends State<InventoryType> {
     return Scaffold(
       appBar: AppbarWidget(box.read('inventoryType')),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
           children: [
-            StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('Inventory')
-                    // .where('type', isEqualTo: box.read('inventoryType'))
-                    .orderBy('dateTime')
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasError) {
-                    print('error');
-                    return const Center(child: Text('Error'));
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    print('waiting');
-                    return const Padding(
-                      padding: EdgeInsets.only(top: 50),
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: Colors.blue,
-                      )),
-                    );
-                  }
+            Center(
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Inventory')
+                      .where('type', isEqualTo: box.read('inventoryType'))
+                      .orderBy('dateTime')
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      print('error');
+                      return const Center(child: Text('Error'));
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      print('waiting');
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 50),
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: Colors.blue,
+                        )),
+                      );
+                    }
 
-                  final data = snapshot.requireData;
-                  return Expanded(
-                    child: SizedBox(
-                      child: ListView.builder(
-                        itemCount: 1,
-                        itemBuilder: ((context, index) {
-                          return DataTable(
-                              border: TableBorder.all(color: Colors.grey),
-                              columns: [
-                                DataColumn(
-                                  label: TextBold(
-                                      text: 'Item',
-                                      fontSize: 14,
-                                      color: Colors.black),
-                                ),
-                                DataColumn(
-                                  label: TextBold(
-                                      text: 'Quantity',
-                                      fontSize: 14,
-                                      color: Colors.black),
-                                ),
-                                DataColumn(
-                                  label: TextBold(
-                                      text: 'Unit',
-                                      fontSize: 14,
-                                      color: Colors.black),
-                                ),
-                              ],
-                              rows: [
-                                for (int i = 0; i < snapshot.data!.size; i++)
-                                  DataRow(cells: [
-                                    DataCell(
-                                      TextRegular(
-                                          text: data.docs[index]['item'],
-                                          fontSize: 12,
-                                          color: Colors.grey),
-                                    ),
-                                    DataCell(
-                                      TextRegular(
-                                          text: data.docs[index]['qty'],
-                                          fontSize: 12,
-                                          color: Colors.grey),
-                                    ),
-                                    DataCell(
-                                      TextRegular(
-                                          text: data.docs[index]['unit'],
-                                          fontSize: 12,
-                                          color: Colors.grey),
-                                    ),
-                                  ])
-                              ]);
-                        }),
-                      ),
-                    ),
-                  );
-                }),
-            ButtonWidget(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            title: const Text(
-                              'Adding to Inventory',
-                              style: TextStyle(
-                                  fontFamily: 'QBold',
-                                  fontWeight: FontWeight.bold),
+                    final data = snapshot.requireData;
+                    return SingleChildScrollView(
+                      child: DataTable(
+                          border: TableBorder.all(color: Colors.grey),
+                          columns: [
+                            DataColumn(
+                              label: TextBold(
+                                  text: 'Item',
+                                  fontSize: 14,
+                                  color: Colors.black),
                             ),
-                            content: SizedBox(
-                              height: 200,
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                      label: TextRegular(
-                                          text: 'Item',
-                                          fontSize: 12,
-                                          color: Colors.black),
-                                    ),
-                                    onChanged: (_input) {
-                                      item = _input;
-                                    },
-                                  ),
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                      label: TextRegular(
-                                          text: 'Quantity',
-                                          fontSize: 12,
-                                          color: Colors.black),
-                                    ),
-                                    onChanged: (_input) {
-                                      qty = _input;
-                                    },
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  StatefulBuilder(
-                                    builder: ((context, setState) {
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          borderRadius:
-                                              BorderRadius.circular(5),
+                            DataColumn(
+                              label: TextBold(
+                                  text: 'Quantity',
+                                  fontSize: 14,
+                                  color: Colors.black),
+                            ),
+                            DataColumn(
+                              label: TextBold(
+                                  text: 'Unit',
+                                  fontSize: 14,
+                                  color: Colors.black),
+                            ),
+                          ],
+                          rows: [
+                            for (int i = 0; i < snapshot.data!.size; i++)
+                              DataRow(cells: [
+                                DataCell(
+                                  TextRegular(
+                                      text: data.docs[i]['item'],
+                                      fontSize: 12,
+                                      color: Colors.grey),
+                                ),
+                                DataCell(
+                                  TextRegular(
+                                      text: data.docs[i]['qty'],
+                                      fontSize: 12,
+                                      color: Colors.grey),
+                                ),
+                                DataCell(
+                                  TextRegular(
+                                      text: data.docs[i]['unit'],
+                                      fontSize: 12,
+                                      color: Colors.grey),
+                                ),
+                              ])
+                          ]),
+                    );
+                  }),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Center(
+                      child: ButtonWidget(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      title: const Text(
+                                        'Adding to Inventory',
+                                        style: TextStyle(
+                                            fontFamily: 'QBold',
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      content: SizedBox(
+                                        height: 200,
+                                        child: Column(
+                                          children: [
+                                            TextFormField(
+                                              decoration: InputDecoration(
+                                                label: TextRegular(
+                                                    text: 'Item',
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              onChanged: (_input) {
+                                                item = _input;
+                                              },
+                                            ),
+                                            TextFormField(
+                                              decoration: InputDecoration(
+                                                label: TextRegular(
+                                                    text: 'Quantity',
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              onChanged: (_input) {
+                                                qty = _input;
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
+                                            StatefulBuilder(
+                                              builder: ((context, setState) {
+                                                return Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.grey[200],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(20, 2, 20, 2),
+                                                    child: DropdownButton(
+                                                      underline: Container(
+                                                          color: Colors
+                                                              .transparent),
+                                                      iconEnabledColor:
+                                                          Colors.black,
+                                                      isExpanded: true,
+                                                      value: _value,
+                                                      items: [
+                                                        for (int i = 0;
+                                                            i < unitList.length;
+                                                            i++)
+                                                          DropdownMenuItem(
+                                                            onTap: () {
+                                                              unit =
+                                                                  unitList[i];
+                                                            },
+                                                            child: Center(
+                                                                child: Row(
+                                                                    children: [
+                                                                  Text(
+                                                                      "Unit: " +
+                                                                          unitList[
+                                                                              i],
+                                                                      style:
+                                                                          const TextStyle(
+                                                                        fontFamily:
+                                                                            'QRegular',
+                                                                        color: Colors
+                                                                            .black,
+                                                                      ))
+                                                                ])),
+                                                            value: i,
+                                                          ),
+                                                      ],
+                                                      onChanged: (value) {
+                                                        setState(() {
+                                                          _value = int.parse(
+                                                              value.toString());
+                                                        });
+                                                      },
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                            ),
+                                          ],
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              20, 2, 20, 2),
-                                          child: DropdownButton(
-                                            underline: Container(
-                                                color: Colors.transparent),
-                                            iconEnabledColor: Colors.black,
-                                            isExpanded: true,
-                                            value: _value,
-                                            items: [
-                                              for (int i = 0;
-                                                  i < unitList.length;
-                                                  i++)
-                                                DropdownMenuItem(
-                                                  onTap: () {
-                                                    unit = unitList[i];
-                                                  },
-                                                  child: Center(
-                                                      child: Row(children: [
-                                                    Text("Unit: " + unitList[i],
-                                                        style: const TextStyle(
-                                                          fontFamily:
-                                                              'QRegular',
-                                                          color: Colors.black,
-                                                        ))
-                                                  ])),
-                                                  value: i,
-                                                ),
-                                            ],
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _value =
-                                                    int.parse(value.toString());
-                                              });
-                                            },
+                                      ),
+                                      actions: <Widget>[
+                                        MaterialButton(
+                                          color: Colors.black,
+                                          onPressed: () {
+                                            addInventory(
+                                                item,
+                                                qty,
+                                                unit,
+                                                box.read('inventoryType'),
+                                                myName);
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text(
+                                            'Continue',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: 'QRegular',
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
-                                      );
-                                    }),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            actions: <Widget>[
-                              MaterialButton(
-                                color: Colors.black,
-                                onPressed: () {
-                                  addInventory(item, qty, unit,
-                                      box.read('inventoryType'), myName);
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text(
-                                  'Continue',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'QRegular',
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ));
-                },
-                text: 'Add Inventory'),
-            const SizedBox(
-              height: 20,
+                                      ],
+                                    ));
+                          },
+                          text: 'Add Inventory'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
