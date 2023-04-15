@@ -13,6 +13,8 @@ import '../../widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
 class InventoryTypeAdmin extends StatefulWidget {
+  const InventoryTypeAdmin({Key? key}) : super(key: key);
+
   @override
   State<InventoryTypeAdmin> createState() => _InventoryTypeAdminState();
 }
@@ -86,9 +88,7 @@ class _InventoryTypeAdminState extends State<InventoryTypeAdmin> {
     //   ),
     // ); // Page
 
-    final image = await imageFromAssetBundle(
-      'assets/images/T turks logo.png',
-    );
+    final image = await imageFromAssetBundle('assets/images/TURKS PNG.png');
     doc.addPage(
       pw.Page(
         build: ((context) {

@@ -10,10 +10,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
-
 import '../../widgets/button_widget.dart';
 
 class WasteReportPageAdmin extends StatefulWidget {
+  const WasteReportPageAdmin({Key? key}) : super(key: key);
+
   @override
   State<WasteReportPageAdmin> createState() => _WasteReportPageAdminState();
 }
@@ -64,9 +65,7 @@ class _WasteReportPageAdminState extends State<WasteReportPageAdmin> {
     /// for using an image from assets
     // final image = await imageFromAssetBundle('assets/image.png');
 
-    final image = await imageFromAssetBundle(
-      'assets/images/T turks logo.png',
-    );
+    final image = await imageFromAssetBundle('assets/images/TURKS PNG.png');
 
     doc.addPage(
       pw.Page(

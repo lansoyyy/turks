@@ -83,9 +83,7 @@ class _POSPageState extends State<POSPage> {
     /// for using an image from assets
     // final image = await imageFromAssetBundle('assets/image.png');
 
-    final image = await imageFromAssetBundle(
-      'assets/images/T turks logo.png',
-    );
+    final image = await imageFromAssetBundle('assets/images/TURKS PNG.png');
 
     doc.addPage(
       pw.Page(
