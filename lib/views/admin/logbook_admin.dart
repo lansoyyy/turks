@@ -12,7 +12,7 @@ import 'package:printing/printing.dart';
 import 'dart:io';
 
 class LogbookAdmin extends StatefulWidget {
-  const LogbookAdmin({super.key});
+  const LogbookAdmin({Key? key}) : super(key: key);
 
   @override
   State<LogbookAdmin> createState() => _LogbookAdminState();

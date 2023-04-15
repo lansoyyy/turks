@@ -7,8 +7,6 @@ import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
 class CrewHome extends StatefulWidget {
-  const CrewHome({super.key});
-
   @override
   State<CrewHome> createState() => _CrewHomeState();
 }

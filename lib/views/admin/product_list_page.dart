@@ -7,8 +7,6 @@ import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ProductListPage extends StatefulWidget {
-  const ProductListPage({super.key});
-
   @override
   State<ProductListPage> createState() => _ProductListPageState();
 }

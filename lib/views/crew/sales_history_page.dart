@@ -5,8 +5,6 @@ import 'package:turks/widgets/drawer_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 
 class SalesHistoryPage extends StatefulWidget {
-  const SalesHistoryPage({super.key});
-
   @override
   State<SalesHistoryPage> createState() => _SalesHistoryPageState();
 }
