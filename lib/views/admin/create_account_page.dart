@@ -203,8 +203,7 @@ class CreateAccountPage extends StatelessWidget {
                                   ),
                                 ],
                                 title: TextRegular(
-                                    text:
-                                        "Enter $name security code or phrasey",
+                                    text: "Enter $name security code or phrase",
                                     fontSize: 14,
                                     color: Colors.black),
                                 content: TextFormField(

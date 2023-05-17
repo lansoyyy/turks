@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turks/auth/login.dart';
 import 'package:turks/utils/firebase_options.dart';
+import 'package:turks/views/admin/admin_home.dart';
 import 'package:turks/views/admin/admin_home_page.dart';
 
 void main() async {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(),
-      home: const LogInPage(),
+      home: const AdminHomePage(),
     );
   }
 }

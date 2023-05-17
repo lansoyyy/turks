@@ -142,6 +142,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                               style: TextStyle(fontFamily: 'QBold'),
                             ),
                             content: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 TextFormField(
                                   onChanged: (_input) {

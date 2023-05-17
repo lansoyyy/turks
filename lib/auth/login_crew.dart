@@ -140,6 +140,7 @@ class _LoginCrewState extends State<LoginCrew> {
                               style: TextStyle(fontFamily: 'QBold'),
                             ),
                             content: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 TextFormField(
                                   onChanged: (_input) {
