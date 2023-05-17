@@ -7,16 +7,39 @@ import 'package:turks/widgets/button_widget.dart';
 import 'package:turks/widgets/text_widget.dart';
 import 'package:get_storage/get_storage.dart';
 
-class CreateAccountPage extends StatelessWidget {
+class CreateAccountPage extends StatefulWidget {
+  const CreateAccountPage({Key? key}) : super(key: key);
+
+  @override
+  State<CreateAccountPage> createState() => _CreateAccountPageState();
+}
+
+class _CreateAccountPageState extends State<CreateAccountPage> {
   late String name;
+
   late String username;
+
   late String password;
+
   late String confirmPassword;
+
   late String answer;
 
   final box = GetStorage();
+  String selectedQuestion = "What is your grandfather's last name?";
 
-  CreateAccountPage({Key? key}) : super(key: key);
+  List<String> questions = [
+    "What is your grandfather's last name?",
+    "What year did you graduate in elementary?",
+    "What is your mother's middle name?",
+    "What is your favorite color?",
+    "What is your elementary ambition?",
+    "What is the name of your BSB?",
+    "What is your favorite pet?",
+    "What is the last name of your grandmother's mother?",
+    "What is the name of your grandfather's father?",
+    "What is your favorite food?",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -168,13 +191,13 @@ class CreateAccountPage extends StatelessWidget {
                                                                         .trim());
                                                       }
                                                       addUser(
-                                                        name,
-                                                        username,
-                                                        box.read(
-                                                            'createAccount'),
-                                                        password,
-                                                        answer,
-                                                      );
+                                                          name,
+                                                          username,
+                                                          box.read(
+                                                              'createAccount'),
+                                                          password,
+                                                          answer,
+                                                          selectedQuestion);
                                                       Navigator.of(context)
                                                           .pushReplacement(
                                                               MaterialPageRoute(
@@ -203,14 +226,44 @@ class CreateAccountPage extends StatelessWidget {
                                   ),
                                 ],
                                 title: TextRegular(
-                                    text: "Enter $name security code or phrase",
+                                    text: "Enter $name security question",
                                     fontSize: 14,
                                     color: Colors.black),
-                                content: TextFormField(
-                                  onChanged: (_input) {
-                                    answer = _input;
-                                  },
-                                ),
+                                content: StatefulBuilder(
+                                    builder: (context, setState) {
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      DropdownButton<String>(
+                                        underline: const SizedBox(),
+                                        value: selectedQuestion,
+                                        hint: const Text('Select a question'),
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            selectedQuestion =
+                                                newValue.toString();
+                                          });
+                                        },
+                                        items: questions
+                                            .map<DropdownMenuItem<String>>(
+                                                (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: SizedBox(
+                                              width: 200,
+                                              child: Text(value),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                      TextFormField(
+                                        onChanged: (_input) {
+                                          answer = _input;
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                }),
                               );
                             });
                       } else {
