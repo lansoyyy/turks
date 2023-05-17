@@ -32,7 +32,9 @@ class _LoginAdminState extends State<LoginAdmin> {
     // Use provider
     var collection = FirebaseFirestore.instance
         .collection('Users')
-        .where('username', isEqualTo: forgotPassword + '@Admin.com');
+        .where('username', isEqualTo: forgotPassword + '@Admin.com')
+        .where('question', isEqualTo: selectedQuestion)
+        .where('answer', isEqualTo: answer);
 
     var querySnapshot = await collection.get();
     if (mounted) {
@@ -45,6 +47,21 @@ class _LoginAdminState extends State<LoginAdmin> {
       });
     }
   }
+
+  String selectedQuestion = "What is your grandfather's last name?";
+
+  List<String> questions = [
+    "What is your grandfather's last name?",
+    "What year did you graduate in elementary?",
+    "What is your mother's middle name?",
+    "What is your favorite color?",
+    "What is your elementary ambition?",
+    "What is the name of your BSB?",
+    "What is your favorite pet?",
+    "What is the last name of your grandmother's mother?",
+    "What is the name of your grandfather's father?",
+    "What is your favorite food?",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -141,40 +158,68 @@ class _LoginAdminState extends State<LoginAdmin> {
                               'Recovering Password',
                               style: TextStyle(fontFamily: 'QBold'),
                             ),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                TextFormField(
-                                  onChanged: (_input) {
-                                    forgotPassword = _input;
-                                    getData();
-                                  },
-                                  decoration: InputDecoration(
-                                    label: TextRegular(
-                                        text: 'Enter your username',
-                                        fontSize: 12,
-                                        color: Colors.black),
+                            content:
+                                StatefulBuilder(builder: (context, setState) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  TextFormField(
+                                    onChanged: (_input) {
+                                      forgotPassword = _input;
+                                      getData();
+                                    },
+                                    decoration: InputDecoration(
+                                      label: TextRegular(
+                                          text: 'Enter your username',
+                                          fontSize: 12,
+                                          color: Colors.black),
+                                    ),
                                   ),
-                                ),
-                                TextFormField(
-                                  onChanged: (_input) {
-                                    answer = _input;
-                                    getData();
-                                  },
-                                  decoration: InputDecoration(
-                                    label: TextRegular(
-                                        text: "Enter security code or phrase",
-                                        fontSize: 12,
-                                        color: Colors.black),
+                                  const SizedBox(
+                                    height: 10,
                                   ),
-                                ),
-                              ],
-                            ),
+                                  DropdownButton<String>(
+                                    underline: const SizedBox(),
+                                    value: selectedQuestion,
+                                    hint: const Text('Select a question'),
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        selectedQuestion = newValue.toString();
+                                      });
+                                    },
+                                    items: questions
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: SizedBox(
+                                          width: 200,
+                                          child: Text(value),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (_input) {
+                                      answer = _input;
+                                      getData();
+                                    },
+                                    decoration: InputDecoration(
+                                      label: TextRegular(
+                                          text: "Enter answer",
+                                          fontSize: 12,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }),
                             actions: <Widget>[
                               MaterialButton(
                                 onPressed: () {
-                                  print(myPassword);
-                                  print(answer);
                                   try {
                                     hasLoaded
                                         ? showDialog(
